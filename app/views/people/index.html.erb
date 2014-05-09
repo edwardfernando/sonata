@@ -1,0 +1,21 @@
+<h3>People Available</h3>
+
+<h5><%= link_to '[Add New]', new_person_path %></h5>
+
+<table width="25%" border="1">
+  <tr>
+    <td>#</td>
+    <td>Name</td>
+  </tr>
+
+  <% @people.each do |p| %>
+  <tr>
+    <td>
+      <%= link_to 'Detail', person_path(p) %>
+      <%= link_to 'Edit', edit_person_path(p) %>
+      <%= link_to 'Destory', person_path(p), method: :delete, data: {confirm: 'Are you sure want to delete this service?'} %>
+    </td>
+    <td><%= p.name %></td>
+  </tr>
+  <% end %>
+</table>

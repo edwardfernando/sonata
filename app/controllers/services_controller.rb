@@ -9,9 +9,7 @@ class ServicesController < ApplicationController
 	end
 
 	def create
-		@service = Service.new(service_param)
-
-		@service.save
+		@service = Service.new(service_param).save
 		redirect_to services_path
 	end
 
@@ -26,7 +24,7 @@ class ServicesController < ApplicationController
 	def update
 		@service = Service.find(params[:id])
 		@service.update(service_param)
-		redirect_to services_path
+		redirect_to service_path(@service)
 	end
 
 	def destroy
