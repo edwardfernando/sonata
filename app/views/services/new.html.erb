@@ -1,15 +1,3 @@
-New Service Name
+<h3>New Service Name</h3>
 
-<%= form_for :services, url: services_path do |s| %>
-	<p>
-		<%= s.label :name %> </br>
-		<%= s.text_field :name %>
-	</p>
-	<p>
-		<%= s.label :description %> </br>
-		<%= s.text_field :description %>
-	</p>
-	<p>
-		<%= s.submit %>
-	</p>
-<% end %>
+<%= render 'form' %>

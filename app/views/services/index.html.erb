@@ -1,4 +1,6 @@
-List Service Available
+<h3>Service Available</h3>
+
+<h5><%= link_to '[Add New]', new_service_path %></h5>
 
 <table width="25%" border="1">
 	<tr>
@@ -9,7 +11,11 @@ List Service Available
 
 	<% @services.each do |a| %>
 	<tr>
-		<td> <%= link_to 'View Detail', service_path(a.id) %> </td>
+		<td>
+			<%= link_to 'Detail', service_path(a) %>
+			<%= link_to 'Edit', edit_service_path(a) %>
+			<%= link_to 'Destory', service_path(a), method: :delete, data: {confirm: 'Are you sure want to delete this service?'} %>
+		</td>
 		<td><%= a.name %></td>
 		<td><%= a.description %></td>
 	</tr>
