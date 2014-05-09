@@ -1,0 +1,17 @@
+List Service Available
+
+<table width="25%" border="1">
+	<tr>
+		<td>#</td>
+		<td>Name</td>
+		<td>Desc</td>
+	</tr>
+
+	<% @services.each do |a| %>
+	<tr>
+		<td> <%= link_to 'View Detail', service_path(a.id) %> </td>
+		<td><%= a.name %></td>
+		<td><%= a.description %></td>
+	</tr>
+	<% end %>
+</table>

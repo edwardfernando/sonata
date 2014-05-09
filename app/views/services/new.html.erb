@@ -1,6 +1,6 @@
 New Service Name
 
-<%= form_for :services do |s| %>
+<%= form_for :services, url: services_path do |s| %>
 	<p>
 		<%= s.label :name %> </br>
 		<%= s.text_field :name %>
