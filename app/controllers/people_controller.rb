@@ -23,6 +23,10 @@ class PeopleController < ApplicationController
     redirect_to person_path(@person)
   end
 
+  def show
+    @person = Person.find(params[:id])
+  end
+
   private
   def person_param
     params.require(:person).permit(:name)

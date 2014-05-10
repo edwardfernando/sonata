@@ -1,0 +1,21 @@
+<h3>Roles Available</h3>
+
+<h5><%= link_to '[Add New]', new_role_path %></h5>
+
+<table width="25%" border="1">
+  <tr>
+    <td>#</td>
+    <td>Name</td>
+  </tr>
+
+  <% @roles.each do |a| %>
+  <tr>
+    <td>
+      <%= link_to 'Detail', role_path(a) %>
+      <%= link_to 'Edit', edit_role_path(a) %>
+      <%= link_to 'Destory', role_path(a), method: :delete, data: {confirm: 'Are you sure want to delete this role?'} %>
+    </td>
+    <td><%= a.name %></td>
+  </tr>
+  <% end %>
+</table>

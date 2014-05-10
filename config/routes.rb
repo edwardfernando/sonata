@@ -3,6 +3,7 @@ Sonata::Application.routes.draw do
 
   resources :services
   resources :people
+  resources :roles
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
