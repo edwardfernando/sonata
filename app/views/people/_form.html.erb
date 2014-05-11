@@ -6,4 +6,9 @@
   <p>
     <%= p.submit %>
   </p>
+
+  <% for role in Role.all %>
+    <%= check_box_tag "person[skillsets][]", role.id, @person.skillsets.map(&:role_id).include?(role.id) %>
+    <%= role.name %> 
+  <% end %>
 <% end %>

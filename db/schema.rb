@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140509155709) do
+ActiveRecord::Schema.define(version: 20140510145344) do
 
   create_table "people", force: true do |t|
     t.string   "name"
@@ -32,5 +32,16 @@ ActiveRecord::Schema.define(version: 20140509155709) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "skillsets", force: true do |t|
+    t.integer  "person_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "skillsets", ["person_id", "role_id"], name: "index_skillsets_on_person_id_and_role_id", unique: true
+  add_index "skillsets", ["person_id"], name: "index_skillsets_on_person_id"
+  add_index "skillsets", ["role_id"], name: "index_skillsets_on_role_id"
 
 end

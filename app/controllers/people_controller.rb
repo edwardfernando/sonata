@@ -9,7 +9,16 @@ class PeopleController < ApplicationController
   end
 
   def create
-    @person = Person.new(person_param).save
+    params[:person][:skillsets] ||= []
+
+    @person = Person.new(person_param)
+    @person.save
+
+    for s in params[:person][:skillsets]
+      Skillset.new(person:@person, role:Role.find(s)).save
+    end
+
+
     redirect_to people_path
   end
 
@@ -18,8 +27,17 @@ class PeopleController < ApplicationController
   end
 
   def update
+    params[:person][:skillsets] ||= []
+
     @person = Person.find(params[:id])
     @person.update(person_param)
+
+    Skillset.where(:person => @person).destroy_all
+
+    for s in params[:person][:skillsets]
+      Skillset.new(person:@person, role:Role.find(s)).save
+    end
+
     redirect_to person_path(@person)
   end
 
@@ -27,9 +45,14 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
   end
 
+  def destroy
+    Person.find(params[:id]).destroy
+    redirect_to people_path
+  end
+
   private
   def person_param
-    params.require(:person).permit(:name)
+    params.require(:person).permit(:name, :skillsets)
   end
 
 end
