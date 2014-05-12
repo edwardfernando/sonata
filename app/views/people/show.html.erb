@@ -3,4 +3,4 @@
   <%= @person.name %>
 </p>
 
-Skillset : <%= @person.skillsets.map(&:role).map(&:name).join(",") %>
+Skillset : <%= @person.skillsets.map(&:role).map(&:name).join(", ") %>

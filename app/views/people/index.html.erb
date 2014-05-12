@@ -6,6 +6,7 @@
   <tr>
     <td>#</td>
     <td>Name</td>
+    <td>Skillsets</td>
   </tr>
 
   <% @people.each do |p| %>
@@ -16,6 +17,7 @@
       <%= link_to 'Destory', person_path(p), method: :delete, data: {confirm: 'Are you sure want to delete this service?'} %>
     </td>
     <td><%= p.name %></td>
+    <td><%= p.skillsets.map(&:role).map(&:name).join(", ") %></td>
   </tr>
   <% end %>
 </table>
