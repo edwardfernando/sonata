@@ -2,7 +2,11 @@ Sonata::Application.routes.draw do
   root "welcome#index"
 
   resources :services
-  resources :people
+  resources :people do
+    collection do
+      get 'popup'
+    end
+  end
   resources :roles do
     collection do
       get 'popup'

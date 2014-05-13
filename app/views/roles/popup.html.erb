@@ -1,12 +1,4 @@
-<script type="text/javascript">
-  function choose(n, t, id, text){
-    window.opener.document.getElementById(n + '-id-' + t).innerHTML = id;
-    window.opener.document.getElementById(n + '-text-' + t).innerHTML = text;
-    window.close();
-  }
-</script>
-
-<table width="25%" border="1">
+<table width="50%" border="1">
   <tr>
     <td>#</td>
     <td>Name</td>
@@ -15,7 +7,7 @@
   <% @roles.each do |a| %>
   <tr>
     <td>
-      <%= link_to 'Choose', "javascript: ", :onclick => "choose('#{params[:n]}', '#{params[:t]}', '#{a.id}', '#{a.name}')" %>
+      <%= link_to 'Choose', "javascript: ", :onclick => "choose('#{params[:name]}', '#{params[:target]}', '#{a.id}', '#{a.name}')" %>
     </td>
     <td><%= a.name %></td>
   </tr>

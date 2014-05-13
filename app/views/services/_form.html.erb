@@ -3,7 +3,6 @@
       addRow();
     });
 
-
     var rowCount = 0;
     function getRow(){
       rowCount += 1;
@@ -12,10 +11,29 @@
                   "<span id=role-text-"+ rowCount +" ></span>" +
                   "<input type=hidden id=role-id-"+ rowCount +" />" +
                 "</td>" +
-                "<td><a href='javascript:' onclick='pop(\"<%= popup_roles_path %>?t="+ rowCount +"&n=role\")'>[Choose Role]</a></td>" +
-                "<td>[Choose Person]</td>" +
+                "<td><a href='javascript:' onclick='pop_role("+ rowCount +")'>[Choose Role]</a></td>" +
+                "<td>" +
+                  "<span id=person-text-"+ rowCount +" ></span>" +
+                  "<input type=hidden id=person-id-"+ rowCount +" />" +
+                "</td>" +
+                "<td><a href='javascript:' onclick='pop_people(" + rowCount + ")'>[Choose Person]</a></td>" +
                 "<td><a href=javascript:deleteRow("+ rowCount +")>[Remove Row]</a></td>" +
               "</tr>";
+    }
+
+    function pop_role(rowCount){
+      pop("<%= popup_roles_path %>?target="+ rowCount +"&name=role");
+    }
+
+    function pop_people(rowCount){
+      var roleValue = document.getElementById("role-id-" + rowCount).value;
+
+      if(roleValue == ""){
+        alert("Please Choose 'Role' first");
+        return;
+      }
+
+      pop("<%= popup_people_path %>?target="+ rowCount +"&name=person&role=" + roleValue);
     }
 
     function addRow(){
@@ -33,14 +51,8 @@
           }
       }
     }
-
-    function pop(url){
-      window.open(url, "popupWindow", "width=600,height=600,scrollbars=yes");
-    }
 </script>
 
-
-<a href="javascript:open(<%= popup_roles_path %>)" class=pop-url>[Choose Role]</a>
 <%= form_for @service do |s| %>
   <p>
     <%= s.label :name %> </br>
@@ -60,11 +72,11 @@
 
   <br/>
 
-<a href="javascript: addRow();">[Add More]</a> | <a href="javascript: deleteAllRows();">[Delete All Rows]</a>
+  <a href="javascript: addRow();">[Add More]</a> | <a href="javascript: deleteAllRows();">[Delete All Rows]</a>
   <table width="50%" border="1" id="person-incharge-table">
     <tr>
         <td colspan=2>Role</td>
-        <td>Person</td>
+        <td colspan=2>Person</td>
         <td>#</td>
     </tr>
   </table>
