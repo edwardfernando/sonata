@@ -1,3 +1,46 @@
+ <script type="text/javascript">
+    $( document ).ready(function() {
+      addRow();
+    });
+
+
+    var rowCount = 0;
+    function getRow(){
+      rowCount += 1;
+      return "<tr id=row-"+ rowCount +" class=\'content\'>"+
+                "<td>" +
+                  "<span id=role-text-"+ rowCount +" ></span>" +
+                  "<input type=hidden id=role-id-"+ rowCount +" />" +
+                "</td>" +
+                "<td><a href='javascript:' onclick='pop(\"<%= popup_roles_path %>?t="+ rowCount +"&n=role\")'>[Choose Role]</a></td>" +
+                "<td>[Choose Person]</td>" +
+                "<td><a href=javascript:deleteRow("+ rowCount +")>[Remove Row]</a></td>" +
+              "</tr>";
+    }
+
+    function addRow(){
+      $('#person-incharge-table').append(getRow());
+    }
+
+    function deleteRow(row){
+      $("#row-" + row).remove();
+    }
+
+    function deleteAllRows(){
+      if(window.confirm("Are you sure? This is not undo-able!")){
+          for(var x = 0; x <= rowCount; x++){
+            deleteRow(x);
+          }
+      }
+    }
+
+    function pop(url){
+      window.open(url, "popupWindow", "width=600,height=600,scrollbars=yes");
+    }
+</script>
+
+
+<a href="javascript:open(<%= popup_roles_path %>)" class=pop-url>[Choose Role]</a>
 <%= form_for @service do |s| %>
   <p>
     <%= s.label :name %> </br>
@@ -14,4 +57,16 @@
   <p>
     <%= s.submit %>
   </p>
+
+  <br/>
+
+<a href="javascript: addRow();">[Add More]</a> | <a href="javascript: deleteAllRows();">[Delete All Rows]</a>
+  <table width="50%" border="1" id="person-incharge-table">
+    <tr>
+        <td colspan=2>Role</td>
+        <td>Person</td>
+        <td>#</td>
+    </tr>
+  </table>
+
 <% end %>

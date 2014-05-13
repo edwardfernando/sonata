@@ -18,7 +18,6 @@ class PeopleController < ApplicationController
       Skillset.new(person:@person, role:Role.find(s)).save
     end
 
-
     redirect_to people_path
   end
 
@@ -48,6 +47,10 @@ class PeopleController < ApplicationController
   def destroy
     Person.find(params[:id]).destroy
     redirect_to people_path
+  end
+
+  def find_by_role
+    @skillsets = Role.find(params[:role]).skillsets
   end
 
   private
