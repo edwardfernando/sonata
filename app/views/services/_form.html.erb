@@ -1,5 +1,6 @@
  <script type="text/javascript">
     $( document ).ready(function() {
+      console.log("Document Ready. Add one row to 'person-incharge-table' table")
       addRow();
     });
 
@@ -9,12 +10,12 @@
       return "<tr id=row-"+ rowCount +" class=\'content\'>"+
                 "<td>" +
                   "<span id=role-text-"+ rowCount +" ></span>" +
-                  "<input type=hidden id=role-id-"+ rowCount +" />" +
+                  "<input type=hidden id=role-id-"+ rowCount +" name=service[role]["+ rowCount +"] />" +
                 "</td>" +
                 "<td><a href='javascript:' onclick='pop_role("+ rowCount +")'>[Choose Role]</a></td>" +
                 "<td>" +
                   "<span id=person-text-"+ rowCount +" ></span>" +
-                  "<input type=hidden id=person-id-"+ rowCount +" />" +
+                  "<input type=hidden id=person-id-"+ rowCount +" name=service[person]["+ rowCount +"] />" +
                 "</td>" +
                 "<td><a href='javascript:' onclick='pop_people(" + rowCount + ")'>[Choose Person]</a></td>" +
                 "<td><a href=javascript:deleteRow("+ rowCount +")>[Remove Row]</a></td>" +
