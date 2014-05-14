@@ -12,8 +12,8 @@ class ServicesController < ApplicationController
 		@service = Service.new(service_param)
 		@service.save
 
-		role_array = params[:service][:role]
-		people_array = params[:service][:person]
+		role_array = params[:service][:role] ||= []
+		people_array = params[:service][:person] ||= []
 
 		role_array.each_with_index do |role,index|
 			Schedule.create(service:@service, role:Role.find(role), person:Person.find(people_array[index]))
@@ -33,6 +33,16 @@ class ServicesController < ApplicationController
 	def update
 		@service = Service.find(params[:id])
 		@service.update(service_param)
+
+		Service.find(params[:id]).schedules.destroy_all
+
+		role_array = params[:service][:role] ||= []
+		people_array = params[:service][:person] ||= []
+
+		role_array.each_with_index do |role,index|
+			Schedule.create(service:@service, role:Role.find(role), person:Person.find(people_array[index]))
+		end
+
 		redirect_to service_path(@service)
 	end
 
