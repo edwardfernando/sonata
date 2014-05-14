@@ -21,12 +21,12 @@
       return "<tr id=row-"+ row +" class=\'content\'>"+
                 "<td>" +
                   "<span id=role-text-"+ row +" >"+ role +"</span>" +
-                  "<input type=hidden id=role-id-"+ row +" name=service[role][] value="+ roleID +"/>" +
+                  "<input type=hidden id=role-id-"+ row +" name=service[role][] value=\""+ roleID +"\" />" +
                 "</td>" +
                 "<td><a href='javascript:' onclick='pop_role("+ row +")'>[Choose Role]</a></td>" +
                 "<td>" +
                   "<span id=person-text-"+ row +" >"+ person +"</span>" +
-                  "<input type=hidden id=person-id-"+ row +" name=service[person][] value="+ personID +"/>" +
+                  "<input type=hidden id=person-id-"+ row +" name=service[person][] value=\""+ personID +"\" />" +
                 "</td>" +
                 "<td><a href='javascript:' onclick='pop_people(" + row + ")'>[Choose Person]</a></td>" +
                 "<td><a href=javascript:deleteRow("+ row +")>[Remove Row]</a></td>" +
