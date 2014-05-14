@@ -53,10 +53,6 @@ class PeopleController < ApplicationController
     @skillsets = Role.find(params[:role]).skillsets
   end
 
-  def popup
-    @people = Person.joins(:skillsets).where("skillsets.role_id = #{params[:role]}");
-  end
-
   private
   def person_param
     params.require(:person).permit(:name, :skillsets)

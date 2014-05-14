@@ -32,10 +32,6 @@ class RolesController < ApplicationController
     @role = Role.find(params[:id])
   end
 
-  def popup
-    @roles = Role.all
-  end
-
   private
   def role_param
     params.require(:role).permit(:name)
