@@ -4,12 +4,12 @@ Sonata::Application.routes.draw do
   resources :services
   resources :people do
     collection do
-      get 'popup'
+      get 'popup', :controller => 'popup', :action => 'popup_people'
     end
   end
   resources :roles do
     collection do
-      get 'popup'
+      get 'popup', :controller => 'popup', :action => 'popup_roles'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

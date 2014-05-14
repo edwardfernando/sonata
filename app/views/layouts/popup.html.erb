@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sonata - Musicians & Singers Scheduling System</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+
+  <script>
+  function choose(n, t, id, text){
+    window.opener.document.getElementById(n + '-id-' + t).value = id;
+    window.opener.document.getElementById(n + '-text-' + t).innerHTML = text;
+    window.close();
+  }
+  </script>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>
