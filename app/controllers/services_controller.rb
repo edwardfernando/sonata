@@ -9,7 +9,16 @@ class ServicesController < ApplicationController
 	end
 
 	def create
-		@service = Service.new(service_param).save
+		@service = Service.new(service_param)
+		@service.save
+
+		role_array = params[:service][:role]
+		people_array = params[:service][:person]
+
+		role_array.each_with_index do |role,index|
+			Schedule.create(service:@service, role:Role.find(role), person:Person.find(people_array[index]))
+		end
+
 		redirect_to services_path
 	end
 

@@ -1,40 +1,41 @@
  <script type="text/javascript">
+    var row = 0;
+
     $( document ).ready(function() {
-      console.log("Document Ready. Add one row to 'person-incharge-table' table")
+      console.log("Document Ready. Add one row to 'person-incharge-table' table.. row = " + row);
       addRow();
     });
 
-    var rowCount = 0;
     function getRow(){
-      rowCount += 1;
-      return "<tr id=row-"+ rowCount +" class=\'content\'>"+
+      row += 1;
+      return "<tr id=row-"+ row +" class=\'content\'>"+
                 "<td>" +
-                  "<span id=role-text-"+ rowCount +" ></span>" +
-                  "<input type=hidden id=role-id-"+ rowCount +" name=service[role]["+ rowCount +"] />" +
+                  "<span id=role-text-"+ row +" ></span>" +
+                  "<input type=hidden id=role-id-"+ row +" name=service[role][] />" +
                 "</td>" +
-                "<td><a href='javascript:' onclick='pop_role("+ rowCount +")'>[Choose Role]</a></td>" +
+                "<td><a href='javascript:' onclick='pop_role("+ row +")'>[Choose Role]</a></td>" +
                 "<td>" +
-                  "<span id=person-text-"+ rowCount +" ></span>" +
-                  "<input type=hidden id=person-id-"+ rowCount +" name=service[person]["+ rowCount +"] />" +
+                  "<span id=person-text-"+ row +" ></span>" +
+                  "<input type=hidden id=person-id-"+ row +" name=service[person][] />" +
                 "</td>" +
-                "<td><a href='javascript:' onclick='pop_people(" + rowCount + ")'>[Choose Person]</a></td>" +
-                "<td><a href=javascript:deleteRow("+ rowCount +")>[Remove Row]</a></td>" +
+                "<td><a href='javascript:' onclick='pop_people(" + row + ")'>[Choose Person]</a></td>" +
+                "<td><a href=javascript:deleteRow("+ row +")>[Remove Row]</a></td>" +
               "</tr>";
     }
 
-    function pop_role(rowCount){
-      pop("<%= popup_roles_path %>?target="+ rowCount +"&name=role");
+    function pop_role(row){
+      pop("<%= popup_roles_path %>?target="+ row +"&name=role");
     }
 
-    function pop_people(rowCount){
-      var roleValue = document.getElementById("role-id-" + rowCount).value;
+    function pop_people(row){
+      var roleValue = document.getElementById("role-id-" + row).value;
 
       if(roleValue == ""){
         alert("Please Choose 'Role' first");
         return;
       }
 
-      pop("<%= popup_people_path %>?target="+ rowCount +"&name=person&role=" + roleValue);
+      pop("<%= popup_people_path %>?target="+ row +"&name=person&role=" + roleValue);
     }
 
     function addRow(){
@@ -47,7 +48,7 @@
 
     function deleteAllRows(){
       if(window.confirm("Are you sure? This is not undo-able!")){
-          for(var x = 0; x <= rowCount; x++){
+          for(var x = 0; x <= row; x++){
             deleteRow(x);
           }
       }
