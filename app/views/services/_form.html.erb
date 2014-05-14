@@ -3,20 +3,30 @@
 
     $( document ).ready(function() {
       console.log("Document Ready. Add one row to 'person-incharge-table' table.. row = " + row);
-      addRow();
+
+      <% @service.schedules.each do |s| %>
+      addRow("<%= s.role.name %>", "<%= s.role.id %>", "<%= s.person.name %>", "<%= s.person.id %>");
+      <% end %>
+
     });
 
-    function getRow(){
+    function getRow(role, roleID, person, personID){
+
+      role = (role == undefined) ? "" : role;
+      roleID = (roleID == undefined) ? "" : roleID;
+      person = (person == undefined) ? "" : person;
+      personID = (personID == undefined) ? "" : personID;
+
       row += 1;
       return "<tr id=row-"+ row +" class=\'content\'>"+
                 "<td>" +
-                  "<span id=role-text-"+ row +" ></span>" +
-                  "<input type=hidden id=role-id-"+ row +" name=service[role][] />" +
+                  "<span id=role-text-"+ row +" >"+ role +"</span>" +
+                  "<input type=hidden id=role-id-"+ row +" name=service[role][] value="+ roleID +"/>" +
                 "</td>" +
                 "<td><a href='javascript:' onclick='pop_role("+ row +")'>[Choose Role]</a></td>" +
                 "<td>" +
-                  "<span id=person-text-"+ row +" ></span>" +
-                  "<input type=hidden id=person-id-"+ row +" name=service[person][] />" +
+                  "<span id=person-text-"+ row +" >"+ person +"</span>" +
+                  "<input type=hidden id=person-id-"+ row +" name=service[person][] value="+ personID +"/>" +
                 "</td>" +
                 "<td><a href='javascript:' onclick='pop_people(" + row + ")'>[Choose Person]</a></td>" +
                 "<td><a href=javascript:deleteRow("+ row +")>[Remove Row]</a></td>" +
@@ -38,8 +48,8 @@
       pop("<%= popup_people_path %>?target="+ row +"&name=person&role=" + roleValue);
     }
 
-    function addRow(){
-      $('#person-incharge-table').append(getRow());
+    function addRow(role, roleID, person, personID){
+      $('#person-incharge-table').append(getRow(role, roleID, person, personID));
     }
 
     function deleteRow(row){

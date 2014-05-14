@@ -12,3 +12,19 @@
   <strong>Date:</strong>
   <%= @service.date %>
 </p>
+
+
+<table width="50%" border="1" id="person-incharge-table">
+  <tr>
+      <td>Role</td>
+      <td>Person</td>
+  </tr>
+
+<% @service.schedules.each do |s| %>
+  <tr>
+      <td><%= s.role.name %></td>
+      <td><%= s.person.name %></td>
+  </tr>
+<% end %>
+
+</table>
