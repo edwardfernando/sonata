@@ -27,11 +27,6 @@
     window.open(url, "Sonata", 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
   }
 
-  function choose(n, t, id, text){
-    window.opener.document.getElementById(n + '-id-' + t).value = id;
-    window.opener.document.getElementById(n + '-text-' + t).innerHTML = text;
-    window.close();
-  }
   </script>
 </head>
 <body>
