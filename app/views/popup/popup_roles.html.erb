@@ -1,15 +1,17 @@
-<table width="50%" border="1">
+<table class="table table-hover table-bordered">
   <tr>
-    <td>#</td>
     <td>Name</td>
+    <td>#</td>
   </tr>
 
   <% @roles.each do |a| %>
   <tr>
-    <td>
-      <%= link_to 'Choose', "javascript: ", :onclick => "choose('#{params[:name]}', '#{params[:target]}', '#{a.id}', '#{a.name}')" %>
-    </td>
     <td><%= a.name %></td>
+    <td>
+      <a href="javascript: " onclick="choose('<%= params[:name] %>', '<%= params[:target] %>', '<%= a.id %>', '<%= a.name %>');" class="btn btn-default btn-xs">
+        <span class="glyphicon glyphicon-import"></span> Choose
+      </a>
+    </td>
   </tr>
   <% end %>
 </table>

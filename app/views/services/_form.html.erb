@@ -23,13 +23,13 @@
                   "<span id=role-text-"+ row +" >"+ role +"</span>" +
                   "<input type=hidden id=role-id-"+ row +" name=service[role][] value=\""+ roleID +"\" />" +
                 "</td>" +
-                "<td><a href='javascript:' onclick='pop_role("+ row +")'>[Choose Role]</a></td>" +
+                "<td><a href='javascript:' onclick='pop_role("+ row +")' class=\"btn btn-default btn-xs\"><span class=\"glyphicon glyphicon-export\"></span> Choose</a></td>" +
                 "<td>" +
                   "<span id=person-text-"+ row +" >"+ person +"</span>" +
                   "<input type=hidden id=person-id-"+ row +" name=service[person][] value=\""+ personID +"\" />" +
                 "</td>" +
-                "<td><a href='javascript:' onclick='pop_people(" + row + ")'>[Choose Person]</a></td>" +
-                "<td><a href=javascript:deleteRow("+ row +")>[Remove Row]</a></td>" +
+                "<td><a href='javascript:' onclick='pop_people(" + row + ")' class=\"btn btn-default btn-xs\"><span class=\"glyphicon glyphicon-export\"></span> Choose</a></td>" +
+                "<td><a href=javascript:deleteRow("+ row +") class=\"btn btn-default btn-xs\"><span class=\"glyphicon glyphicon-remove-circle\"></span> Delete Row</a></td>" +
               "</tr>";
     }
 
@@ -84,8 +84,17 @@
 
   <br/>
 
-  <a href="javascript: " onclick="addRow();">[Add More]</a> | <a href="javascript: " onclick="deleteAllRows();">[Delete All Rows]</a>
-  <table width="50%" border="1" id="person-incharge-table">
+  <div style="padding-top: 10px; padding-bottom: 20px;">
+    <a href="javascript: " onclick="addRow();" class="btn btn-default btn-xs">
+      <span class="glyphicon glyphicon-plus"></span> Add More Row
+    </a>
+
+    <a href="javascript: " onclick="deleteAllRows();" class="btn btn-default btn-xs">
+      <span class="glyphicon glyphicon-minus"></span> Delete All Rows
+    </a>
+  </div>
+
+  <table class="table table-hover table-bordered" id="person-incharge-table">
     <tr>
         <td colspan=2>Role</td>
         <td colspan=2>Person</td>

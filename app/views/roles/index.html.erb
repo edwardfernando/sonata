@@ -1,21 +1,33 @@
 <h3>Roles Available</h3>
 
-<h5><%= link_to '[Add New]', new_role_path %></h5>
 
-<table width="25%" border="1">
+<div style="padding-top: 10px; padding-bottom: 20px;">
+  <a href="<%= new_role_path %>" class="btn btn-default btn-xs">
+    <span class="glyphicon glyphicon-plus"></span> Add
+  </a>
+</div>
+
+
+<table class="table table-hover table-bordered">
   <tr>
-    <td>#</td>
     <td>Name</td>
+    <td>#</td>
   </tr>
 
   <% @roles.each do |a| %>
   <tr>
-    <td>
-      <%= link_to 'Detail', role_path(a) %>
-      <%= link_to 'Edit', edit_role_path(a) %>
-      <%= link_to 'Destory', role_path(a), method: :delete, data: {confirm: 'Are you sure want to delete this role?'} %>
-    </td>
     <td><%= a.name %></td>
+    <td>
+      <a href="<%= role_path(a) %>" class="btn btn-default btn-xs">
+        <span class="glyphicon glyphicon-eye-open"></span> View
+      </a>
+      <a href="<%= edit_role_path(a) %>" class="btn btn-default btn-xs">
+        <span class="glyphicon glyphicon-edit"></span> Edit
+      </a>
+      <a data-confirm="Are you sure want to delete this role?" data-method="delete" href="<%= role_path(a) %>" rel="nofollow" class="btn btn-default btn-xs">
+        <span class="glyphicon glyphicon-remove-circle"></span> Delete
+      </a>
+    </td>
   </tr>
   <% end %>
 </table>
