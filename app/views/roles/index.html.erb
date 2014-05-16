@@ -9,25 +9,29 @@
 
 
 <table class="table table-hover table-bordered">
-  <tr>
-    <td>Name</td>
-    <td>#</td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>#</th>
+    </tr>
+  </thead>
 
-  <% @roles.each do |a| %>
-  <tr>
-    <td><%= a.name %></td>
-    <td>
-      <a href="<%= role_path(a) %>" class="btn btn-default btn-xs">
-        <span class="glyphicon glyphicon-eye-open"></span> View
-      </a>
-      <a href="<%= edit_role_path(a) %>" class="btn btn-default btn-xs">
-        <span class="glyphicon glyphicon-edit"></span> Edit
-      </a>
-      <a data-confirm="Are you sure want to delete this role?" data-method="delete" href="<%= role_path(a) %>" rel="nofollow" class="btn btn-default btn-xs">
-        <span class="glyphicon glyphicon-remove-circle"></span> Delete
-      </a>
-    </td>
-  </tr>
-  <% end %>
+  <tbody>
+    <% @roles.each do |a| %>
+    <tr>
+      <td><%= a.name %></td>
+      <td>
+        <a href="<%= role_path(a) %>" class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-eye-open"></span> View
+        </a>
+        <a href="<%= edit_role_path(a) %>" class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-edit"></span> Edit
+        </a>
+        <a data-confirm="Are you sure want to delete this role?" data-method="delete" href="<%= role_path(a) %>" rel="nofollow" class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-remove-circle"></span> Delete
+        </a>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
 </table>
