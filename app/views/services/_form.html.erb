@@ -65,26 +65,25 @@
     }
 </script>
 
-<%= form_for @service do |s| %>
-  <p>
-    <%= s.label :name %> </br>
-    <%= s.text_field :name %>
-  </p>
-  <p>
-    <%= s.label :description %> </br>
-    <%= s.text_field :description %>
-  </p>
-  <p>
-    <%= s.label :date %> </br>
-    <%= s.text_field :date, :class => "datepicker-field"%>
-  </p>
-  <p>
-    <%= s.submit %>
-  </p>
+<%= form_for @service, :html => {:role => "form"} do |s| %>
+  <div class="form-group">
+    <%= s.label :name, :for => "serviceName" %>
+    <%= s.text_field :name, :class => "form-control", :id => "serviceName", :placeholder => "Enter Service Name" %>
+  </div>
 
-  <br/>
+  <div class="form-group">
+    <%= s.label :description, :for => "serviceDescription" %>
+    <%= s.text_area :description, :class => "form-control", :id => "serviceDescription", :placeholder => "Description" %>
+  </div>
 
-  <div style="padding-top: 10px; padding-bottom: 20px;">
+  <div class="form-group">
+    <%= s.label :date, :for => "serviceDate" %>
+    <%= s.text_field :date, :class => "datepicker-field form-control", :id => "serviceDate"%>
+  </div>
+
+  <%= s.submit :class => "btn btn-default" %>
+
+  <div align="right" style="padding-top: 10px; padding-bottom: 20px;">
     <a href="javascript: " onclick="addRow();" class="btn btn-default btn-xs">
       <span class="glyphicon glyphicon-plus"></span> Add More Row
     </a>
