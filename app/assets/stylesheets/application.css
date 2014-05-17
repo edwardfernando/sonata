@@ -12,8 +12,9 @@
  *= require_tree .
  *= require bootstrap
  *= require bootstrap-datepicker3
+ *= require jquery.ui.datepicker
  */
- 
+
 table {
     table-layout: fixed;
     word-wrap: break-word;
