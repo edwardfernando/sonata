@@ -1,6 +1,11 @@
+<h3>Person Details</h3>
+
 <p>
   <strong>Name:</strong>
   <%= @person.name %>
 </p>
 
-Skillset : <%= @person.skillsets.map(&:role).map(&:name).join(", ") %>
+<p>
+  <strong>Skillset :</strong>
+  <%= @person.skillsets.map(&:role).map(&:name).join(", ") %>
+</p>
