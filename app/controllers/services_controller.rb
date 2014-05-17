@@ -43,7 +43,7 @@ class ServicesController < ApplicationController
 			Schedule.create(service:@service, role:Role.find(role), person:Person.find(people_array[index]))
 		end
 
-		redirect_to service_path(@service)
+		redirect_to services_path
 	end
 
 	def destroy

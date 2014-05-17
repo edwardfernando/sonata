@@ -37,7 +37,7 @@ class PeopleController < ApplicationController
       Skillset.new(person:@person, role:Role.find(s)).save
     end
 
-    redirect_to person_path(@person)
+    redirect_to services_path
   end
 
   def show

@@ -20,7 +20,7 @@ class RolesController < ApplicationController
   def update
     @role = Role.find(params[:id])
     @role.update(role_param)
-    redirect_to role_path(@role)
+    redirect_to services_path
   end
 
   def destroy
