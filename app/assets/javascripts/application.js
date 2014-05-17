@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.datepicker
 //= require turbolinks
 //= require_tree .
 //= require bootstrap
@@ -50,4 +51,17 @@
     window.opener.document.getElementById(n + '-id-' + t).value = id;
     window.opener.document.getElementById(n + '-text-' + t).innerHTML = text;
     window.close();
+  }
+
+  function getUrlParameter(sParam){
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++){
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam){
+            return sParameterName[1];
+        }
+    }
+
+    return 'undefined';
   }
