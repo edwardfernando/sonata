@@ -2,14 +2,25 @@
 
 <div class="row">
   <div class="col-md-3">
-		<div class="inline-date-picker"></div>
+
+    <div align="center">
+      <div class="inline-date-picker"></div>
+    </div>
 
 	</div>
   <div class="col-md-9">
 		<div style="padding-top: 10px; padding-bottom: 20px;">
-			<a href="<%= new_service_path %>" class="btn btn-default btn-xs">
-				<span class="glyphicon glyphicon-plus"></span> Add
-			</a>
+      <a href="<%= services_path %>" class="btn btn-default btn-xs">
+        <span class="glyphicon glyphicon-list-alt"></span> Show All
+      </a>
+
+      <a href="<%= services_path %>?date=" class="btn btn-default btn-xs">
+        <span class="glyphicon glyphicon-flag"></span> Today
+      </a>
+
+      <a href="<%= new_service_path %>" class="btn btn-default btn-xs">
+        <span class="glyphicon glyphicon-plus"></span> Add
+      </a>
 		</div>
 
 		<table class="table table-hover table-bordered">
@@ -36,15 +47,17 @@
 					<td><%= a.description %></td>
 					<td><%= a.date %></td>
 					<td>
-						<a href="javascript:" class="btn btn-default btn-xs" data-toggle="modal" data-target="#schedules-<%= a.id %>">
-							<span class="glyphicon glyphicon-eye-open"></span> View
-						</a>
-						<a href="<%= edit_service_path(a) %>" class="btn btn-default btn-xs">
-							<span class="glyphicon glyphicon-edit"></span> Edit
-						</a>
-						<a data-confirm="Are you sure want to delete this service?" data-method="delete" href="<%= service_path(a) %>" rel="nofollow" class="btn btn-default btn-xs">
-							<span class="glyphicon glyphicon-remove-circle"></span> Delete
-						</a>
+            <div class="btn-group">
+  						<a href="javascript:" class="btn btn-default btn-xs" data-toggle="modal" data-target="#schedules-<%= a.id %>">
+  							<span class="glyphicon glyphicon-eye-open"></span> View
+  						</a>
+  						<a href="<%= edit_service_path(a) %>" class="btn btn-default btn-xs">
+  							<span class="glyphicon glyphicon-edit"></span> Edit
+  						</a>
+  						<a data-confirm="Are you sure want to delete this service?" data-method="delete" href="<%= service_path(a) %>" rel="nofollow" class="btn btn-default btn-xs">
+  							<span class="glyphicon glyphicon-remove-circle"></span> Delete
+  						</a>
+            </div>
 
 						<div class="modal fade" id="schedules-<%= a.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
