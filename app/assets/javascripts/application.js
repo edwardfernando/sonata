@@ -19,6 +19,47 @@
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.id.js
 
+// Based on solution found at : http://stackoverflow.com/questions/18770517/rails-4-how-to-use-document-ready-with-turbo-links
+var ready = function(){
+
+  // All codes below are related to date picker
+  $(function(){
+    var param = getUrlParameter('date');
+    if(!param || param == ''){
+      param = new Date();
+    }
+
+    var dateParam = new Date(param) == 'Invalid Date' ? new Date() : new Date(param);
+
+    $('.inline-date-picker').datepicker({
+      language: "id",
+      calendarWeeks: true,
+      beforeShowDay: function(date){
+
+        if (date.getMonth() == dateParam.getMonth()){
+          switch(date.getDate()){
+          case dateParam.getDate():
+            return{
+              classes: 'active'
+            }
+          }
+        }
+
+      }
+      }).on('changeDate', function(e){
+        window.location = '?date=' + $.datepicker.formatDate('yy-mm-dd', e.date) ;
+      }).datepicker('update', dateParam);
+
+  });
+
+  function isValidDate(d) {
+    if ( Object.prototype.toString.call(d) !== "[object Date]" )
+      return false;
+    return !isNaN(d.getTime());
+  }
+
+  // End date picker code
+
   $(function () {
       $("[rel='tooltip']").tooltip();
   });
@@ -63,5 +104,10 @@
         }
     }
 
-    return 'undefined';
+    return false;
   }
+};
+
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
