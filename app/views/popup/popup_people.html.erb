@@ -1,19 +1,18 @@
 <table class="table table-hover table-bordered">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>#</th>
+      <th>People Available</th>
     </tr>
   </thead>
 
   <tbody>
     <% @people.each do |p| %>
     <tr>
-      <td><%= p.name %></td>
       <td>
-        <a href="javascript: " onclick="choose('<%= params[:name] %>', '<%= params[:target] %>', '<%= p.id %>', '<%= p.name %>');" class="btn btn-default btn-xs">
-          <span class="glyphicon glyphicon-import"></span> Choose
+        <a href="javascript: " rel="tooltip" title="Choose <%= p.name %>" data-placement="bottom" onclick="choose('<%= params[:name] %>', '<%= params[:target] %>', '<%= p.id %>', '<%= p.name %>');" class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-import"></span>
         </a>
+        <%= p.name %>
       </td>
     </tr>
     <% end %>

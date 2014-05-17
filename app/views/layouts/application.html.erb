@@ -6,28 +6,6 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 
-  <script>
-  $(function() {
-    $( ".datepicker-field" ).datepicker({
-      changeMonth: true,
-      changeYear: true,
-      dateFormat: "yy-mm-dd"
-    });
-  });
-
-  function pop(url) {
-    w = 600;
-    h = 600;
-    wLeft = window.screenLeft ? window.screenLeft : window.screenX;
-    wTop = window.screenTop ? window.screenTop : window.screenY;
-
-    var left = wLeft + (window.innerWidth / 2) - (w / 2);
-    var top = wTop + (window.innerHeight / 2) - (h / 2);
-
-    window.open(url, "Sonata", 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
-  }
-
-  </script>
 </head>
 <body style="padding-top: 50px;">
 
