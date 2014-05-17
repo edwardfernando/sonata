@@ -13,3 +13,8 @@
  *= require bootstrap
  *= require bootstrap-datepicker3
  */
+ 
+table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
