@@ -65,45 +65,55 @@
     }
 </script>
 
-<%= form_for @service, :html => {:role => "form"} do |s| %>
-  <div class="form-group">
-    <%= s.label :name, :for => "serviceName" %>
-    <%= s.text_field :name, :class => "form-control", :id => "serviceName", :placeholder => "Enter Service Name" %>
+<div class="container">
+  <div class="row">
+    <%= form_for @service, :html => {:role => "form", :class => "form-horizontal"} do |s| %>
+      <div class="form-group">
+        <div class="col-xs-4">
+          <%= s.label :name, :for => "serviceName" %>
+          <%= s.text_field :name, :class => "form-control", :id => "serviceName", :placeholder => "Enter Service Name" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-7">
+          <%= s.label :description, :for => "serviceDescription" %>
+          <%= s.text_area :description, :class => "form-control", :id => "serviceDescription", :placeholder => "Description" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-2">
+          <%= s.label :date, :for => "serviceDate" %>
+          <%= s.text_field :date, :class => "form-control datepicker-field", :id => "serviceDate"%>
+        </div>
+      </div>
+
+      <%= s.submit :class => "btn btn-default" %>
+
+      <div align="right" style="padding-top: 10px; padding-bottom: 20px;">
+        <a href="javascript: " onclick="addRow();" class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-plus"></span> Add More Row
+        </a>
+
+        <a href="javascript: " onclick="deleteAllRows();" class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-minus"></span> Delete All Rows
+        </a>
+      </div>
+
+      <table class="table table-hover table-bordered" id="person-incharge-table">
+        <thead>
+          <tr>
+              <th colspan=2>Role</th>
+              <th colspan=2>Person</th>
+              <th>#</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        </tbody>
+      </table>
+
+    <% end %>
   </div>
-
-  <div class="form-group">
-    <%= s.label :description, :for => "serviceDescription" %>
-    <%= s.text_area :description, :class => "form-control", :id => "serviceDescription", :placeholder => "Description" %>
-  </div>
-
-  <div class="form-group">
-    <%= s.label :date, :for => "serviceDate" %>
-    <%= s.text_field :date, :class => "form-control datepicker-field", :id => "serviceDate"%>
-  </div>
-
-  <%= s.submit :class => "btn btn-default" %>
-
-  <div align="right" style="padding-top: 10px; padding-bottom: 20px;">
-    <a href="javascript: " onclick="addRow();" class="btn btn-default btn-xs">
-      <span class="glyphicon glyphicon-plus"></span> Add More Row
-    </a>
-
-    <a href="javascript: " onclick="deleteAllRows();" class="btn btn-default btn-xs">
-      <span class="glyphicon glyphicon-minus"></span> Delete All Rows
-    </a>
-  </div>
-
-  <table class="table table-hover table-bordered" id="person-incharge-table">
-    <thead>
-      <tr>
-          <th colspan=2>Role</th>
-          <th colspan=2>Person</th>
-          <th>#</th>
-      </tr>
-    </thead>
-
-    <tbody>
-    </tbody>
-  </table>
-
-<% end %>
+</div>

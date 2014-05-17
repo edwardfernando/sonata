@@ -1,20 +1,27 @@
-<%= form_for @person, :html => {:role => "form"} do |p| %>
+<div class="container">
+  <div class="row">
+    <%= form_for @person, :html => {:role => "form", :class => "form-horizontal"} do |p| %>
+      <div class="form-group">
+        <div class="col-xs-4">
+          <%= p.label :name, :for => "peopleName" %>
+          <%= p.text_field :name, :class => "form-control", :id => "peopleName", :placeholder => "Enter Name" %>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <%= p.label :name, :for => "peopleName" %>
-    <%= p.text_field :name, :class => "form-control", :id => "peopleName", :placeholder => "Enter Name" %>
+      <div class="form-group">
+        <div class="col-xs-6">
+          <%= p.label "Skillsets"%>
+          <div class="checkbox">
+            <% for role in Role.all %>
+              <label>
+                <%= check_box_tag "person[skillsets][]", role.id, @person.skillsets.map(&:role_id).include?(role.id) %> <%= role.name %>
+              </label>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <%= p.submit :class => "btn btn-default" %>
+    <% end %>
   </div>
-
-  <div class="form-group">
-    <%= p.label "Skillsets"%>
-    <div class="checkbox">
-      <% for role in Role.all %>
-        <label>
-          <%= check_box_tag "person[skillsets][]", role.id, @person.skillsets.map(&:role_id).include?(role.id) %> <%= role.name %>
-        </label>
-      <% end %>
-    </div>
-  </div>
-
-  <%= p.submit :class => "btn btn-default" %>
-<% end %>
+</div>
