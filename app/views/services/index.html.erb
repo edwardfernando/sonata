@@ -2,20 +2,29 @@
 
 <div class="row">
   <div class="col-md-3">
-
-    <div align="center">
-      <div class="inline-date-picker"></div>
-    </div>
-
+    <div class="inline-date-picker"></div>
 	</div>
   <div class="col-md-9">
 		<div style="padding-top: 10px; padding-bottom: 20px;">
+
+      <div class="btn-group">
+        <!--
+        <a href="<%= services_path %>?date=" class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-arrow-left"></span> Previous Day
+        </a>
+      -->
+        <a href="<%= services_path %>?date=" class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-flag"></span> Today
+        </a>
+        <!--
+        <a href="<%= services_path %>?date=" class="btn btn-default btn-xs">
+          Next Day <span class="glyphicon glyphicon-arrow-right"></span>
+        </a>
+      -->
+      </div>
+
       <a href="<%= services_path %>" class="btn btn-default btn-xs">
         <span class="glyphicon glyphicon-list-alt"></span> Show All
-      </a>
-
-      <a href="<%= services_path %>?date=" class="btn btn-default btn-xs">
-        <span class="glyphicon glyphicon-flag"></span> Today
       </a>
 
       <a href="<%= new_service_path %>" class="btn btn-default btn-xs">
