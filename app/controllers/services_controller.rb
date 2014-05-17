@@ -1,7 +1,14 @@
 class ServicesController < ApplicationController
 
 	def index
-		@services = Service.all.order(date: :desc)
+		date = params[:date]
+
+		if date == nil
+			@services = Service.all.order(date: :desc)
+		else
+			@services = Service.where(:date => date)
+		end
+
 	end
 
 	def new
