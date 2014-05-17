@@ -1,6 +1,41 @@
 <h3>Service Available</h3>
 
 
+<span id="test"></span>
+
+<div id="service-date-picker"></div>
+<script>
+
+	var param = getUrlParameter('date');
+	if(param == 'undefined' || param == ''){
+		param = new Date();
+	}
+
+	var dateParam = new Date(param);
+	$('#service-date-picker').datepicker({
+		language: "id",
+		calendarWeeks: true,
+		beforeShowDay: function(date){
+
+			if (date.getMonth() == dateParam.getMonth()){
+				switch(date.getDate()){
+				case dateParam.getDate():
+					return{
+						classes: 'active'
+					}
+				}
+			}
+
+		}
+		}).on('changeDate', function(e){
+			window.location = '<%= services_path %>?date=' + $.datepicker.formatDate('yy-mm-dd', e.date) ;
+    }).datepicker('update', dateParam);
+
+</script>
+
+<!--
+
+
 <div style="padding-top: 10px; padding-bottom: 20px;">
 	<a href="<%= new_service_path %>" class="btn btn-default btn-xs">
 		<span class="glyphicon glyphicon-plus"></span> Add
@@ -35,13 +70,13 @@
 				</a>
 
 				<div class="modal fade" id="schedules-<%= a.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				  <div class="modal-dialog">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				        <h4 class="modal-title" id="myModalLabel"><%= a.name %></h4>
-				      </div>
-				      <div class="modal-body">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel"><%= a.name %></h4>
+							</div>
+							<div class="modal-body">
 								<p><strong>Description:</strong> <%= a.description %></p>
 								<p><strong>Date:</strong> <%= a.date %></p>
 
@@ -62,13 +97,13 @@
 									<% end %>
 									</tbody>
 								</table>
-				      </div>
-				      <div class="modal-footer">
+							</div>
+							<div class="modal-footer">
 								<a href="<%= edit_service_path(a) %>" class="btn btn-default">Edit</a>
 								<a href="javasript:" class="btn btn-primary" data-dismiss="modal">Close</a>
-				      </div>
-				    </div>
-				  </div>
+							</div>
+						</div>
+					</div>
 				</div>
 
 			</td>
@@ -76,3 +111,5 @@
 		<% end %>
 	</tbody>
 </table>
+
+-->
