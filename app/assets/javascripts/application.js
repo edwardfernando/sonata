@@ -14,5 +14,40 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-//= require jquery.ui.datepicker
 //= require bootstrap
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.id.js
+
+  $(function () {
+      $("[rel='tooltip']").tooltip();
+  });
+
+  $(function() {
+    $( ".datepicker-field" ).datepicker({
+      language: "id",
+      format: "yyyy-mm-dd",
+      todayBtn: "linked",
+      orientation: "top auto",
+      calendarWeeks: true,
+      autoclose: true,
+      todayHighlight: true
+    });
+  });
+
+  function pop(url) {
+    w = 600;
+    h = 600;
+    wLeft = window.screenLeft ? window.screenLeft : window.screenX;
+    wTop = window.screenTop ? window.screenTop : window.screenY;
+
+    var left = wLeft + (window.innerWidth / 2) - (w / 2);
+    var top = wTop + (window.innerHeight / 2) - (h / 2);
+
+    window.open(url, "Sonata", 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+  }
+
+  function choose(n, t, id, text){
+    window.opener.document.getElementById(n + '-id-' + t).value = id;
+    window.opener.document.getElementById(n + '-text-' + t).innerHTML = text;
+    window.close();
+  }
