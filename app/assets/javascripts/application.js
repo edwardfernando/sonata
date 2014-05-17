@@ -32,6 +32,7 @@ var ready = function(){
     var dateParam = new Date(param) == 'Invalid Date' ? new Date() : new Date(param);
 
     $('.inline-date-picker').datepicker({
+      todayHighlight: true,
       language: "id",
       calendarWeeks: true,
       beforeShowDay: function(date){
