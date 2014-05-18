@@ -2,12 +2,11 @@
     var row = 0;
 
     $( document ).ready(function() {
-      console.log("Document Ready. Add one row to 'person-incharge-table' table.. row = " + row);
+      $('#serviceDate').val($.datepicker.formatDate('yy-mm-dd', getValidDateParam()));
 
       <% @service.schedules.each do |s| %>
       addRow("<%= s.role.name %>", "<%= s.role.id %>", "<%= s.person.name %>", "<%= s.person.id %>");
       <% end %>
-
     });
 
     function getRow(role, roleID, person, personID){
