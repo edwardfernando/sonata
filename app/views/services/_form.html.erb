@@ -2,7 +2,11 @@
     var row = 0;
 
     $( document ).ready(function() {
-      $('#serviceDate').val($.datepicker.formatDate('yy-mm-dd', getValidDateParam()));
+
+      // Set service date to 'today' day for 'add' page
+      if($('#serviceDate').val() == ''){
+        $('#serviceDate').val($.datepicker.formatDate('yy-mm-dd', getValidDateParam()));
+      }
 
       <% @service.schedules.each do |s| %>
       addRow("<%= s.role.name %>", "<%= s.role.id %>", "<%= s.person.name %>", "<%= s.person.id %>");
