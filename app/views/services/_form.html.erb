@@ -94,28 +94,39 @@
 
       <%= s.submit :class => "btn btn-default" %>
 
-      <div align="right" style="padding-top: 10px; padding-bottom: 20px;">
-        <a href="javascript: " onclick="addRow();" class="btn btn-default btn-xs">
-          <span class="glyphicon glyphicon-plus"></span> Add More Row
-        </a>
+      <div style="padding-top: 10px; padding-bottom: 20px;">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Choose People Involved</h3>
+          </div>
 
-        <a href="javascript: " onclick="deleteAllRows();" class="btn btn-default btn-xs">
-          <span class="glyphicon glyphicon-minus"></span> Delete All Rows
-        </a>
+          <div class="panel-body">
+
+            <div align="right" style="padding-top: 10px; padding-bottom: 20px;">
+              <a href="javascript: " onclick="addRow();" class="btn btn-default btn-xs">
+                <span class="glyphicon glyphicon-plus"></span> Add More Row
+              </a>
+
+              <a href="javascript: " onclick="deleteAllRows();" class="btn btn-default btn-xs">
+                <span class="glyphicon glyphicon-minus"></span> Delete All Rows
+              </a>
+            </div>
+
+            <table class="table table-hover table-bordered" id="person-incharge-table">
+              <thead>
+                <tr>
+                    <th colspan=2>Role</th>
+                    <th colspan=2>Person</th>
+                    <th>#</th>
+                </tr>
+              </thead>
+
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-
-      <table class="table table-hover table-bordered" id="person-incharge-table">
-        <thead>
-          <tr>
-              <th colspan=2>Role</th>
-              <th colspan=2>Person</th>
-              <th>#</th>
-          </tr>
-        </thead>
-
-        <tbody>
-        </tbody>
-      </table>
 
     <% end %>
   </div>
