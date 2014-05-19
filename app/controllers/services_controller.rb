@@ -26,7 +26,7 @@ class ServicesController < ApplicationController
 			Schedule.create(service:@service, role:Role.find(role), person:Person.find(people_array[index]))
 		end
 
-		redirect_to services_path
+		redirect_to services_path + "?date=" + @service.date.strftime("%F")
 	end
 
 	def show
@@ -50,7 +50,7 @@ class ServicesController < ApplicationController
 			Schedule.create(service:@service, role:Role.find(role), person:Person.find(people_array[index]))
 		end
 
-		redirect_to services_path
+		redirect_to services_path + "?date=" + @service.date.strftime("%F")
 	end
 
 	def destroy
