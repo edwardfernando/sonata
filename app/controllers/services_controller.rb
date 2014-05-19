@@ -1,10 +1,15 @@
+require 'date'
+
 class ServicesController < ApplicationController
 
 	def index
 		date = params[:date]
+		@today = today
 
 		if date == nil
 			@services = Service.all.order(date: :desc)
+		elsif date.empty?
+			@services = Service.where(:date => today)
 		else
 			@services = Service.where(:date => date)
 		end
