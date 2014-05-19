@@ -1,10 +1,15 @@
+require 'date'
+
 class ServicesController < ApplicationController
 
 	def index
 		date = params[:date]
+		@today = today
 
 		if date == nil
 			@services = Service.all.order(date: :desc)
+		elsif date.empty?
+			@services = Service.where(:date => today)
 		else
 			@services = Service.where(:date => date)
 		end
@@ -26,7 +31,7 @@ class ServicesController < ApplicationController
 			Schedule.create(service:@service, role:Role.find(role), person:Person.find(people_array[index]))
 		end
 
-		redirect_to services_path
+		redirect_to services_path + "?date=" + @service.date.strftime("%F")
 	end
 
 	def show
@@ -50,7 +55,7 @@ class ServicesController < ApplicationController
 			Schedule.create(service:@service, role:Role.find(role), person:Person.find(people_array[index]))
 		end
 
-		redirect_to services_path
+		redirect_to services_path + "?date=" + @service.date.strftime("%F")
 	end
 
 	def destroy

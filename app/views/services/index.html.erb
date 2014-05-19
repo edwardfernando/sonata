@@ -13,7 +13,7 @@
           <span class="glyphicon glyphicon-arrow-left"></span> Previous Day
         </a>
       -->
-        <a href="<%= services_path %>?date=" class="btn btn-default btn-xs">
+        <a href="<%= services_path %>?date=<%= @today %>" class="btn btn-default btn-xs">
           <span class="glyphicon glyphicon-flag"></span> Today
         </a>
         <!--
@@ -27,10 +27,12 @@
         <span class="glyphicon glyphicon-list-alt"></span> Show All
       </a>
 
-      <a href="<%= new_service_path %>" class="btn btn-default btn-xs">
+      <a href="<%= new_service_path %>?date=<%= params[:date] %>" class="btn btn-default btn-xs">
         <span class="glyphicon glyphicon-plus"></span> Add
       </a>
 		</div>
+
+    <h4 class="text-right">Service For: <%= params[:date] ? params[:date] : 'All' %></h4>
 
 		<table class="table table-hover table-bordered">
 			<thead>
@@ -46,7 +48,7 @@
 
 				<% if @services.empty? %>
 				<tr>
-						<td colspan="4">No service found. <%= link_to 'Create one?', new_service_path %> </td>
+						<td colspan="4">No service found. <%= link_to 'Create one?', new_service_path + '?date=' + params[:date] %> </td>
 				</tr>
 				<% end %>
 
