@@ -12,6 +12,8 @@ Sonata::Application.routes.draw do
       get 'popup', :controller => 'popup', :action => 'popup_roles'
     end
   end
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "sessions" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
