@@ -40,6 +40,11 @@ class CreateUsers < ActiveRecord::Migration
       t.string :avatar_url
       t.string :random_id
 
+      # Custom Field
+      t.boolean  :is_approved, default: false
+      t.datetime :approved_date
+
+
       t.timestamps
     end
 
