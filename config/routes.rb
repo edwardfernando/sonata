@@ -1,19 +1,30 @@
 Sonata::Application.routes.draw do
   root "welcome#index"
 
+  match 'login', to: 'welcome#login', via: [:get]
+
   resources :services
+
   resources :people do
     collection do
       get 'popup', :controller => 'popup', :action => 'popup_people'
     end
   end
+
   resources :roles do
     collection do
       get 'popup', :controller => 'popup', :action => 'popup_roles'
     end
   end
 
+  resources :users
+
   devise_for :users, :controllers => { :omniauth_callbacks => "sessions" }
+
+  devise_scope :user do
+    get 'logout', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
