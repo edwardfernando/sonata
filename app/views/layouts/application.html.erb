@@ -19,10 +19,13 @@
 
       <div class="collapse navbar-collapse navHeaderCollapse">
         <ul class="nav navbar-nav navbar-right">
+          <li <% if params[:controller] == "people" && params[:action] == "profile" %> class="active" <% end %>>
+            <%= link_to "My Profile", profile_path %>
+          </li>
           <li <% if params[:controller] == "services" %> class="active" <% end %>>
             <%= link_to "General Service", services_path %>
           </li>
-          <li <% if params[:controller] == "people" %> class="active" <% end %>>
+          <li <% if params[:controller] == "people" && params[:action] == "index" %> class="active" <% end %>>
             <%= link_to "People", people_path %>
           </li>
           <li <% if params[:controller] == "roles" %> class="active" <% end %>>
