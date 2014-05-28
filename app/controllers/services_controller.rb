@@ -4,7 +4,6 @@ class ServicesController < ApplicationController
 
 	def index
 		date = params[:date]
-		@today = today
 
 		if date == nil
 			@services = Service.all.order(date: :desc)

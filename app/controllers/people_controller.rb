@@ -4,6 +4,9 @@ class PeopleController < ApplicationController
     @people = Person.all
   end
 
+  def profile
+  end
+
   def new
     @person = Person.new
   end
