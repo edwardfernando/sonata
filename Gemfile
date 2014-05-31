@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.2'
+gem 'rails', '4.1.1'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
@@ -13,6 +13,8 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+
+gem 'pundit'
 
 # Use Bootstrap
 gem 'bootstrap-sass', '~> 3.1.1'

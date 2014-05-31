@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20140513150849) do
     t.boolean  "is_servant",             default: false
     t.boolean  "is_approved",            default: false
     t.datetime "approved_date"
+    t.integer  "role"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -45,6 +45,8 @@ class CreatePeople < ActiveRecord::Migration
       t.boolean  :is_approved, default: false
       t.datetime :approved_date
 
+      # Pundit Field
+      t.integer  :role
 
       t.timestamps
     end
