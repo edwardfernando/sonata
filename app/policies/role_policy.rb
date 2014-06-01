@@ -10,10 +10,6 @@ class RolePolicy
     @user.admin?
   end
 
-  def new?
-    true
-  end
-
   def update?
     @user.admin?
   end

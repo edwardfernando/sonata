@@ -10,7 +10,6 @@ class RolesController < ApplicationController
 
   def new
     @role = Role.new
-    authorize @role
   end
 
   def create
