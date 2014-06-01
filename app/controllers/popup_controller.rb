@@ -1,5 +1,8 @@
 class PopupController < ApplicationController
 
+  before_filter :authenticate_person!
+#  after_action :verify_authorized
+
   def popup_roles
     @roles = Role.all
   end

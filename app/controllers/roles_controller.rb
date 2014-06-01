@@ -1,11 +1,16 @@
 class RolesController < ApplicationController
 
+  before_filter :authenticate_person!
+  after_action :verify_authorized
+
   def index
     @roles = Role.all
+    authorize @roles
   end
 
   def new
     @role = Role.new
+    authorize @role
   end
 
   def create

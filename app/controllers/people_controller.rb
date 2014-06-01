@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
 
   before_filter :authenticate_person!
-  after_action :verify_authorized, except: [:show]
+  after_action :verify_authorized
 
   def index
     @people = Person.all
