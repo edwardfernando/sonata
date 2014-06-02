@@ -33,6 +33,17 @@
           <a data-confirm="Are you sure want to delete this person?" data-method="delete" href="<%= person_path(p) %>" rel="nofollow" class="btn btn-default btn-xs">
             <span class="glyphicon glyphicon-remove-circle"></span> Delete
           </a>
+
+          <% if p.is_approved? %>
+          <a data-confirm="Are you sure want to delete this person?" data-method="delete" href="<%= person_path(p) %>" rel="nofollow" class="btn btn-default btn-xs">
+            <span class="glyphicon glyphicon-thumbs-up"></span> Approved
+          </a>
+          <% else %>
+          <a data-confirm="Are you sure want to delete this person?" data-method="delete" href="<%= person_path(p) %>" rel="nofollow" class="btn btn-default btn-xs">
+            <span class="glyphicon glyphicon-thumbs-down"></span> Revoke
+          </a>
+          <% end %>
+
         </div>
       </td>
     </tr>
