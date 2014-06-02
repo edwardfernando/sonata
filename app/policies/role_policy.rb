@@ -1,21 +1,37 @@
 class RolePolicy
-  attr_reader :user, :record
+  attr_reader :person, :record
 
-  def initialize(user, record)
-    @user = user
+  def initialize(person, record)
+    @person = person
     @record = record
   end
 
   def index?
-    @user.admin?
+    @person.admin?
+  end
+
+  def new?
+    @person.admin?
+  end
+
+  def create?
+    @person.admin?
+  end
+
+  def edit?
+    @person.admin?
   end
 
   def update?
-    @user.admin?
+    @person.admin?
   end
 
   def destroy?
-    @user.admin?
+    @person.admin?
+  end
+
+  def show?
+    @person.admin?
   end
 
 end

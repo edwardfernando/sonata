@@ -7,15 +7,31 @@ class PersonPolicy
   end
 
   def index?
-    @person.admin?
+    @person.manager? || @person.admin?
+  end
+
+  def new?
+    @person.manager? || @person.admin?
+  end
+
+  def create?
+    @person.manager? || @person.admin?
+  end
+
+  def edit?
+    @person.manager? || @person.admin?
   end
 
   def update?
-    @person.admin?
+    @person.manager? || @person.admin?
   end
 
   def destroy?
-    @person.admin?
+    @person.manager? || @person.admin?
+  end
+
+  def show?
+    @person.manager? || @person.admin?
   end
 
 end
