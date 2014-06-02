@@ -1,0 +1,2 @@
+module DeniedHelper
+end
