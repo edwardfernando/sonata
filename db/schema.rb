@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20140513150849) do
     t.string   "oauth_expires_at"
     t.string   "avatar_url"
     t.string   "random_id"
-    t.boolean  "is_servant",             default: false
     t.boolean  "is_approved",            default: false
     t.datetime "approved_date"
     t.integer  "role"
