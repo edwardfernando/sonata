@@ -32,7 +32,7 @@
         <span class="glyphicon glyphicon-plus"></span> Add
       </a>
       <% end %>
-      
+
 		</div>
 
     <h4 class="text-right">Service For: <%= params[:date] ? params[:date] : 'All' %></h4>
@@ -70,13 +70,20 @@
   							<span class="glyphicon glyphicon-eye-open"></span> View
   						</a>
 
-              <% if person_signed_in? && (current_person.manager? || current_person.admin?) %>
-  						<a href="<%= edit_service_path(a) %>" class="btn btn-default btn-xs">
-  							<span class="glyphicon glyphicon-edit"></span> Edit
-  						</a>
-  						<a data-confirm="Are you sure want to delete this service?" data-method="delete" href="<%= service_path(a) %>" rel="nofollow" class="btn btn-default btn-xs">
-  							<span class="glyphicon glyphicon-remove-circle"></span> Delete
-  						</a>
+              <% if person_signed_in? %>
+
+                <% if policy(a).edit? %>
+    						<a href="<%= edit_service_path(a) %>" class="btn btn-default btn-xs">
+    							<span class="glyphicon glyphicon-edit"></span> Edit
+    						</a>
+                <% end %>
+
+                <% if policy(a).destroy? %>
+    						<a data-confirm="Are you sure want to delete this service?" data-method="delete" href="<%= service_path(a) %>" rel="nofollow" class="btn btn-default btn-xs">
+    							<span class="glyphicon glyphicon-remove-circle"></span> Delete
+    						</a>
+                <% end %>
+
               <% end %>
 
             </div>
@@ -112,7 +119,7 @@
 									</div>
 									<div class="modal-footer">
 
-                    <% if person_signed_in? && (current_person.manager? || current_person.admin?) %>
+                    <% if person_signed_in? && policy(a).edit? %>
 										<a href="<%= edit_service_path(a) %>" class="btn btn-default">Edit</a>
                     <% end %>
 
