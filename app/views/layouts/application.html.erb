@@ -25,12 +25,18 @@
           <li <% if params[:controller] == "services" %> class="active" <% end %>>
             <%= link_to "General Service", services_path %>
           </li>
+
           <li <% if params[:controller] == "people" && params[:action] == "index" %> class="active" <% end %>>
             <%= link_to "People", people_path %>
           </li>
+
+          <% if !current_person.nil? && current_person.admin? %>
+
           <li <% if params[:controller] == "roles" %> class="active" <% end %>>
             <%= link_to "Roles", roles_path %>
           </li>
+
+          <% end %>
 
           <%= render 'partials/login_button' %>
 
