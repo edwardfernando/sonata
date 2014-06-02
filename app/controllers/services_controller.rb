@@ -2,8 +2,8 @@ require 'date'
 
 class ServicesController < ApplicationController
 
-	before_filter :authenticate_person!
-#	after_action :verify_authorized
+	before_filter :authenticate_person!, except: [:index, :show]
+	after_action :verify_authorized, except: [:index, :show]
 
 	def index
 		date = params[:date]
@@ -20,10 +20,14 @@ class ServicesController < ApplicationController
 
 	def new
 		@service = Service.new
+		authorize @service
 	end
 
 	def create
 		@service = Service.new(service_param)
+
+		authorize @service
+
 		@service.save
 
 		role_array = params[:service][:role] ||= []
@@ -42,10 +46,13 @@ class ServicesController < ApplicationController
 
 	def edit
 		@service = Service.find(params[:id])
+		authorize @service
 	end
 
 	def update
 		@service = Service.find(params[:id])
+		authorize @service
+
 		@service.update(service_param)
 
 		Service.find(params[:id]).schedules.destroy_all
@@ -61,7 +68,10 @@ class ServicesController < ApplicationController
 	end
 
 	def destroy
-		Service.find(params[:id]).destroy
+		@service = Service.find(params[:id])
+		authorize @service
+
+		@service.destroy
 		redirect_to services_path
 	end
 
