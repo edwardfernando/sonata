@@ -10,25 +10,37 @@ class RolesController < ApplicationController
 
   def new
     @role = Role.new
+    authorize @role
   end
 
   def create
-    @role = Role.new(role_param).save
+    @role = Role.new(role_param)
+    authorize @role
+
+    @role.save
+
     redirect_to roles_path
   end
 
   def edit
     @role = Role.find(params[:id])
+    authorize @role
   end
 
   def update
     @role = Role.find(params[:id])
+    authorize @role
+
     @role.update(role_param)
-    redirect_to services_path
+    redirect_to roles_path
   end
 
   def destroy
-    Role.find(params[:id]).destroy
+    @role = Role.find(params[:id])
+    authorize @role
+
+    @role.destroy
+
     redirect_to roles_path
   end
 

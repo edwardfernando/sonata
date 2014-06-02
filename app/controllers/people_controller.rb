@@ -13,12 +13,15 @@ class PeopleController < ApplicationController
 
   def new
     @person = Person.new
+    authorize @person
   end
 
   def create
     params[:person][:skillsets] ||= []
 
     @person = Person.new(person_param)
+    authorize @person
+
     @person.save
 
     for s in params[:person][:skillsets]
@@ -30,12 +33,15 @@ class PeopleController < ApplicationController
 
   def edit
     @person = Person.find(params[:id])
+    authorize @person
   end
 
   def update
     params[:person][:skillsets] ||= []
 
     @person = Person.find(params[:id])
+    authorize @person
+
     @person.update(person_param)
 
     Skillset.where(:person => @person).destroy_all
@@ -49,10 +55,14 @@ class PeopleController < ApplicationController
 
   def show
     @person = Person.find(params[:id])
+    authorize @person
   end
 
   def destroy
-    Person.find(params[:id]).destroy
+    @person = Person.find(params[:id])
+    authorize @person
+
+    @person.destroy
     redirect_to people_path
   end
 
