@@ -17,9 +17,12 @@ class RolesController < ApplicationController
     @role = Role.new(role_param)
     authorize @role
 
-    @role.save
+    if @role.save
+      redirect_to roles_path
+    else
+      render 'new'
+    end
 
-    redirect_to roles_path
   end
 
   def edit
@@ -31,8 +34,11 @@ class RolesController < ApplicationController
     @role = Role.find(params[:id])
     authorize @role
 
-    @role.update(role_param)
-    redirect_to roles_path
+    if @role.update(role_param)
+      redirect_to roles_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy

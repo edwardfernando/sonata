@@ -28,8 +28,6 @@ class ServicesController < ApplicationController
 
 		authorize @service
 
-		@service.save
-
 		role_array = params[:service][:role] ||= []
 		people_array = params[:service][:person] ||= []
 
@@ -37,7 +35,13 @@ class ServicesController < ApplicationController
 			Schedule.create(service:@service, role:Role.find(role), person:Person.find(people_array[index]))
 		end
 
-		redirect_to services_path + "?date=" + @service.date.strftime("%F")
+		if @service.save
+			redirect_to services_path + "?date=" + @service.date.strftime("%F")
+		else
+			@service.errors.add(:schedules) if role_array.empty?
+			render "new"
+		end
+
 	end
 
 	def show
@@ -53,18 +57,22 @@ class ServicesController < ApplicationController
 		@service = Service.find(params[:id])
 		authorize @service
 
-		@service.update(service_param)
-
-		Service.find(params[:id]).schedules.destroy_all
-
 		role_array = params[:service][:role] ||= []
 		people_array = params[:service][:person] ||= []
 
-		role_array.each_with_index do |role,index|
-			Schedule.create(service:@service, role:Role.find(role), person:Person.find(people_array[index]))
+		if @service.update(service_param) && !role_array.empty?
+			Service.find(params[:id]).schedules.destroy_all
+
+			role_array.each_with_index do |role,index|
+				Schedule.create(service:@service, role:Role.find(role), person:Person.find(people_array[index]))
+			end
+
+			redirect_to services_path + "?date=" + @service.date.strftime("%F")
+		else
+			@service.errors.add(:schedules) if role_array.empty?
+			render "edit"
 		end
 
-		redirect_to services_path + "?date=" + @service.date.strftime("%F")
 	end
 
 	def destroy

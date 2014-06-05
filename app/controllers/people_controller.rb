@@ -22,13 +22,17 @@ class PeopleController < ApplicationController
     @person = Person.new(person_param)
     authorize @person
 
-    @person.save
-
     for s in params[:person][:skillsets]
       Skillset.new(person:@person, role:Role.find(s)).save
     end
 
-    redirect_to people_path
+    if @person.save
+      redirect_to people_path
+    else
+      @person.errors.add(:skillsets) if params[:person][:skillsets].empty?
+      render 'new'
+    end
+
   end
 
   def edit
@@ -37,20 +41,22 @@ class PeopleController < ApplicationController
   end
 
   def update
-    params[:person][:skillsets] ||= []
-
     @person = Person.find(params[:id])
     authorize @person
 
-    @person.update(person_param)
+    params[:person][:skillsets] ||= []
 
-    Skillset.where(:person => @person).destroy_all
+    if @person.update(person_param) && !params[:person][:skillsets].empty?
+      Skillset.where(:person => @person).destroy_all
 
-    for s in params[:person][:skillsets]
-      Skillset.new(person:@person, role:Role.find(s)).save
+      for s in params[:person][:skillsets]
+        Skillset.new(person:@person, role:Role.find(s)).save
+      end
+    else
+      @person.errors.add(:skillsets) if params[:person][:skillsets].empty?
+      render "edit"
     end
 
-    redirect_to people_path
   end
 
   def show
@@ -72,7 +78,7 @@ class PeopleController < ApplicationController
 
   private
   def person_param
-    params.require(:person).permit(:name, :skillsets)
+    params.require(:person).permit(:name, :email, :skillsets)
   end
 
 end
