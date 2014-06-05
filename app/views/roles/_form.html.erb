@@ -1,6 +1,17 @@
 <div class="container">
   <div class="row">
     <%= form_for @role, :html => {:role => "form", :class => "form-horizontal"}  do |s| %>
+      <% if @role.errors.any? %>
+    		<div id="error_explanation">
+          <%= pluralize(@role.errors.count, "error") %> prohibited this post from being saved:
+      		<ul>
+      			<% @role.errors.full_messages.each do |msg| %>
+      			<li><%= msg %></li>
+      			<% end %>
+      		</ul>
+    	  </div>
+    	<% end %>
+
       <div class="form-group">
         <div class="col-xs-4">
           <%= s.label :name, :for => "roleName" %>
