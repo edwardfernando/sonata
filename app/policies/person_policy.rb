@@ -34,4 +34,8 @@ class PersonPolicy
     @person.manager? || @person.admin?
   end
 
+  def popup_people?
+    @person.manager? || @person.admin?
+  end
+
 end

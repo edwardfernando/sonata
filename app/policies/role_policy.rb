@@ -34,4 +34,8 @@ class RolePolicy
     @person.admin?
   end
 
+  def popup_roles?
+    @person.manager? || @person.admin?
+  end
+
 end
