@@ -19,3 +19,8 @@ table {
     table-layout: fixed;
     word-wrap: break-word;
 }
+
+/* add required field asterisk */
+label.required:after {
+    content: " *";
+}
