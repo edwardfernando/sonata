@@ -2,7 +2,7 @@ class Person < ActiveRecord::Base
   has_many :skillsets, :dependent => :destroy
   has_many :roles, :through => :skiilsets
 
-  has_many :schedules, :dependent => :destroy
+  has_many :schedules, :dependent => :destroy, inverse_of: :person
 
 
   # Include default devise modules. Others available are:
@@ -10,6 +10,9 @@ class Person < ActiveRecord::Base
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   devise :omniauthable #, :validatable
+
+  validates :name, presence: true
+  validates :email, uniqueness: true, presence: true
 
   enum role: [:user, :manager, :admin]
   after_initialize :set_default_role, :if => :new_record?
@@ -33,6 +36,8 @@ class Person < ActiveRecord::Base
                             avatar_url:auth.info.image,
                             random_id:Devise.friendly_token[0,20]
                           )
+
+                        return person
   end
 
 
