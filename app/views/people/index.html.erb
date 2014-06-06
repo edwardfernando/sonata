@@ -11,6 +11,7 @@
     <tr>
       <th>Name</th>
       <th>Skillsets</th>
+      <th>Role</th>
       <th>#</th>
     </tr>
   </thead>
@@ -20,24 +21,31 @@
     <tr <%= "class=danger" unless p.is_approved? %>>
       <td><%= p.name %></td>
       <td><%= p.skillsets.map(&:role).map(&:name).join(", ") %></td>
+      <td><%= p.role %></td>
       <td>
         <div class="btn-group">
-          <!--
-          <a href="<%= person_path(p) %>" class="btn btn-default btn-xs">
-            <span class="glyphicon glyphicon-eye-open"></span> View
-          </a>
-        -->
-          <a href="<%= edit_person_path(p) %>" class="btn btn-default btn-xs">
-            <span class="glyphicon glyphicon-edit"></span> Edit
-          </a>
-          <a data-confirm="Are you sure want to delete this person?" data-method="delete" href="<%= person_path(p) %>" rel="nofollow" class="btn btn-default btn-xs">
-            <span class="glyphicon glyphicon-remove-circle"></span> Delete
-          </a>
 
-          <% unless p.is_approved %>
-          <a href="<%= approve_person_path(p) %>" rel="nofollow" class="btn btn-default btn-xs">
-            <span class="glyphicon glyphicon-thumbs-up"></span> Approve
-          </a>
+          <%= "Admin Account" if p.admin? %>
+
+          <% unless p.admin? %>
+            <!--
+            <a href="<%= person_path(p) %>" class="btn btn-default btn-xs">
+              <span class="glyphicon glyphicon-eye-open"></span> View
+            </a>
+          -->
+            <a href="<%= edit_person_path(p) %>" class="btn btn-default btn-xs">
+              <span class="glyphicon glyphicon-edit"></span> Edit
+            </a>
+            <a data-confirm="Are you sure want to delete this person?" data-method="delete" href="<%= person_path(p) %>" rel="nofollow" class="btn btn-default btn-xs">
+              <span class="glyphicon glyphicon-remove-circle"></span> Delete
+            </a>
+
+            <% unless p.is_approved %>
+            <a href="<%= approve_person_path(p) %>" rel="nofollow" class="btn btn-default btn-xs">
+              <span class="glyphicon glyphicon-thumbs-up"></span> Approve
+            </a>
+            <% end %>
+
           <% end %>
         </div>
       </td>

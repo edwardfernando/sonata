@@ -1,2 +1,30 @@
-Current person : <%= current_person.name %>
-<img src="<%= current_person.avatar_url %>" />
+<div class="container-fluid well span6">
+	<div class="row-fluid">
+        <div class="span2" >
+		    <img src="<%= parse_avatar %>" class="img-circle profilePicture">
+        </div>
+
+        <div class="span8">
+            <h4><%= current_person.name %></h4>
+            <h6><%= current_person.role.capitalize %> | <%= current_person.skillsets.map(&:role).map(&:name).join(", ") %></h6>
+            <h6><%= current_person.email %></h6>
+            <h6>Member for <%= time_ago_in_words(current_person.created_at, include_seconds: true)  %> since <%= current_person.created_at.strftime("%F") %></h6>
+        </div>
+
+        <div class="span2">
+            <div class="btn-group">
+                <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
+                    Action
+                    <span class="icon-cog icon-white"></span><span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#"><span class="icon-wrench"></span> Edit</a></li>
+
+                    <% if current_person.admin? %>
+                    <li><a href="#"><span class="icon-trash"></span> Delete</a></li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+</div>
+</div>
