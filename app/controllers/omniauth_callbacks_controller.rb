@@ -14,10 +14,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @person.nil?
       @person = Person.create_from_facebook(auth)
-    elsif(!@person.is_approved?)
-      set_flash_message(:danger, :not_approved, :name => @person.name, :kind => "Facebook")
+    # elsif(!@person.is_approved?)
+    #   set_flash_message(:danger, :not_approved, :name => @person.name, :kind => "Facebook")
     else
-      set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+      set_flash_message(:info, :success, :kind => "Facebook") if is_navigational_format?
     end
 
     sign_in_and_redirect @person, :event => :authentication
@@ -30,10 +30,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @person.nil?
       @person = Person.create_from_twitter(auth)
-    elsif(!@person.is_approved?)
-        set_flash_message(:danger, :not_approved, :name => @person.name, :kind => "Twitter")
+    # elsif(!@person.is_approved?)
+    #     set_flash_message(:danger, :not_approved, :name => @person.name, :kind => "Twitter")
     else
-      set_flash_message(:notice, :success, :kind => "Twitter") if is_navigational_format?
+      set_flash_message(:info, :success, :kind => "Twitter") if is_navigational_format?
     end
 
     sign_in_and_redirect @person, :event => :authentication
