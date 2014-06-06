@@ -10,6 +10,10 @@ class PersonPolicy
     @person.manager? || @person.admin?
   end
 
+  def approve?
+    @person.manager? || @person.admin?
+  end
+
   def new?
     @person.manager? || @person.admin?
   end
