@@ -111,7 +111,7 @@
 											<% a.schedules.each do |s| %>
 												<tr>
 														<td><%= s.role.name %></td>
-														<td><%= s.person.name %></td>
+														<td><img src="<%= parse_avatar %>" class="img-circle profilePicture-small"> <%= s.person.name %></td>
 												</tr>
 											<% end %>
 											</tbody>
