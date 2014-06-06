@@ -17,6 +17,10 @@ Sonata::Application.routes.draw do
     collection do
       get 'popup', :controller => 'popup', :action => 'popup_people'
     end
+
+    member do
+      get 'approve', :action => 'approve'
+    end
   end
   devise_for :people, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
