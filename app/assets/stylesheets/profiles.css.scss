@@ -3,8 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.profilePicture{
+.profilePicture-normal{
   width:200px;
   height:200px;
+  overflow:hidden;
+}
+
+.profilePicture-small{
+  width:20px;
+  height:20px;
   overflow:hidden;
 }
