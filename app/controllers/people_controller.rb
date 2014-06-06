@@ -11,6 +11,19 @@ class PeopleController < ApplicationController
   def profile
   end
 
+  def approve
+    @person = Person.find(params[:id])
+    authorize @person
+
+    if @person.valid?
+      @person.update(is_approved: true, approved_date: DateTime.now)
+      redirect_to people_path
+    else
+      render 'edit'
+    end
+
+  end
+
   def new
     @person = Person.new
     authorize @person
@@ -52,6 +65,8 @@ class PeopleController < ApplicationController
       for s in params[:person][:skillsets]
         Skillset.new(person:@person, role:Role.find(s)).save
       end
+
+      redirect_to people_path
     else
       @person.errors.add(:skillsets) if params[:person][:skillsets].empty?
       render "edit"
