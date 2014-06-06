@@ -17,7 +17,7 @@
 
   <tbody>
     <% @people.each do |p| %>
-    <tr>
+    <tr <%= "class=danger" unless p.is_approved? %>>
       <td><%= p.name %></td>
       <td><%= p.skillsets.map(&:role).map(&:name).join(", ") %></td>
       <td>
@@ -34,16 +34,11 @@
             <span class="glyphicon glyphicon-remove-circle"></span> Delete
           </a>
 
-          <% if p.is_approved? %>
-          <a data-confirm="Are you sure want to delete this person?" data-method="delete" href="<%= person_path(p) %>" rel="nofollow" class="btn btn-default btn-xs">
-            <span class="glyphicon glyphicon-thumbs-up"></span> Approved
-          </a>
-          <% else %>
-          <a data-confirm="Are you sure want to delete this person?" data-method="delete" href="<%= person_path(p) %>" rel="nofollow" class="btn btn-default btn-xs">
-            <span class="glyphicon glyphicon-thumbs-down"></span> Revoke
+          <% unless p.is_approved %>
+          <a href="<%= approve_person_path(p) %>" rel="nofollow" class="btn btn-default btn-xs">
+            <span class="glyphicon glyphicon-thumbs-up"></span> Approve
           </a>
           <% end %>
-
         </div>
       </td>
     </tr>
