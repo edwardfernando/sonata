@@ -21,8 +21,8 @@
         <ul class="nav navbar-nav navbar-right">
 
           <% if person_signed_in? %>
-          <li <% if params[:controller] == "people" && params[:action] == "profile" %> class="active" <% end %>>
-            <%= link_to "My Profile", profile_path %>
+          <li <% if params[:controller] == "profiles" %> class="active" <% end %>>
+              <a href="<%= profile_path %>"> <img src="<%= current_person.avatar_url %>" class="img-circle profilePicture-small">  My profile</a>
           </li>
           <% end %>
 
