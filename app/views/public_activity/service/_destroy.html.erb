@@ -1,0 +1,26 @@
+<%
+  json = JSON.parse(activity.parameters[:model_details])
+%>
+
+<li>
+  <div class="timeline-badge danger"><i class="glyphicon glyphicon-trash"></i></div>
+  <div class="timeline-panel">
+    <div class="timeline-heading">
+      <h4 class="timeline-title">
+        <%= json["name"] %>
+      </h4>
+    </div>
+    <div class="timeline-body">
+      <p><s><%= json["description"] %></s></p>
+      <hr>
+
+      <small>
+        Deleted by <%= activity.owner.name %> -
+        <span class="text-muted">
+          <i class="glyphicon glyphicon-time"></i> <%= time_ago_in_words(activity.created_at, include_seconds: true) %> ago
+        </span>
+
+      </small>
+    </div>
+  </div>
+</li>

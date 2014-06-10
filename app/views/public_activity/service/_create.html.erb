@@ -1,0 +1,66 @@
+<%
+  if activity.trackable.nil?
+    json = JSON.parse(activity.parameters[:model_details])
+  end
+%>
+
+<li class="timeline-inverted">
+  <div class="timeline-badge success">
+    <% if activity.trackable.nil? %>
+      <i class="glyphicon glyphicon-exclamation-sign"></i>
+    <% elsif activity.trackable.created_at != activity.trackable.updated_at %>
+      <i class="glyphicon glyphicon-star-empty"></i>
+    <% else %>
+      <i class="glyphicon glyphicon-star"></i>
+    <% end %>
+  </div>
+  <div class="timeline-panel">
+    <div class="timeline-heading">
+      <h4 class="timeline-title">
+        <%= "#{json ? json["name"] : activity.trackable.name}" %>
+      </h4>
+    </div>
+    <div class="timeline-body">
+      <p>
+        <%= "#{json ? json["description"] : activity.trackable.description}" %>
+      </p>
+
+      <% unless activity.trackable.nil? %>
+      <hr>
+      <table class="table table-hover table-bordered" id="person-incharge-table">
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Person</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% activity.trackable.schedules.each do |s| %>
+          <tr>
+              <td><%= s.role.name %></td>
+              <td><img src="<%= s.person.avatar_url %>" class="img-circle profilePicture-small"> <%= s.person.name %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <hr>
+      <% end %>
+
+      <small>
+        Created by <%= activity.owner.name %> -
+        <span class="text-muted">
+          <i class="glyphicon glyphicon-time"></i> <%= time_ago_in_words(activity.created_at, include_seconds: true) %> ago
+
+          <% if activity.trackable.nil? %>
+            <em>- which has been removed</em>
+          <% elsif activity.trackable.created_at != activity.trackable.updated_at %>
+            <em>- Content edited </em>
+          <% end %>
+
+        </span>
+
+      </small>
+    </div>
+  </div>
+</li>
