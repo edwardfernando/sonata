@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
 
+  include PublicActivity::StoreController 
   include Pundit
 
   # Prevent CSRF attacks by raising an exception.
