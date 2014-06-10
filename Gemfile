@@ -15,6 +15,8 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 
 gem 'pundit'
+gem 'public_activity'
+gem "font-awesome-rails"
 
 # Use Bootstrap
 gem 'bootstrap-sass', '~> 3.1.1'
