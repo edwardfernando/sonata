@@ -41,8 +41,9 @@ class CreatePeople < ActiveRecord::Migration
       t.string :random_id
 
       # Custom Field
-      # t.boolean  :is_servant, default: false
-      t.boolean  :is_approved, default: false
+      t.string :phone_number_1
+      t.string :phone_number_2
+      t.integer  :is_approved, default: 0
       t.datetime :approved_date
 
       # Pundit Field
