@@ -1,11 +1,18 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def after_sign_in_path_for(person)
-    if !person.is_approved?
-      return profile_path
+
+    if person.email.blank?
+      return profile_edit_path
     else
       return root_path
     end
+
+    # if !person.is_approved?
+    #   return profile_path
+    # else
+    #   return root_path
+    # end
   end
 
   def facebook
@@ -14,8 +21,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @person.nil?
       @person = Person.create_from_facebook(auth)
-    # elsif(!@person.is_approved?)
-    #   set_flash_message(:danger, :not_approved, :name => @person.name, :kind => "Facebook")
+    elsif @person.email.blank?
+      set_flash_message(:danger, :email_required, :kind => "Facebook")
+    elsif !@person.is_approved?
+      set_flash_message(:danger, :not_approved, :name => @person.name, :kind => "Facebook")
     else
       set_flash_message(:info, :success, :kind => "Facebook") if is_navigational_format?
     end
@@ -30,8 +39,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @person.nil?
       @person = Person.create_from_twitter(auth)
-    # elsif(!@person.is_approved?)
-    #     set_flash_message(:danger, :not_approved, :name => @person.name, :kind => "Twitter")
+    elsif @person.email.blank?
+        set_flash_message(:danger, :email_required, :kind => "Twitter")
+    elsif !@person.is_approved?
+        set_flash_message(:danger, :not_approved, :name => @person.name, :kind => "Twitter")
     else
       set_flash_message(:info, :success, :kind => "Twitter") if is_navigational_format?
     end
