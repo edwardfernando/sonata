@@ -12,6 +12,8 @@ Sonata::Application.routes.draw do
   end
 
   match 'profile', to: 'profiles#index', via: [:get]
+  match 'profile/edit', to: 'profiles#edit', via: [:get]
+  match 'profile/update', to: 'profiles#update', via: [:patch]
 
   resources :people do
     collection do
