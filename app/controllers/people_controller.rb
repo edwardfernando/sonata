@@ -93,7 +93,7 @@ class PeopleController < ApplicationController
 
   private
   def person_param
-    params.require(:person).permit(:name, :email, :skillsets)
+    params.require(:person).permit(:name, :email, :phone_number_1, :phone_number_2, :skillsets)
   end
 
 end
