@@ -13,6 +13,8 @@ class Person < ActiveRecord::Base
 
   validates :name, presence: true
   validates :email, uniqueness: true, presence: true
+  validates :phone_number_1, numericality: { only_integer: true }, allow_blank: true
+  validates :phone_number_2, numericality: { only_integer: true }, allow_blank: true
 
   enum role: [:user, :manager, :admin]
   after_initialize :set_default_role, :if => :new_record?
@@ -34,7 +36,7 @@ class Person < ActiveRecord::Base
                             oauth_token:auth.credentials.token,
                             oauth_expires_at:Time.at(auth.credentials.expires_at),
                             avatar_url:auth.info.image,
-                            random_id:Devise.friendly_token[0,20]
+                            random_id:Devise.friendly_token[0,5]
                           )
 
                         return person
@@ -48,7 +50,7 @@ class Person < ActiveRecord::Base
           email:"",
           oauth_token:auth.credentials.token,
           avatar_url:auth.info.image,
-          random_id:Devise.friendly_token[0,20],
+          random_id:Devise.friendly_token[0,5],
         )
 
     person.save(validate: false)
