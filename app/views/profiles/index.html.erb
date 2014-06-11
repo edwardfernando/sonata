@@ -15,7 +15,7 @@
 									<i class="glyphicon glyphicon-cog"></i> Option <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">Edit</a></li>
+									<li><a href="<%= profile_edit_path %>">Edit</a></li>
 
 									<% if current_person.admin? %>
 									<li class="divider"></li>
@@ -27,7 +27,7 @@
 
 					</div>
 					<div class="col-xs-12 col-sm-4 text-center">
-									<img src="<%= parse_avatar %>" alt="" class="center-block img-circle img-responsive">
+									<img src="<%= parse_avatar %>" alt="" class="center-block img-circle img-responsive profilePicture-normal">
 									<h4><span class="badge"><%= current_person.role.capitalize %></span></h4>
 					</div>
 				<!--
