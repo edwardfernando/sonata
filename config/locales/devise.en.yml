@@ -26,7 +26,8 @@ en:
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
-      not_approved: "Hello, %{name}! You have signed up your %{kind} account successfully. However, we could not activated all features because your account is not yet approved. Please contact your Administrator & try again later."
+      email_required: "Successfully authenticated from %{kind} account. We could now assign you to any services until you provide a valid email."
+      not_approved: "Hello, %{name}! You have signed up your %{kind} account successfully. However, we could not assign you to any services because your account is not yet approved. Please contact your Administrator & try again later."
     passwords:
       no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
       send_instructions: "You will receive an email with instructions on how to reset your password in a few minutes."
