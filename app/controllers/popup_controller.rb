@@ -11,7 +11,7 @@ class PopupController < ApplicationController
   end
 
   def popup_people
-    @people = Person.joins(:skillsets).where("skillsets.role_id = #{params[:role]}")
+    @people = Person.joins(:skillsets).where("skillsets.role_id = ? and email is not null and is_approved = ?", params[:role], 1)
 
     # Implemented inside person_policy
     authorize @people
