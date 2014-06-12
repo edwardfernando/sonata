@@ -45,6 +45,8 @@ class ServicesController < ApplicationController
 			role_array.each_with_index do |role,index|
 				person = Person.find(people_array[index])
 				schedule = Schedule.create(service:@service, role:Role.find(role), person:person)
+
+				ScheduleMailer.new_schedule_notification(schedule).deliver
 			end
 
 			redirect_to services_path + "?date=" + @service.date.strftime("%F")
