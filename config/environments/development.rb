@@ -26,4 +26,14 @@ Sonata::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => "smtp.mandrillapp.com",
+    :port => 587,
+    :domain => "sonata.com",
+    :user_name => "edward.fer@gmail.com",
+    :password => "M3gO3RuXdItIF7q_pLkABA"
+  }
 end

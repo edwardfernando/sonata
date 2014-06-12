@@ -5,7 +5,15 @@
 %>
 
 <li class="timeline-inverted">
-  <div class="timeline-badge success">
+  <div class="timeline-badge
+
+    <% if activity.trackable.nil? %>
+    warning
+    <% else %>
+    success
+    <% end %>
+
+    ">
     <% if activity.trackable.nil? %>
       <i class="glyphicon glyphicon-exclamation-sign"></i>
     <% elsif activity.trackable.created_at != activity.trackable.updated_at %>
