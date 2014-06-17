@@ -1,14 +1,24 @@
 <li>
-  <div class="timeline-badge info"><i class="glyphicon glyphicon-list-alt"></i></div>
+  <div class="timeline-badge danger"><i class="glyphicon glyphicon-list-alt"></i></div>
   <div class="timeline-panel">
     <div class="timeline-heading">
       <h4 class="timeline-title">
-        <%= activity.owner.name %>
       </h4>
     </div>
     <div class="timeline-body">
-      <p><%= activity.inspect %></p>
-      <p><%= activity.trackable.inspect %></p>
+      <div class="media">
+          <a class=" pull-left" href="#">
+              <img src="<%= activity.owner.avatar_url %>" class="img-circle"/>
+          </a>
+          <div class="media-body">
+              <strong><%= activity.owner.name %></strong> rejected
+              <a href="<%= service_path(activity.trackable.service) %>">
+              <%= activity.trackable.service.name %> at <% activity.trackable.service.date %>
+              </a>
+              as <%= activity.trackable.role.name %>
+          </div>
+      </div>
+
       <hr>
 
       <small>

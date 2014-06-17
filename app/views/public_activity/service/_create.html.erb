@@ -39,7 +39,6 @@
           <tr>
             <th>Role</th>
             <th>Person</th>
-            <th>Confirmed?</th>
           </tr>
         </thead>
 
@@ -48,7 +47,6 @@
           <tr>
               <td><%= s.role.name %></td>
               <td><img src="<%= s.person.avatar_url %>" class="img-circle profilePicture-small"> <%= s.person.name %></td>
-              <td><%= s.is_confirmed? %></t>
           </tr>
         <% end %>
         </tbody>
