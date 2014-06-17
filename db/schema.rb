@@ -70,6 +70,9 @@ ActiveRecord::Schema.define(version: 20140607070944) do
     t.integer  "service_id"
     t.integer  "person_id"
     t.integer  "role_id"
+    t.integer  "is_confirmed", default: 0
+    t.datetime "confirmed_at"
+    t.string   "reasons"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

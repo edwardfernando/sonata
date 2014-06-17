@@ -4,6 +4,9 @@ class CreateSchedules < ActiveRecord::Migration
       t.integer :service_id
       t.integer :person_id
       t.integer :role_id
+      t.integer  :is_confirmed, default: 0
+      t.datetime :confirmed_at
+      t.string :reasons
       t.timestamps
     end
 
