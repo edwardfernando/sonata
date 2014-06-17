@@ -1,0 +1,35 @@
+<li>
+  <div class="timeline-badge info"><i class="glyphicon glyphicon-list-alt"></i></div>
+  <div class="timeline-panel">
+    <div class="timeline-heading">
+      <h4 class="timeline-title">
+      </h4>
+    </div>
+    <div class="timeline-body">
+      <div class="media">
+          <a class=" pull-left" href="#">
+              <img src="<%= activity.owner.avatar_url %>" class="img-circle"/>
+          </a>
+          <div class="media-body">
+              <%= activity.inspect %>
+
+              <strong><%= activity.owner.name %></strong> has confirmed a schedule
+              <a href="<%# service_path(activity.trackable.service) %>">
+              <%# activity.trackable.service.name %> at <%# activity.trackable.service.date %>
+              </a>
+              as <%# activity.trackable.role.name %>
+          </div>
+      </div>
+
+      <hr>
+
+      <small>
+        Confirmed
+        <span class="text-muted">
+          <i class="glyphicon glyphicon-time"></i> <%= time_ago_in_words(activity.created_at, include_seconds: true) %> ago
+        </span>
+
+      </small>
+    </div>
+  </div>
+</li>

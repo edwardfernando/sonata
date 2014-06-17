@@ -1,0 +1,23 @@
+<li>
+  <div class="timeline-badge info"><i class="glyphicon glyphicon-list-alt"></i></div>
+  <div class="timeline-panel">
+    <div class="timeline-heading">
+      <h4 class="timeline-title">
+        <%= activity.owner.name %>
+      </h4>
+    </div>
+    <div class="timeline-body">
+      <p><%= activity.inspect %></p>
+      <p><%= activity.trackable.inspect %></p>
+      <hr>
+
+      <small>
+        Rejected
+        <span class="text-muted">
+          <i class="glyphicon glyphicon-time"></i> <%= time_ago_in_words(activity.created_at, include_seconds: true) %> ago
+        </span>
+
+      </small>
+    </div>
+  </div>
+</li>
