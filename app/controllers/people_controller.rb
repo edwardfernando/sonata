@@ -15,13 +15,11 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     authorize @person
 
-    if @person.valid?
-      @person.update(is_approved: true, approved_date: DateTime.now)
-      redirect_to people_path
-    else
-      render 'edit'
+    unless @person.admin?
+      @person.update(is_approved: !@person.is_approved?, approved_date: DateTime.now)
     end
 
+    redirect_to people_path
   end
 
   def new
