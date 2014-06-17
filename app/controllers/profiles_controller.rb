@@ -3,6 +3,10 @@ class ProfilesController < ApplicationController
   before_filter :authenticate_person!
 
   def index
+    render 'show'
+  end
+
+  def show
   end
 
   def edit
@@ -26,7 +30,9 @@ class ProfilesController < ApplicationController
       @person.errors.add(:skillsets) if params[:person][:skillsets].empty?
       render "edit"
     end
+  end
 
+  def schedule
   end
 
   private
