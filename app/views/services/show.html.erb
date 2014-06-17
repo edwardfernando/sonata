@@ -27,7 +27,11 @@
   <% @service.schedules.each do |s| %>
     <tr>
         <td><%= s.role.name %></td>
-        <td><%= s.person.name %></td>
+        <td><%= s.person.name %>
+          <% if s.person.id == current_person.id %>
+          Approved My Schedule | Reject My Schedule
+          <% end %>
+        </td>
     </tr>
   <% end %>
   </tbody>

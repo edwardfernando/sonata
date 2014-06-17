@@ -39,16 +39,18 @@ class ServicesController < ApplicationController
 			@service.errors.add(:schedules)
 			render "new"
 		else
-			@service.save(service_param)
 			# Service.find(params[:id]).schedules.destroy_all
 
 			role_array.each_with_index do |role,index|
 				person = Person.find(people_array[index])
-				schedule = Schedule.create(service:@service, role:Role.find(role), person:person)
+				role = Role.find(role)
 
+				schedule = Schedule.create(service:@service, role:role, person:person)
 				ScheduleMailer.new_schedule_notification(schedule).deliver
+
 			end
 
+			@service.save(service_param)
 			redirect_to services_path + "?date=" + @service.date.strftime("%F")
 		end
 
@@ -56,6 +58,11 @@ class ServicesController < ApplicationController
 
 	def show
 		@service = Service.find(params[:id])
+		@status = true
+
+		@service.schedules.each do |s|
+			@status = false unless s.is_confirmed?
+		end
 	end
 
 	def edit
@@ -69,10 +76,11 @@ class ServicesController < ApplicationController
 
 		role_array = params[:service][:role] ||= []
 		people_array = params[:service][:person] ||= []
+		confirmation_array = params[:service][:isConfirmed] ||= []
 
 		role_array.delete_if(&:empty?)
 		people_array.delete_if(&:empty?)
-
+		confirmation_array.delete_if(&:empty?)
 
 		if !@service.update(service_param)
 			render "edit"
@@ -81,13 +89,28 @@ class ServicesController < ApplicationController
 			render "edit"
 		else
 
-			@service.update(service_param)
-			Service.find(params[:id]).schedules.destroy_all
+			# Remove all unconfirmed schedules from particular service because we're going to overide it
+			Schedule.where(service: @service, confirmed_at: nil).destroy_all
 
 			role_array.each_with_index do |role,index|
-				person = Person.find(people_array[index])
-				schedule = Schedule.create(service:@service, role:Role.find(role), person:person)
+
+				if confirmation_array[index] == "false"
+					person = Person.find(people_array[index])
+					role = Role.find(role_array[index])
+
+					begin
+						schedule = Schedule.create(service:@service, role:role, person:person)
+						ScheduleMailer.new_schedule_notification(schedule).deliver
+					rescue ActiveRecord::RecordNotUnique => error
+						@service.errors.add(:schedules, " - You already assigned #{person.name} as #{role.name}. Operation canceled.")
+						render "edit"
+						return false
+					end
+				end
+
 			end
+
+			@service.update(service_param)
 
 			redirect_to services_path + "?date=" + @service.date.strftime("%F")
 		end

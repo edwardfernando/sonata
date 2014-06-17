@@ -9,30 +9,33 @@
       }
 
       <% @service.schedules.each do |s| %>
-      addRow("<%= s.role.name %>", "<%= s.role.id %>", "<%= s.person.name %>", "<%= s.person.id %>");
+      addRow("<%= s.role.name %>", "<%= s.role.id %>", "<%= s.person.name %>", "<%= s.person.id %>", <%= !s.confirmed_at.nil? %>);
       <% end %>
     });
 
-    function getRow(role, roleID, person, personID){
+    function getRow(role, roleID, person, personID, isConfirmed){
 
       role = (role == undefined) ? "" : role;
       roleID = (roleID == undefined) ? "" : roleID;
       person = (person == undefined) ? "" : person;
       personID = (personID == undefined) ? "" : personID;
+      disabled_class = (isConfirmed == undefined) ? "" : isConfirmed ? "disabled" : "";
+      isConfirmed = (isConfirmed == undefined) ? "false" : isConfirmed ? "true" : "false";
 
       row += 1;
       return "<tr id=row-"+ row +" class=\'content\'>"+
                 "<td>" +
+                  "<input type=hidden id=isconfirmed-"+ row +" name=service[isConfirmed][] value=\""+ isConfirmed +"\" />" +
                   "<span id=role-text-"+ row +" >"+ role +"</span>" +
                   "<input type=hidden id=role-id-"+ row +" name=service[role][] value=\""+ roleID +"\" />" +
                 "</td>" +
-                "<td><a href='javascript:' onclick='pop_role("+ row +")' class=\"btn btn-default btn-xs\"><span class=\"glyphicon glyphicon-export\"></span> Choose</a></td>" +
+                "<td><a href='javascript:' onclick='pop_role("+ row +")' class=\"btn btn-default btn-xs "+ disabled_class +"\"><span class=\"glyphicon glyphicon-export\"></span> Choose</a></td>" +
                 "<td>" +
                   "<span id=person-text-"+ row +" >"+ person +"</span>" +
                   "<input type=hidden id=person-id-"+ row +" name=service[person][] value=\""+ personID +"\" />" +
                 "</td>" +
-                "<td><a href='javascript:' onclick='pop_people(" + row + ")' class=\"btn btn-default btn-xs\"><span class=\"glyphicon glyphicon-export\"></span> Choose</a></td>" +
-                "<td><a href=javascript:deleteRow("+ row +") class=\"btn btn-default btn-xs\"><span class=\"glyphicon glyphicon-remove-circle\"></span> Delete Row</a></td>" +
+                "<td><a href='javascript:' onclick='pop_people(" + row + ")' class=\"btn btn-default btn-xs "+ disabled_class +"\"><span class=\"glyphicon glyphicon-export\"></span> Choose</a></td>" +
+                "<td><a href=javascript:deleteRow("+ row +") class=\"btn btn-default btn-xs "+ disabled_class +" \"><span class=\"glyphicon glyphicon-remove-circle\"></span> Delete Row</a></td>" +
               "</tr>";
     }
 
@@ -51,12 +54,14 @@
       pop("<%= popup_people_path %>?target="+ row +"&name=person&role=" + roleValue);
     }
 
-    function addRow(role, roleID, person, personID){
-      $('#person-incharge-table').append(getRow(role, roleID, person, personID));
+    function addRow(role, roleID, person, personID, isConfirmed){
+      $('#person-incharge-table').append(getRow(role, roleID, person, personID, isConfirmed));
     }
 
     function deleteRow(row){
-      $("#row-" + row).remove();
+      if($("#isconfirmed-" + row).val() == 'false'){
+        $("#row-" + row).remove();
+      }
     }
 
     function deleteAllRows(){
