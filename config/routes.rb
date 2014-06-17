@@ -14,6 +14,9 @@ Sonata::Application.routes.draw do
   match 'profile', to: 'profiles#index', via: [:get]
   match 'profile/edit', to: 'profiles#edit', via: [:get]
   match 'profile/update', to: 'profiles#update', via: [:patch]
+  match 'profile/schedule', to: 'profiles#schedule', via: [:get]
+  match 'profile/schedule/confirm/:id', to: 'schedules#confirm', via: [:get], as: "profile_schedule_confirm"
+  match 'profile/schedule/reject/:id', to: 'schedules#reject', via: [:patch], as: "profile_schedule_reject"
 
   resources :people do
     collection do
