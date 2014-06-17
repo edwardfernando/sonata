@@ -1,0 +1,153 @@
+<div class="container">
+    <h3><% if current_person.admin? %><span class="glyphicon glyphicon-tower"></span> <% end %><%= current_person.name %></h3>
+    <hr>
+  <div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="<%= parse_avatar(current_person) %>" alt="" class="center-block img-circle img-responsive profilePicture-normal">
+          <p></p>
+          <div>
+          <% current_person.skillsets.each do |s| %>
+          <span class="label label-primary"><%= s.role.name %></span>
+          <% end %>
+        </div>
+        </div>
+      </div>
+
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <h3>Personal info</h3>
+
+        <form class="form-horizontal" role="form">
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label"><span class="glyphicon glyphicon-phone"></span> Phone</label>
+            <div class="col-lg-8">
+              <label class="control-label"><%= current_person.phone_number_1 %></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label"><span class="glyphicon glyphicon-earphone"></span> Mobile</label>
+            <div class="col-lg-8">
+              <label class="control-label"><%= current_person.phone_number_2 %></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label"><span class="glyphicon glyphicon-envelope"></span> Email</label>
+            <div class="col-lg-8">
+              <label class="control-label"><%= current_person.email %></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label"><span class="glyphicon glyphicon-registration-mark"></span> Provider</label>
+            <div class="col-lg-8">
+              <label class="control-label"><%= current_person.provider.capitalize %> / <%= current_person.created_at %></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label"><span class="glyphicon glyphicon-user"></span> Verification</label>
+            <div class="col-lg-8">
+              <label class="control-label"><%= current_person.is_approved? ? "Verified" : "Not Verified" %></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+              <a href="<%= profile_edit_path %>" class="btn btn-primary">Edit</a>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+<hr>
+
+<h3>My Schedule:</h3>
+
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Role</th>
+      <th>Service Name</th>
+      <th>#</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% current_person.schedules.each do |schedule| %>
+    <tr>
+      <td><%= schedule.service.date %></td>
+      <td><%= schedule.role.name.capitalize %></td>
+      <td>
+        <%= link_to schedule.service.name.capitalize, service_path(schedule.service) %>
+      </td>
+
+      <td>
+        <% if schedule.is_confirmed? %>
+          Confirmed at <%= schedule.confirmed_at %>
+        <% elsif schedule.confirmed_at.blank? %>
+          <a href="javascript:" class="btn btn-default btn-xs" data-toggle="modal" data-target="#confirm-schedule-modal-<%= schedule.id %>">
+            Confirm / Reject?
+          </a>
+        <% else %>
+            Rejected at <%= schedule.confirmed_at %>
+        <% end %>
+
+        <div class="modal fade" id="confirm-schedule-modal-<%= schedule.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Your schedule details</h4>
+              </div>
+              <div class="modal-body">
+                <p><strong>Service Name:</strong> <%= schedule.service.name %></p>
+                <p><strong>Role:</strong> <%= schedule.role.name.capitalize %></p>
+                <p><strong>Description:</strong> <%= schedule.service.description %></p>
+                <p><strong>Date:</strong> <%= schedule.service.date %></p>
+              </div>
+
+              <div class="modal-footer">
+
+                <a href="<%= profile_schedule_confirm_path(schedule) %>" class="btn btn-primary">Confirm</a>
+                <a data-toggle="collapse" data-parent="#accordion-<%= schedule.id %>" href="#collapseOne-<%= schedule.id %>" class="btn btn-default">
+                  Reject
+                </a>
+
+                <div class="panel-group" id="accordion-<%= schedule.id %>">
+                  <div>
+                    <div id="collapseOne-<%= schedule.id %>" class="panel-collapse collapse">
+                      <div class="panel-body">
+
+                        <%= form_for schedule, :url => profile_schedule_reject_path(schedule), :html => {:role => "form", :class => "form-horizontal"} do |p| %>
+
+                          <div class="form-group">
+                            <%= p.text_area :reasons, :class => "form-control", :placeholder => "Please write what are your reason?" %>
+                          </div>
+                          <div class="form-group">
+                            <%= p.submit "Confirm Reject", :class => "btn btn-warning" %>
+                          </div>
+
+                        <% end %>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
