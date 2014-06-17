@@ -22,7 +22,15 @@
 
           <% if person_signed_in? %>
           <li <% if params[:controller] == "profiles" %> class="active" <% end %>>
-              <a href="<%= profile_path %>"> <img src="<%= current_person.avatar_url %>" class="img-circle profilePicture-small">  My profile</a>
+              <!-- <a href=""> <img src="<%= current_person.avatar_url %>" class="img-circle profilePicture-small">  My profile</a> -->
+              <a  href="javascript: " class="dropdown-toggle" data-toggle= "dropdown">
+                <img src="<%= current_person.avatar_url %>" class="img-circle profilePicture-small">  Me <b class="caret"></b>
+              </a>
+
+              <ul class="dropdown-menu">
+                <li><a href="<%= profile_path %>"><b class="fa fa-<%= current_person.provider %>-square"> </b> Profile</a></li>
+                <!-- <li><a href="<%= profile_schedule_path %>"><b class="fa fa-table"> </b> Schedule</a></li> -->
+              </ul>
           </li>
           <% end %>
 
