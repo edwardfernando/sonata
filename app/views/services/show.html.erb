@@ -27,10 +27,9 @@
   <% @service.schedules.each do |s| %>
     <tr>
         <td><%= s.role.name %></td>
-        <td><%= s.person.name %>
-          <% if s.person.id == current_person.id %>
-          Approved My Schedule | Reject My Schedule
-          <% end %>
+        <td>
+          <%= s.person.name %> | 
+          <%= s.confirmed_at.nil? ? "Confirmed" : "Waiting Confirmation" %>
         </td>
     </tr>
   <% end %>
