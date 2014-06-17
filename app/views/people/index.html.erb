@@ -6,57 +6,50 @@
   </a>
 </div>
 
-<table class="table table-hover table-bordered">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Skillsets</th>
-      <th>Role</th>
-      <th>#</th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @people.each do |p| %>
-    <tr <%= "class=danger" unless p.is_approved? %>>
-      <td>
-        <% if p.provider == 'facebook' %>
-          <b class="fa fa-facebook-square"> </b> </a>
-        <% elsif p.provider == 'twitter' %>
-          <b class="fa fa-twitter-square"> </b> </a>
-        <% end %>
-        <%= p.name %>
-      </td>
-      <td><%= p.skillsets.map(&:role).map(&:name).join(", ") %></td>
-      <td><%= p.role %></td>
-      <td>
-        <div class="btn-group">
+<div class="container">
+    <div class="row">
+      <% @people.each do |p| %>
+      <div class="col-md-4">
+          <div class="well well-sm">
+              <div class="media">
+                  <a class="thumbnail pull-left" href="#">
+                      <img class="media-object" src="<%= p.avatar_url %>">
+                  </a>
+                  <div class="media-body">
+                      <h4 class="media-heading">
+                        <% if p.admin? %><span class="glyphicon glyphicon-tower"></span> <% end %>
+                        <% if p.provider == 'facebook' %>
+                          <b class="fa fa-facebook-square"> </b> </a>
+                        <% elsif p.provider == 'twitter' %>
+                          <b class="fa fa-twitter-square"> </b> </a>
+                        <% end %>
+                        <%= p.name %>
+                      </h4>
+                      <p>
+                        <% p.skillsets.each do |skill| %>
+                        <span class="label label-primary"><%= skill.role.name.capitalize %></span>
+                        <% end %>
+                      </p>
+                      <p>
+                          <a href="<%= person_path(p) %>" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+                          <a href="<%= edit_person_path(p) %>" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-edit"></span> Edit</a>
 
-          <%= "Admin Account" if p.admin? %>
+                          <% unless p.admin? %>
+                            <a href="<%= approve_person_path(p) %>" class="btn btn-xs btn-default">
+                            <% if p.is_approved? %>
+                              <span class="glyphicon glyphicon-ban-circle"></span> Reject
+                            <% else %>
+                              <span class="glyphicon glyphicon-ok-circle"></span> Grant
+                            <% end %>
+                            </a>
+                          <% end %>
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <% end %>
 
-          <% unless p.admin? %>
-            <!--
-            <a href="<%= person_path(p) %>" class="btn btn-default btn-xs">
-              <span class="glyphicon glyphicon-eye-open"></span> View
-            </a>
-          -->
-            <a href="<%= edit_person_path(p) %>" class="btn btn-default btn-xs">
-              <span class="glyphicon glyphicon-edit"></span> Edit
-            </a>
-            <a data-confirm="Are you sure want to delete this person?" data-method="delete" href="<%= person_path(p) %>" rel="nofollow" class="btn btn-default btn-xs">
-              <span class="glyphicon glyphicon-remove-circle"></span> Delete
-            </a>
-
-            <% unless p.is_approved? %>
-            <a href="<%= approve_person_path(p) %>" rel="nofollow" class="btn btn-default btn-xs">
-              <span class="glyphicon glyphicon-thumbs-up"></span> Approve
-            </a>
-            <% end %>
-
-          <% end %>
-        </div>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+  </div>
+</div>

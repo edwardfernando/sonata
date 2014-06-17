@@ -1,11 +1,69 @@
-<h3>Person Details</h3>
+<div class="container">
+    <h3><% if @person.admin? %><span class="glyphicon glyphicon-tower"></span> <% end %><%= @person.name %></h3>
+    <hr>
+  <div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="<%= parse_avatar(@person) %>" alt="" class="center-block img-circle img-responsive profilePicture-normal">
+          <p></p>
+          <div>
+          <% @person.skillsets.each do |s| %>
+          <span class="label label-primary"><%= s.role.name %></span>
+          <% end %>
+        </div>
+        </div>
+      </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @person.name %>
-</p>
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <h3>Personal info</h3>
 
-<p>
-  <strong>Skillset :</strong>
-  <%= @person.skillsets.map(&:role).map(&:name).join(", ") %>
-</p>
+        <form class="form-horizontal" role="form">
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label"><span class="glyphicon glyphicon-phone"></span> Phone</label>
+            <div class="col-lg-8">
+              <label class="control-label"><%= @person.phone_number_1 %></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label"><span class="glyphicon glyphicon-earphone"></span> Mobile</label>
+            <div class="col-lg-8">
+              <label class="control-label"><%= @person.phone_number_2 %></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label"><span class="glyphicon glyphicon-envelope"></span> Email</label>
+            <div class="col-lg-8">
+              <label class="control-label"><%= @person.email %></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label"><span class="glyphicon glyphicon-registration-mark"></span> Provider</label>
+            <div class="col-lg-8">
+              <label class="control-label"><%= @person.provider.capitalize %> / <%= @person.created_at %></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label"><span class="glyphicon glyphicon-user"></span> Verification</label>
+            <div class="col-lg-8">
+              <label class="control-label"><%= @person.is_approved? ? "Verified" : "Not Verified" %></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+              <a href="<%= edit_person_path(@person) %>" class="btn btn-primary">Edit</a>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+<hr>
