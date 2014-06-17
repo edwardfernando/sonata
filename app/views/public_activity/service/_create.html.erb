@@ -5,15 +5,7 @@
 %>
 
 <li class="timeline-inverted">
-  <div class="timeline-badge
-
-    <% if activity.trackable.nil? %>
-    warning
-    <% else %>
-    success
-    <% end %>
-
-    ">
+  <div class="timeline-badge <% if activity.trackable.nil? %>warning<% else %>success<% end %>">
     <% if activity.trackable.nil? %>
       <i class="glyphicon glyphicon-exclamation-sign"></i>
     <% elsif activity.trackable.created_at != activity.trackable.updated_at %>
@@ -25,7 +17,14 @@
   <div class="timeline-panel">
     <div class="timeline-heading">
       <h4 class="timeline-title">
-        <%= "#{json ? json["name"] : activity.trackable.name}" %>
+        <% if json %>
+          <%= json["name"] %> / <%= json["date"] %>
+        <% else %>
+          <a href="<%= service_path(activity.trackable) %>">
+            <%= activity.trackable.name %> / <%= activity.trackable.date %>
+          </a>
+        <% end %>
+
       </h4>
     </div>
     <div class="timeline-body">
@@ -40,6 +39,7 @@
           <tr>
             <th>Role</th>
             <th>Person</th>
+            <th>Confirmed?</th>
           </tr>
         </thead>
 
@@ -48,6 +48,7 @@
           <tr>
               <td><%= s.role.name %></td>
               <td><img src="<%= s.person.avatar_url %>" class="img-circle profilePicture-small"> <%= s.person.name %></td>
+              <td><%= s.is_confirmed? %></t>
           </tr>
         <% end %>
         </tbody>
