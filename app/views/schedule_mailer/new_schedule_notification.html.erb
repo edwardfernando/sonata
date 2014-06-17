@@ -3,20 +3,24 @@
 Anda menerima permintaan jadwal pelayanan untuk ibadah sebagai berikut:
 
 <br/><br/>
+
 <table class="table table-hover table-bordered">
     <tr>
-        <td width="30%">Ibadah</td>
-        <td><%= @schedule.service.name %></td>
+        <td width="35%">Ibadah</td>
+        <td>: <%= @schedule.service.name %></td>
     </tr>
     <tr>
         <td>Tanggal</td>
-        <td><%= @schedule.service.date %></td>
+        <td>: <%= @schedule.service.date %></td>
     </tr>
     <tr>
         <td>Role</td>
-        <td><%= @schedule.role.name %></td>
+        <td>: <%= @schedule.role.name %></td>
     </tr>
 </table>
+
 <br/>
 
-Untuk informasi lebih detail, silahkan login dan check jadwal Anda.
+<p>Untuk menyetujui / menolak jadwal ini silahkan login dengan akun <%= @schedule.person.provider %> Anda.</p>
+<i>Jika Anda sudah pernah menerima email dengan jadwal dan role yang sama sebelumnya, maka email ini merupakan pengingat bahwa Anda belum
+  melakukan persetujuan/penolakan terhadap permintaan jadwal ini.<i>
