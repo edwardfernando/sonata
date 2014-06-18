@@ -13,7 +13,7 @@ class Person < ActiveRecord::Base
 
   validates :name, presence: true
   validates :email, uniqueness: true, presence: true
-  validates :phone_number_1, numericality: { only_integer: true }, allow_blank: true
+  validates :phone_number_1, numericality: { only_integer: true }, presence: true
   validates :phone_number_2, numericality: { only_integer: true }, allow_blank: true
 
   enum role: [:user, :manager, :admin]
