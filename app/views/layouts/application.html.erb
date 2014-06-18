@@ -21,17 +21,36 @@
         <ul class="nav navbar-nav navbar-right">
 
           <% if person_signed_in? %>
+          <li>
+            <a  href="javascript: " class="dropdown-toggle" data-toggle= "dropdown" rel="tooltip" title="Your unconfirmed schedules" data-placement="bottom">
+              <span class="label label-primary"><%= get_unconfirmed_schedules %></span> <b class="caret"></b>
+            </a>
+
+            <% if get_unconfirmed_schedules > 0 %>
+            <ul class="dropdown-menu">
+            <% current_person.schedules.each do |schedule|
+                if schedule.confirmed_at.nil? %>
+
+              <li><a href="<%= service_path(schedule.service) %>"> <%= schedule.service.name %></a></li>
+
+            <% end
+            end %>
+            </ul>
+            <% end %>
+          </li>
+
           <li <% if params[:controller] == "profiles" %> class="active" <% end %>>
-              <!-- <a href=""> <img src="<%= current_person.avatar_url %>" class="img-circle profilePicture-small">  My profile</a> -->
-              <a  href="javascript: " class="dropdown-toggle" data-toggle= "dropdown">
+              <a href="<%= profile_path %>"> <img src="<%= current_person.avatar_url %>" class="img-circle profilePicture-small">  Me </a>
+              <!-- <a  href="javascript: " class="dropdown-toggle" data-toggle= "dropdown">
                 <img src="<%= current_person.avatar_url %>" class="img-circle profilePicture-small">  Me <b class="caret"></b>
               </a>
 
               <ul class="dropdown-menu">
                 <li><a href="<%= profile_path %>"><b class="fa fa-<%= current_person.provider %>-square"> </b> Profile</a></li>
-                <!-- <li><a href="<%= profile_schedule_path %>"><b class="fa fa-table"> </b> Schedule</a></li> -->
-              </ul>
+                <li><a href="<%= profile_schedule_path %>"><b class="fa fa-table"> </b> Schedule</a></li>
+              </ul> -->
           </li>
+
           <% end %>
 
           <li <% if params[:controller] == "services" %> class="active" <% end %>>
