@@ -77,4 +77,14 @@ Sonata::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => "smtp.mandrillapp.com",
+    :port => 587,
+    :domain => "sonata.com",
+    :user_name => "edward.fer@gmail.com",
+    :password => "M3gO3RuXdItIF7q_pLkABA"
+  }
 end
