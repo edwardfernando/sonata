@@ -2,7 +2,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def after_sign_in_path_for(person)
 
-    if person.email.blank?
+    if person.persisted? || person.email.blank?
       return profile_edit_path
     else
       return root_path
