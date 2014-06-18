@@ -1,5 +1,5 @@
 class ScheduleMailer < ActionMailer::Base
-  default from: "schedule@sonata.com"
+  default from: "sonata@sonata.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
