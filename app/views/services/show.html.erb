@@ -20,6 +20,7 @@
     <tr>
       <th>Role</th>
       <th>Person</th>
+      <th>#</th>
     </tr>
   </thead>
 
@@ -28,8 +29,69 @@
     <tr>
         <td><%= s.role.name %></td>
         <td>
-          <%= s.person.name %> | 
-          <%= s.confirmed_at.nil? ? "Confirmed" : "Waiting Confirmation" %>
+          <%= s.person.name %>
+        </td>
+        <td>
+
+      <% if s.is_confirmed? %>
+        Confirmed at <%= s.confirmed_at %>
+      <% elsif s.person == current_person && s.confirmed_at.blank? %>
+        <a href="javascript:" class="btn btn-default btn-xs" data-toggle="modal" data-target="#confirm-schedule-modal-<%= s.id %>">
+          Confirm / Reject?
+        </a>
+      <% else %>
+          Waiting
+      <% end %>
+
+        <% if s.person == current_person && !s.confirmed_at.nil? %>
+
+          <div class="modal fade" id="confirm-schedule-modal-<%= s.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel">Your schedule details</h4>
+                </div>
+                <div class="modal-body">
+                  <p><strong>Service Name:</strong> <%= s.service.name %></p>
+                  <p><strong>Role:</strong> <%= s.role.name.capitalize %></p>
+                  <p><strong>Description:</strong> <%= s.service.description %></p>
+                  <p><strong>Date:</strong> <%= s.service.date %></p>
+                </div>
+
+                <div class="modal-footer">
+
+                  <a href="<%= profile_schedule_confirm_path(s) %>" class="btn btn-primary">Confirm</a>
+                  <a data-toggle="collapse" data-parent="#accordion-<%= s.id %>" href="#collapseOne-<%= s.id %>" class="btn btn-default">
+                    Reject
+                  </a>
+
+                  <div class="panel-group" id="accordion-<%= s.id %>">
+                    <div>
+                      <div id="collapseOne-<%= s.id %>" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                          <%= form_for s, :url => profile_schedule_reject_path(s), :html => {:role => "form", :class => "form-horizontal"} do |p| %>
+
+                            <div class="form-group">
+                              <%= p.text_area :reasons, :class => "form-control", :placeholder => "Please write what are your reason?" %>
+                            </div>
+                            <div class="form-group">
+                              <%= p.submit "Confirm Reject", :class => "btn btn-warning" %>
+                            </div>
+
+                          <% end %>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <% end %>
         </td>
     </tr>
   <% end %>
