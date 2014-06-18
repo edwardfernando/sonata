@@ -2,17 +2,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def after_sign_in_path_for(person)
 
-    if person.persisted? || person.email.blank?
+    if person.email.blank?
       return profile_edit_path
     else
       return root_path
     end
 
-    # if !person.is_approved?
-    #   return profile_path
-    # else
-    #   return root_path
-    # end
   end
 
   def facebook
