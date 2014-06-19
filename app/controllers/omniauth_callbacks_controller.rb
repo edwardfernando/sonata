@@ -1,8 +1,17 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
-  def after_sign_in_path_for(person)
-
+  def is_profile_complete(person)
     if person.email.blank?
+      return false
+    elsif person.phone_number_1.blank?
+      return false
+    end
+
+    return true
+  end
+
+  def after_sign_in_path_for(person)
+    if !is_profile_complete(person)
       return profile_edit_path
     else
       return root_path
@@ -16,8 +25,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @person.nil?
       @person = Person.create_from_facebook(auth)
-    elsif @person.email.blank?
-      set_flash_message(:danger, :email_required, :kind => "Facebook")
+    elsif !is_profile_complete(@person)
+      set_flash_message(:danger, :profile_not_compelte, :kind => "Facebook")
     elsif !@person.is_approved?
       set_flash_message(:danger, :not_approved, :name => @person.name, :kind => "Facebook")
     else
@@ -34,8 +43,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @person.nil?
       @person = Person.create_from_twitter(auth)
-    elsif @person.email.blank?
-        set_flash_message(:danger, :email_required, :kind => "Twitter")
+    elsif !is_profile_complete(@person)
+        set_flash_message(:danger, :profile_not_compelte, :kind => "Twitter")
     elsif !@person.is_approved?
         set_flash_message(:danger, :not_approved, :name => @person.name, :kind => "Twitter")
     else
