@@ -36,13 +36,18 @@
                           <a href="<%= edit_person_path(p) %>" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-edit"></span> Edit</a>
 
                           <% unless p.admin? %>
-                            <a href="<%= approve_person_path(p) %>" class="btn btn-xs btn-default">
+
                             <% if p.is_approved? %>
-                              <span class="glyphicon glyphicon-ban-circle"></span> Reject
+                              <a href="javascript: " class="btn btn-xs btn-default">
+                                Approved
+                              </a>
+                              <!-- <span class="glyphicon glyphicon-ban-circle"></span> Reject -->
                             <% else %>
-                              <span class="glyphicon glyphicon-ok-circle"></span> Grant
+                              <a href="<%= approve_person_path(p) %>" class="btn btn-xs btn-default">
+                                <span class="glyphicon glyphicon-ok-circle"></span> Grant
+                              </a>
                             <% end %>
-                            </a>
+
                           <% end %>
                       </p>
                   </div>

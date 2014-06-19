@@ -15,15 +15,9 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     authorize @person
 
-    approved = !@person.is_approved?
-
     unless @person.admin?
-      @person.update(is_approved: approved, approved_date: DateTime.now)
-
-      if approved
-        PersonApprovedMailer.approved(@person).deliver
-      end
-
+      @person.update(is_approved: true, approved_date: DateTime.now)
+      PersonApprovedMailer.approved(@person).deliver
     end
 
     redirect_to people_path
