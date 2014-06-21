@@ -43,7 +43,7 @@
           Waiting
       <% end %>
 
-        <% if s.person == current_person %>
+        <% if s.person == current_person && s.confirmed_at.blank? %>
 
           <div class="modal fade" id="confirm-schedule-modal-<%= s.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
