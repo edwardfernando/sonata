@@ -16,7 +16,10 @@ class PeopleController < ApplicationController
     authorize @person
 
     unless @person.admin?
-      @person.update(is_approved: true, approved_date: DateTime.now)
+      @person.is_approved = 1
+      @person.approved_date = DateTime.now
+      @person.save(validate: false)
+
       PersonApprovedMailer.approved(@person).deliver
     end
 
@@ -92,7 +95,7 @@ class PeopleController < ApplicationController
 
   private
   def person_param
-    params.require(:person).permit(:name, :email, :phone_number_1, :phone_number_2, :skillsets)
+    params.require(:person).permit(:name, :email, :phone_number_1, :phone_number_2, :birthday, :skillsets)
   end
 
 end

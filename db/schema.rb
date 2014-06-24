@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140607070944) do
+ActiveRecord::Schema.define(version: 20140624114022) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20140607070944) do
     t.integer  "role"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "birthday"
   end
 
   add_index "people", ["email"], name: "index_people_on_email", unique: true

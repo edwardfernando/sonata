@@ -18,6 +18,7 @@
 //= require bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.id.js
+//= require fullcalendar
 
 
 function pop(url) {
@@ -69,6 +70,10 @@ function getValidDateParam(){
 
 // Based on solution found at : http://stackoverflow.com/questions/18770517/rails-4-how-to-use-document-ready-with-turbo-links
 var ready = function(){
+
+  $(function(){
+    $("#calendar").fullCalendar({})
+  });
 
   // All codes below are related to date picker
   $(function(){

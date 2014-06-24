@@ -21,6 +21,13 @@
 
       <div class="form-group">
         <div class="col-xs-4">
+          <%= p.label :birthday, :for => "peopleBirthday" %>
+          <%= p.text_field :birthday, :class => "form-control datepicker-field", :id => "peopleBirthday", :placeholder => "Enter Birthday" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-4">
           <%= p.label :phone_number_1, :for => "peoplePhoneNumber1" %>
           <%= p.text_field :phone_number_1, :class => "form-control", :id => "peoplePhoneNumber1", :placeholder => "Enter Your Mobile Phone Number" %>
         </div>

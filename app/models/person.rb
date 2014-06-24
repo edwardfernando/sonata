@@ -1,3 +1,5 @@
+require 'Date'
+
 class Person < ActiveRecord::Base
   has_many :skillsets, :dependent => :destroy
   has_many :roles, :through => :skiilsets
@@ -28,6 +30,7 @@ class Person < ActiveRecord::Base
   end
 
   def self.create_from_facebook(auth)
+
     person = Person.create(
                   name:auth.extra.raw_info.name,
                             provider:auth.provider,
@@ -36,7 +39,8 @@ class Person < ActiveRecord::Base
                             oauth_token:auth.credentials.token,
                             oauth_expires_at:Time.at(auth.credentials.expires_at),
                             avatar_url:auth.info.image,
-                            random_id:Devise.friendly_token[0,5]
+                            random_id:Devise.friendly_token[0,5],
+                            birthday:Date.strptime(auth.extra.raw_info.birthday, "%m/%d/%Y")
                           )
 
                         return person
@@ -50,7 +54,7 @@ class Person < ActiveRecord::Base
           email:"",
           oauth_token:auth.credentials.token,
           avatar_url:auth.info.image,
-          random_id:Devise.friendly_token[0,5],
+          random_id:Devise.friendly_token[0,5]
         )
 
     person.save(validate: false)
