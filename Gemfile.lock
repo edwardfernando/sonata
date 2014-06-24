@@ -53,6 +53,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     font-awesome-rails (4.1.0.0)
       railties (>= 3.2, < 5.0)
+    fullcalendar-rails (1.6.4.0)
     hashie (2.1.1)
     hike (1.2.3)
     i18n (0.6.9)
@@ -183,6 +184,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   font-awesome-rails
+  fullcalendar-rails
   jbuilder (~> 1.2)
   jquery-rails
   jquery-ui-rails

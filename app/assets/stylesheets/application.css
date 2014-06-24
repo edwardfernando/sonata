@@ -14,6 +14,7 @@
  *= require bootstrap-datepicker3
  *= require jquery.ui.datepicker
  *= require font-awesome
+ *= require fullcalendar
  */
 
 table {
