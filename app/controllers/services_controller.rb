@@ -8,13 +8,23 @@ class ServicesController < ApplicationController
 	def index
 		date = params[:date]
 
-		if date == nil
-			@services = Service.all.order(date: :desc)
-		elsif date.empty?
-			@services = Service.where(:date => today)
-		else
-			@services = Service.where(:date => date)
+		respond_to do |format|
+			format.html {
+					if date == nil
+						@services = Service.all.order(date: :desc)
+					elsif date.empty?
+						@services = Service.where(:date => today)
+					else
+						@services = Service.where(:date => date)
+					end
+			}
+
+			format.json {
+					@services = Service.all
+			}
 		end
+
+
 
 	end
 

@@ -72,7 +72,12 @@ function getValidDateParam(){
 var ready = function(){
 
   $(function(){
-    $("#calendar").fullCalendar({})
+    $("#calendar").fullCalendar({
+      events: '/services.json',
+  		eventMouseover: function(cal_event, js_event, view){
+  			
+  		}
+    })
   });
 
   // All codes below are related to date picker
