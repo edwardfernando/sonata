@@ -10,22 +10,39 @@ class ServicesController < ApplicationController
 
 		respond_to do |format|
 			format.html {
-					if date == nil
-						@services = Service.all.order(date: :desc)
-					elsif date.empty?
-						@services = Service.where(:date => today)
-					else
-						@services = Service.where(:date => date)
-					end
+				@activities = PublicActivity::Activity.where(:trackable_type => "Schedule").order("created_at desc")
+				# @services = Service.order("date asc").limit(5)
+
+				# if date == nil
+				# 	@services = Service.all.order(date: :desc)
+				# elsif date.empty?
+				# 	@services = Service.where(:date => today)
+				# else
+				# 	@services = Service.where(:date => date)
+				# end
 			}
 
 			format.json {
-					@services = Service.all
+					start_date = Time.at(params[:start].to_i).to_date
+					end_date = Time.at(params[:end].to_i).to_date
+
+					@services = Service.where(:date => start_date..end_date)
 			}
 		end
 
+	end
 
+	def show
+		@service = Service.find(params[:id])
 
+		respond_to do |format|
+			format.html{
+			}
+
+			format.json{
+				render json: @service
+			}
+		end
 	end
 
 	def new
@@ -64,15 +81,6 @@ class ServicesController < ApplicationController
 			redirect_to services_path + "?date=" + @service.date.strftime("%F")
 		end
 
-	end
-
-	def show
-		@service = Service.find(params[:id])
-		@status = true
-
-		@service.schedules.each do |s|
-			@status = false unless s.is_confirmed?
-		end
 	end
 
 	def edit
