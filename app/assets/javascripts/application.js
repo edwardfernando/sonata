@@ -72,7 +72,24 @@ function getValidDateParam(){
 var ready = function(){
 
   $(function(){
-    $("#calendar").fullCalendar({})
+    $("#calendar").fullCalendar({
+      events: '/services.json',
+  		eventClick: function(calEvent, jsEvent, view) {
+        $('.modal-body').load('/services/' + calEvent.id + ".json", function(result){
+            var json = JSON.parse(result);
+
+            $("#detail-service-modal-dialog-edit-link").attr("href", "/services/" + json.id + "/edit");
+            $("#detail-service-modal-dialog-view-link").attr("href", "/services/" + json.id);
+            $("#detail-service-modal-dialog-title").html(json.name + " / " + json.date);
+            $("#detail-service-modal-dialog-body").html(json.description);
+
+      	    $('#detail-service-modal-dialog').modal({show:true});
+      	});
+  		},
+      eventRender: function(event, element) {
+        element.css('cursor', 'pointer');
+      }
+    })
   });
 
   // All codes below are related to date picker
