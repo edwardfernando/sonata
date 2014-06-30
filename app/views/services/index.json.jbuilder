@@ -3,5 +3,5 @@ json.array!(@services) do |service|
     json.title service.name
     json.start service.date
     # json.end service.date
-    json.url service_url(service)
+    # json.url service_url(service)
 end
