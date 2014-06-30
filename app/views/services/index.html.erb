@@ -1,141 +1,182 @@
 <h3>Service Available</h3>
 
 <div class="row">
-  <div class="col-md-3">
-    <div class="inline-date-picker"></div>
-	</div>
-  <div class="col-md-9">
-    <div id="calendar"></div>
+  <div class="col-md-4">
+    <div style="padding-top: 10px; padding-bottom: 20px;">
 
-		<div style="padding-top: 10px; padding-bottom: 20px;">
-
+      <% if false %>
       <div class="btn-group">
         <!--
         <a href="<%= services_path %>?date=" class="btn btn-default btn-xs">
           <span class="glyphicon glyphicon-arrow-left"></span> Previous Day
         </a>
       -->
-        <a href="<%= services_path %>?date=<%= today %>" class="btn btn-default btn-xs">
+
+        <!-- <a href="<%= services_path %>?date=<%= today %>" class="btn btn-default btn-xs">
           <span class="glyphicon glyphicon-flag"></span> Today
-        </a>
+        </a> -->
+
         <!--
         <a href="<%= services_path %>?date=" class="btn btn-default btn-xs">
           Next Day <span class="glyphicon glyphicon-arrow-right"></span>
         </a>
       -->
       </div>
-
-      <a href="<%= services_path %>" class="btn btn-default btn-xs">
-        <span class="glyphicon glyphicon-list-alt"></span> Show All
-      </a>
-
-      <% if person_signed_in? && (current_person.manager? || current_person.admin?) %>
-      <a href="<%= new_service_path %>?date=<%= get_valid_date(params[:date]) %>" class="btn btn-default btn-xs">
-        <span class="glyphicon glyphicon-plus"></span> Add
-      </a>
       <% end %>
 
-		</div>
+      <!-- <a href="<%= services_path %>" class="btn btn-default btn-xs">
+        <span class="glyphicon glyphicon-list-alt"></span> Show All
+      </a> -->
 
+      <% if person_signed_in? && (current_person.manager? || current_person.admin?) %>
+      <div class="list-group">
+        <a href="<%= new_service_path %>?date=<%= get_valid_date(params[:date]) %>" class="list-group-item">
+          <span class="glyphicon glyphicon-plus"></span> Add New Schedule
+        </a>
+      </div>
+      <% end %>
+
+
+      <ul class="timeline">
+          <% @activities.each do |activity| %>
+            <%= render_activity activity %>
+          <% end %>
+          <%# FOR ANOTHER SAMPLE PLEASE SEE : http://bootsnipp.com/snippets/featured/timeline-responsive %>
+      </ul>
+    </div>
+
+
+    <!-- <div class="inline-date-picker"></div> -->
+
+	</div>
+  <div class="col-md-8">
+
+    <div id="calendar"></div>
+
+    <br/>
+
+    <%# I know this is very weird, but i just dont want to remove this block code for future use %>
+    <% if false %>
     <h4 class="text-right">Service For: <%= params[:date] ? params[:date] : 'All' %></h4>
 
-		<table class="table table-hover table-bordered">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Desc</th>
-					<th>Date</th>
-					<th>#</th>
-				</tr>
-			</thead>
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Desc</th>
+          <th>Date</th>
+          <th>#</th>
+        </tr>
+      </thead>
 
-			<tbody>
+      <tbody>
 
-				<% if @services.empty? %>
-				<tr>
-						<td colspan="4">No service found.
+        <% if @services.empty? %>
+        <tr>
+            <td colspan="4">No service found.
 
             <% if person_signed_in? && (current_person.manager? || current_person.admin?) %>
             <%= link_to 'Create one?', new_service_path + '?date=' + get_valid_date(params[:date]) %> </td>
             <% end %>
-				</tr>
-				<% end %>
+        </tr>
+        <% end %>
 
-				<% @services.each do |a| %>
-				<tr>
-					<td><%= a.name %></td>
-					<td><%= a.description %></td>
-					<td><%= a.date %></td>
-					<td>
+        <% @services.each do |a| %>
+        <tr>
+          <td><%= a.name %></td>
+          <td><%= a.description %></td>
+          <td><%= a.date %></td>
+          <td>
             <div class="btn-group">
-  						<a href="javascript:" class="btn btn-default btn-xs" data-toggle="modal" data-target="#schedules-<%= a.id %>">
-  							<span class="glyphicon glyphicon-eye-open"></span> View
-  						</a>
+              <a href="javascript:" class="btn btn-default btn-xs" data-toggle="modal" data-target="#schedules-<%= a.id %>">
+                <span class="glyphicon glyphicon-eye-open"></span> View
+              </a>
 
               <% if person_signed_in? %>
 
                 <% if policy(a).edit? %>
-    						<a href="<%= edit_service_path(a) %>" class="btn btn-default btn-xs">
-    							<span class="glyphicon glyphicon-edit"></span> Edit
-    						</a>
+                <a href="<%= edit_service_path(a) %>" class="btn btn-default btn-xs">
+                  <span class="glyphicon glyphicon-edit"></span> Edit
+                </a>
                 <% end %>
 
                 <% if policy(a).destroy? %>
-    						<a data-confirm="Are you sure want to delete this service?" data-method="delete" href="<%= service_path(a) %>" rel="nofollow" class="btn btn-default btn-xs">
-    							<span class="glyphicon glyphicon-remove-circle"></span> Delete
-    						</a>
+                <a data-confirm="Are you sure want to delete this service?" data-method="delete" href="<%= service_path(a) %>" rel="nofollow" class="btn btn-default btn-xs">
+                  <span class="glyphicon glyphicon-remove-circle"></span> Delete
+                </a>
                 <% end %>
 
               <% end %>
 
             </div>
 
-						<div class="modal fade" id="schedules-<%= a.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-										<h4 class="modal-title" id="myModalLabel"><%= a.name %></h4>
-									</div>
-									<div class="modal-body">
-										<p><strong>Description:</strong> <%= a.description %></p>
-										<p><strong>Date:</strong> <%= a.date %></p>
+            <div class="modal fade" id="schedules-<%= a.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"><%= a.name %></h4>
+                  </div>
+                  <div class="modal-body">
+                    <p><strong>Description:</strong> <%= a.description %></p>
+                    <p><strong>Date:</strong> <%= a.date %></p>
 
-										<table class="table table-hover table-bordered" id="person-incharge-table">
-											<thead>
-												<tr>
-													<th>Role</th>
-													<th>Person</th>
-												</tr>
-											</thead>
+                    <table class="table table-hover table-bordered" id="person-incharge-table">
+                      <thead>
+                        <tr>
+                          <th>Role</th>
+                          <th>Person</th>
+                        </tr>
+                      </thead>
 
-											<tbody>
-											<% a.schedules.each do |s| %>
-												<tr>
-														<td><%= s.role.name %></td>
-														<td><img src="<%= s.person.avatar_url %>" class="img-circle profilePicture-small"> <%= s.person.name %></td>
-												</tr>
-											<% end %>
-											</tbody>
-										</table>
-									</div>
-									<div class="modal-footer">
+                      <tbody>
+                      <% a.schedules.each do |s| %>
+                        <tr>
+                            <td><%= s.role.name %></td>
+                            <td><img src="<%= s.person.avatar_url %>" class="img-circle profilePicture-small"> <%= s.person.name %></td>
+                        </tr>
+                      <% end %>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
 
                     <% if person_signed_in? && policy(a).edit? %>
-										<a href="<%= edit_service_path(a) %>" class="btn btn-default">Edit</a>
+                    <a href="<%= edit_service_path(a) %>" class="btn btn-default">Edit</a>
                     <% end %>
 
-										<a href="javasript:" class="btn btn-primary" data-dismiss="modal">Close</a>
-									</div>
-								</div>
-							</div>
-						</div>
+                    <a href="javasript:" class="btn btn-primary" data-dismiss="modal">Close</a>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-					</td>
-				</tr>
-				<% end %>
+          </td>
+        </tr>
+        <% end %>
 
-			</tbody>
-		</table>
+      </tbody>
+    </table>
+    <% end %>
+
 	</div>
+</div>
+
+<div class="modal fade" id="detail-service-modal-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="detail-service-modal-dialog-title"></h4>
+      </div>
+      <div id="detail-service-modal-dialog-body" class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <% if person_signed_in? && (current_person.manager? || current_person.admin?) %>
+        <a href="" id="detail-service-modal-dialog-edit-link" class="btn btn-default">Edit</a>
+        <% end %>
+        <a href="" id="detail-service-modal-dialog-view-link" class="btn btn-primary">Details</a>
+      </div>
+    </div>
+  </div>
 </div>
