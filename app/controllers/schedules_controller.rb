@@ -25,4 +25,21 @@ class SchedulesController < ApplicationController
     redirect_to profile_path
   end
 
+  def destroy
+    schedule = Schedule.where(service: params[:service_id], id: params[:id])
+    authorize schedule
+
+    schedule.first.destroy
+
+    respond_to do |format|
+      format.html{
+        render :nothing => true
+      }
+
+      format.js{
+      }
+    end
+
+  end
+
 end

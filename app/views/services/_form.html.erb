@@ -1,5 +1,7 @@
  <script type="text/javascript">
-    var row = 0;
+
+    var personRowCount = 0;
+    var attachmentCount = 0;
 
     $( document ).ready(function() {
 
@@ -9,33 +11,96 @@
       }
 
       <% @service.schedules.each do |s| %>
-      addRow("<%= s.role.name %>", "<%= s.role.id %>", "<%= s.person.name %>", "<%= s.person.id %>", <%= !s.confirmed_at.nil? %>);
+      newPerson("<%= s.id %>", "<%= s.role.name %>", "<%= s.role.id %>", "<%= s.person.name %>", "<%= s.person.id %>", <%= !s.confirmed_at.nil? %>, "<%= service_schedule_path(@service, s) %>");
+      <% end %>
+
+      <% @service.attachments.each do |a| %>
+      createAttachmentRow("<%= a.id %>", "<%= a.name %>", "<%= a.url %>", "<%= service_attachment_path(@service, a) %>");
       <% end %>
     });
 
-    function getRow(role, roleID, person, personID, isConfirmed){
+    function createAttachmentRow(attachmentID, name, url, path){
+      attachmentID = (attachmentID == undefined) ? "" : attachmentID;
+      name = (name == undefined) ? "" : name;
+      url = (url == undefined) ? "" : url;
+      path = (path == undefined) ? "" : path;
 
+      attachmentCount += 1;
+
+      // "<a href=\"javascript: deleteAttachment("+ attachmentCount +")\" class=\"btn btn-default\" data-method=\"delete\">" +
+
+      $("#attachments-div").append("<div id=attachment-div-"+ attachmentCount +" class=\"input-group\" style=\"margin-bottom:10px\">" +
+
+        <% if action_name.eql?("edit") %>
+        "<input type=hidden id=attachment-id-" + attachmentCount + " value=\"" + attachmentID + "\"/>" +
+        "<input type=hidden id=attachment-url-path-" + attachmentCount + " value=\"" + path + "\"/>" +
+        <% end %>
+
+        "<input name=\"service[attachment_name][]\" type=\"text\" class=\"form-control\" placeholder=\"Attachment Name\" value=" + name + ">" +
+        "<input name=\"service[attachment_url][]\" type=\"text\" class=\"form-control\" placeholder=\"Attachment URL (Dropbox/Box)\" value=" + url + ">" +
+        "<span class=\"input-group-addon\">" +
+          "<a href=javascript: onclick=deleteAttachment("+ attachmentCount +")  class=\"btn btn-default\" data-method=\"delete\" data-remote=true>" +
+            "<span class=\"glyphicon glyphicon-remove-circle\"></span>" +
+          "</a>" +
+        "</span>" +
+      "</div>");
+    }
+
+    function deleteAttachment(row){
+      BootstrapDialog.confirm('Are you sure to delete this attachment?', function(result){
+          if(result) {
+            <% if action_name.eql?("edit") %>
+            $.ajax({
+              url: $("#attachment-url-path-" + row).val() ,
+              type: "DELETE",
+              // dataType: "json",
+              data: {"_method":"delete"}
+            });
+            <% end %>
+
+            $("#attachment-div-" + row).remove();
+          }
+      });
+
+    }
+
+    function deleteAllAttachments(){
+      for(var x = 0; x <= attachmentCount; x++){
+        deleteAttachment(x);
+      }
+    }
+
+    function createPersonRow(scheduleID, role, roleID, person, personID, isConfirmed, path){
+
+      scheduleID = (scheduleID == undefined) ? "" : scheduleID;
       role = (role == undefined) ? "" : role;
       roleID = (roleID == undefined) ? "" : roleID;
       person = (person == undefined) ? "" : person;
       personID = (personID == undefined) ? "" : personID;
       disabled_class = (isConfirmed == undefined) ? "" : isConfirmed ? "disabled" : "";
       isConfirmed = (isConfirmed == undefined) ? "false" : isConfirmed ? "true" : "false";
+      path = (path == undefined) ? "" : path;
 
-      row += 1;
-      return "<tr id=row-"+ row +" class=\'content\'>"+
+      personRowCount += 1;
+      return "<tr id=person-row-"+ personRowCount +" class=\'content\'>"+
                 "<td>" +
-                  "<input type=hidden id=isconfirmed-"+ row +" name=service[isConfirmed][] value=\""+ isConfirmed +"\" />" +
-                  "<span id=role-text-"+ row +" >"+ role +"</span>" +
-                  "<input type=hidden id=role-id-"+ row +" name=service[role][] value=\""+ roleID +"\" />" +
+
+                  <% if action_name.eql?("edit") %>
+                  "<input type=hidden id=schedule-id-" + personRowCount + " value=\"" + scheduleID + "\"/>" +
+                  "<input type=hidden id=schedule-url-path-" + personRowCount + " value=\"" + path + "\"/>" +
+                  <% end %>
+
+                  "<input type=hidden id=isconfirmed-"+ personRowCount +" name=service[isConfirmed][] value=\""+ isConfirmed +"\" />" +
+                  "<span id=role-text-"+ personRowCount +" >"+ role +"</span>" +
+                  "<input type=hidden id=role-id-"+ personRowCount +" name=service[role][] value=\""+ roleID +"\" />" +
                 "</td>" +
-                "<td><a href='javascript:' onclick='pop_role("+ row +")' class=\"btn btn-default btn-xs "+ disabled_class +"\"><span class=\"glyphicon glyphicon-export\"></span> Choose</a></td>" +
+                "<td><a href='javascript:' onclick='pop_role("+ personRowCount +")' class=\"btn btn-default btn-xs "+ disabled_class +"\"><span class=\"glyphicon glyphicon-export\"></span> Choose</a></td>" +
                 "<td>" +
-                  "<span id=person-text-"+ row +" >"+ person +"</span>" +
-                  "<input type=hidden id=person-id-"+ row +" name=service[person][] value=\""+ personID +"\" />" +
+                  "<span id=person-text-"+ personRowCount +" >"+ person +"</span>" +
+                  "<input type=hidden id=person-id-"+ personRowCount +" name=service[person][] value=\""+ personID +"\" />" +
                 "</td>" +
-                "<td><a href='javascript:' onclick='pop_people(" + row + ")' class=\"btn btn-default btn-xs "+ disabled_class +"\"><span class=\"glyphicon glyphicon-export\"></span> Choose</a></td>" +
-                "<td><a href=javascript:deleteRow("+ row +") class=\"btn btn-default btn-xs "+ disabled_class +" \"><span class=\"glyphicon glyphicon-remove-circle\"></span> Delete Row</a></td>" +
+                "<td><a href='javascript:' onclick='pop_people(" + personRowCount + ")' class=\"btn btn-default btn-xs "+ disabled_class +"\"><span class=\"glyphicon glyphicon-export\"></span> Choose</a></td>" +
+                "<td><a href=javascript: onclick=deletePersonRow("+ personRowCount +") class=\"btn btn-default btn-xs "+ disabled_class +" \"><span class=\"glyphicon glyphicon-remove-circle\"></span> Delete Row</a></td>" +
               "</tr>";
     }
 
@@ -54,62 +119,124 @@
       pop("<%= popup_people_path %>?target="+ row +"&name=person&role=" + roleValue);
     }
 
-    function addRow(role, roleID, person, personID, isConfirmed){
-      $('#person-incharge-table').append(getRow(role, roleID, person, personID, isConfirmed));
+    function newPerson(scheduleID, role, roleID, person, personID, isConfirmed, path){
+      $('#person-incharge-table').append(createPersonRow(scheduleID, role, roleID, person, personID, isConfirmed, path));
     }
 
-    function deleteRow(row){
+    function deletePersonRow(row){
+
+      if($("#schedule-id-" + row).val() == ''){
+        $("#person-row-" + row).remove();
+        return;
+      }
+
       if($("#isconfirmed-" + row).val() == 'false'){
-        $("#row-" + row).remove();
+
+        BootstrapDialog.confirm('Are you sure to delete this schedule?', function(result){
+            if(result) {
+              <% if action_name.eql?("edit") %>
+              $.ajax({
+                url: $("#schedule-url-path-" + row).val() ,
+                type: "DELETE",
+                // dataType: "json",
+                data: {"_method":"delete"}
+              });
+              <% end %>
+
+              $("#person-row-" + row).remove();
+            }
+        });
+
       }
     }
 
-    function deleteAllRows(){
+    <% if action_name.eql?("new") %>
+    function deleteAllPeople(){
       if(window.confirm("Are you sure? This is not undo-able!")){
-          for(var x = 0; x <= row; x++){
-            deleteRow(x);
+          for(var x = 0; x <= personRowCount; x++){
+            deletePersonRow(x);
           }
       }
     }
+    <% end %>
+
 </script>
 
 <div class="container">
-  <div class="row">
-    <%= form_for @service, :html => {:role => "form", :class => "form-horizontal"} do |s| %>
-      <% if @service.errors.any? %>
-        <div id="error_explanation">
-          <%= pluralize(@service.errors.count, "error") %> prohibited this post from being saved:
-          <ul>
-            <% @service.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-            <% end %>
-          </ul>
+  <%= form_for @service, :html => {:role => "form", :class => "form-horizontal"} do |s| %>
+    <div class="row">
+        <% if @service.errors.any? %>
+          <div id="error_explanation">
+            <%= pluralize(@service.errors.count, "error") %> prohibited this post from being saved:
+            <ul>
+              <% @service.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="col-xs-12">
+              <%= s.label :name, :for => "serviceName" %>
+              <%= s.text_field :name, :class => "form-control", :id => "serviceName", :placeholder => "Enter Service Name" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-12">
+              <%= s.label :description, :for => "serviceDescription" %>
+              <%= s.text_area :description, :class => "form-control", :id => "serviceDescription", :placeholder => "Description", :rows => 10 %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-4">
+              <%= s.label :date, :for => "serviceDate" %>
+              <%= s.text_field :date, :class => "form-control datepicker-field", :id => "serviceDate"%>
+            </div>
+          </div>
+
+          <%= s.submit :class => "btn btn-default" %>
         </div>
-      <% end %>
 
-      <div class="form-group">
-        <div class="col-xs-4">
-          <%= s.label :name, :for => "serviceName" %>
-          <%= s.text_field :name, :class => "form-control", :id => "serviceName", :placeholder => "Enter Service Name" %>
+
+        <div class="col-md-6">
+          <div style="padding-top: 10px; padding-bottom: 20px;">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Attachments & Resources
+                  <a  href="javascript: " rel="tooltip" title="Upload your attachment in external services such as dropbox.com & box.com, and paste the download URL below" data-placement="right">
+                    [?]
+                  </a>
+                </h3>
+              </div>
+
+              <div class="panel-body">
+                <div align="right" style="padding-top: 10px; padding-bottom: 20px;">
+                  <a href="javascript: " onclick="createAttachmentRow()" class="btn btn-default btn-xs">
+                    <span class="glyphicon glyphicon-plus"></span> Add More Row
+                  </a>
+
+                  <% if action_name.eql?("new") %>
+                  <a href="javascript: " onclick="deleteAllAttachments()" class="btn btn-default btn-xs">
+                    <span class="glyphicon glyphicon-minus"></span> Delete All Rows
+                  </a>
+                  <% end %>
+                </div>
+
+
+                <div id="attachments-div">
+                </div>
+
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+    </div>
 
-      <div class="form-group">
-        <div class="col-xs-7">
-          <%= s.label :description, :for => "serviceDescription" %>
-          <%= s.text_area :description, :class => "form-control", :id => "serviceDescription", :placeholder => "Description" %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-xs-2">
-          <%= s.label :date, :for => "serviceDate" %>
-          <%= s.text_field :date, :class => "form-control datepicker-field", :id => "serviceDate"%>
-        </div>
-      </div>
-
-      <%= s.submit :class => "btn btn-default" %>
-
+    <div class="row">
       <div style="padding-top: 10px; padding-bottom: 20px;">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -119,13 +246,14 @@
           <div class="panel-body">
 
             <div align="right" style="padding-top: 10px; padding-bottom: 20px;">
-              <a href="javascript: " onclick="addRow();" class="btn btn-default btn-xs">
-                <span class="glyphicon glyphicon-plus"></span> Add More Row
+              <a href="javascript: " onclick="newPerson();" class="btn btn-default btn-xs">
+                <span class="glyphicon glyphicon-plus"></span> New Person
               </a>
-
-              <a href="javascript: " onclick="deleteAllRows();" class="btn btn-default btn-xs">
-                <span class="glyphicon glyphicon-minus"></span> Delete All Rows
+              <% if action_name.eql?("new") %>
+              <a href="javascript: " onclick="deleteAllPeople();" class="btn btn-default btn-xs">
+                <span class="glyphicon glyphicon-minus"></span> Delete All
               </a>
+              <% end %>
             </div>
 
             <table class="table table-hover table-bordered" id="person-incharge-table">
@@ -143,7 +271,6 @@
           </div>
         </div>
       </div>
-
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>

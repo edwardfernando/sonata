@@ -3,7 +3,10 @@ Sonata::Application.routes.draw do
 
   match 'denied', to: 'denied#index', via: [:get]
 
-  resources :services
+  resources :services do
+    resources :schedules
+    resources :attachments
+  end
 
   resources :roles do
     collection do
