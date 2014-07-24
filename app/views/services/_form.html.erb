@@ -36,7 +36,7 @@
         "<input type=hidden id=attachment-url-path-" + attachmentCount + " value=\"" + path + "\"/>" +
         <% end %>
 
-        "<input name=\"service[attachment_name][]\" type=\"text\" class=\"form-control\" placeholder=\"Attachment Name\" value=" + name + ">" +
+        "<input name=\"service[attachment_name][]\" type=\"text\" class=\"form-control\" placeholder=\"Attachment Name\" value=\"" + name + "\">" +
         "<input name=\"service[attachment_url][]\" type=\"text\" class=\"form-control\" placeholder=\"Attachment URL (Dropbox/Box)\" value=" + url + ">" +
         "<span class=\"input-group-addon\">" +
           "<a href=javascript: onclick=deleteAttachment("+ attachmentCount +")  class=\"btn btn-default\" data-method=\"delete\" data-remote=true>" +
@@ -176,98 +176,108 @@
           </div>
         <% end %>
 
-        <div class="col-md-6">
-          <div class="form-group">
-            <div class="col-xs-12">
-              <%= s.label :name, :for => "serviceName" %>
-              <%= s.text_field :name, :class => "form-control", :id => "serviceName", :placeholder => "Enter Service Name" %>
+      <div class="col-md-6">
+        <div style="padding-top: 10px; padding-bottom: 20px;">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Details</h3>
             </div>
-          </div>
 
-          <div class="form-group">
-            <div class="col-xs-12">
-              <%= s.label :description, :for => "serviceDescription" %>
-              <%= s.text_area :description, :class => "form-control", :id => "serviceDescription", :placeholder => "Description", :rows => 10 %>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="col-xs-4">
-              <%= s.label :date, :for => "serviceDate" %>
-              <%= s.text_field :date, :class => "form-control datepicker-field", :id => "serviceDate"%>
-            </div>
-          </div>
-
-          <%= s.submit :class => "btn btn-default" %>
-        </div>
-
-
-        <div class="col-md-6">
-          <div style="padding-top: 10px; padding-bottom: 20px;">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">Attachments & Resources
-                  <a  href="javascript: " rel="tooltip" title="Upload your attachment in external services such as dropbox.com & box.com, and paste the download URL below" data-placement="right">
-                    [?]
-                  </a>
-                </h3>
-              </div>
-
-              <div class="panel-body">
-                <div align="right" style="padding-top: 10px; padding-bottom: 20px;">
-                  <a href="javascript: " onclick="createAttachmentRow()" class="btn btn-default btn-xs">
-                    <span class="glyphicon glyphicon-plus"></span> Add More Row
-                  </a>
-
-                  <% if action_name.eql?("new") %>
-                  <a href="javascript: " onclick="deleteAllAttachments()" class="btn btn-default btn-xs">
-                    <span class="glyphicon glyphicon-minus"></span> Delete All Rows
-                  </a>
-                  <% end %>
+            <div class="panel-body">
+                <div class="form-group">
+                  <div class="col-xs-12">
+                    <%= s.label :name, :for => "serviceName" %>
+                    <%= s.text_field :name, :class => "form-control", :id => "serviceName", :placeholder => "Enter Service Name" %>
+                  </div>
                 </div>
 
-
-                <div id="attachments-div">
+                <div class="form-group">
+                  <div class="col-xs-12">
+                    <%= s.label :description, :for => "serviceDescription" %>
+                    <%= s.text_area :description, :class => "form-control", :id => "serviceDescription", :placeholder => "Description", :rows => 10 %>
+                  </div>
                 </div>
 
-              </div>
+                <div class="form-group">
+                  <div class="col-xs-4">
+                    <%= s.label :date, :for => "serviceDate" %>
+                    <%= s.text_field :date, :class => "form-control datepicker-field", :id => "serviceDate"%>
+                  </div>
+                </div>
+                <%= s.submit :class => "btn btn-default" %>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="col-md-6">
+        <div style="padding-top: 10px; padding-bottom: 20px;">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Attachments & Resources
+                <a  href="javascript: " rel="tooltip" title="Upload your attachment in external services such as dropbox.com & box.com, and paste the download URL below" data-placement="right">
+                  [?]
+                </a>
+              </h3>
+            </div>
+
+            <div class="panel-body">
+              <div align="right" style="padding-top: 10px; padding-bottom: 20px;">
+                <a href="javascript: " onclick="createAttachmentRow()" class="btn btn-default btn-xs">
+                  <span class="glyphicon glyphicon-plus"></span> Add More Row
+                </a>
+
+                <% if action_name.eql?("new") %>
+                <a href="javascript: " onclick="deleteAllAttachments()" class="btn btn-default btn-xs">
+                  <span class="glyphicon glyphicon-minus"></span> Delete All Rows
+                </a>
+                <% end %>
+              </div>
+
+
+              <div id="attachments-div">
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="row">
-      <div style="padding-top: 10px; padding-bottom: 20px;">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Choose People Involved</h3>
-          </div>
-
-          <div class="panel-body">
-
-            <div align="right" style="padding-top: 10px; padding-bottom: 20px;">
-              <a href="javascript: " onclick="newPerson();" class="btn btn-default btn-xs">
-                <span class="glyphicon glyphicon-plus"></span> New Person
-              </a>
-              <% if action_name.eql?("new") %>
-              <a href="javascript: " onclick="deleteAllPeople();" class="btn btn-default btn-xs">
-                <span class="glyphicon glyphicon-minus"></span> Delete All
-              </a>
-              <% end %>
+      <div class="col-md-12">
+        <div style="padding-top: 10px; padding-bottom: 20px;">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Choose People Involved</h3>
             </div>
 
-            <table class="table table-hover table-bordered" id="person-incharge-table">
-              <thead>
-                <tr>
-                    <th colspan=2>Role</th>
-                    <th colspan=2>Person</th>
-                    <th>#</th>
-                </tr>
-              </thead>
+            <div class="panel-body">
 
-              <tbody>
-              </tbody>
-            </table>
+              <div align="right" style="padding-top: 10px; padding-bottom: 20px;">
+                <a href="javascript: " onclick="newPerson();" class="btn btn-default btn-xs">
+                  <span class="glyphicon glyphicon-plus"></span> New Person
+                </a>
+                <% if action_name.eql?("new") %>
+                <a href="javascript: " onclick="deleteAllPeople();" class="btn btn-default btn-xs">
+                  <span class="glyphicon glyphicon-minus"></span> Delete All
+                </a>
+                <% end %>
+              </div>
+
+              <table class="table table-hover table-bordered" id="person-incharge-table">
+                <thead>
+                  <tr>
+                      <th colspan=2>Role</th>
+                      <th colspan=2>Person</th>
+                      <th>#</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
