@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624114022) do
+ActiveRecord::Schema.define(version: 20140703142958) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 20140624114022) do
   add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
+
+  create_table "attachments", force: true do |t|
+    t.integer  "service_id"
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attachments", ["service_id"], name: "index_attachments_on_service_id"
 
   create_table "people", force: true do |t|
     t.string   "email",                  default: "", null: false

@@ -1,54 +1,6 @@
 <h3>Service Available</h3>
 
 <div class="row">
-  <div class="col-md-4">
-    <div style="padding-top: 10px; padding-bottom: 20px;">
-
-      <% if false %>
-      <div class="btn-group">
-        <!--
-        <a href="<%= services_path %>?date=" class="btn btn-default btn-xs">
-          <span class="glyphicon glyphicon-arrow-left"></span> Previous Day
-        </a>
-      -->
-
-        <!-- <a href="<%= services_path %>?date=<%= today %>" class="btn btn-default btn-xs">
-          <span class="glyphicon glyphicon-flag"></span> Today
-        </a> -->
-
-        <!--
-        <a href="<%= services_path %>?date=" class="btn btn-default btn-xs">
-          Next Day <span class="glyphicon glyphicon-arrow-right"></span>
-        </a>
-      -->
-      </div>
-      <% end %>
-
-      <!-- <a href="<%= services_path %>" class="btn btn-default btn-xs">
-        <span class="glyphicon glyphicon-list-alt"></span> Show All
-      </a> -->
-
-      <% if person_signed_in? && (current_person.manager? || current_person.admin?) %>
-      <div class="list-group">
-        <a href="<%= new_service_path %>?date=<%= get_valid_date(params[:date]) %>" class="list-group-item">
-          <span class="glyphicon glyphicon-plus"></span> Add New Schedule
-        </a>
-      </div>
-      <% end %>
-
-
-      <ul class="timeline">
-          <% @activities.each do |activity| %>
-            <%= render_activity activity %>
-          <% end %>
-          <%# FOR ANOTHER SAMPLE PLEASE SEE : http://bootsnipp.com/snippets/featured/timeline-responsive %>
-      </ul>
-    </div>
-
-
-    <!-- <div class="inline-date-picker"></div> -->
-
-	</div>
   <div class="col-md-8">
 
     <div id="calendar"></div>
@@ -158,6 +110,54 @@
       </tbody>
     </table>
     <% end %>
+
+  </div>
+  <div class="col-md-4">
+    <div style="padding-top: 10px; padding-bottom: 20px;">
+
+      <% if false %>
+      <div class="btn-group">
+        <!--
+        <a href="<%= services_path %>?date=" class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-arrow-left"></span> Previous Day
+        </a>
+      -->
+
+        <!-- <a href="<%= services_path %>?date=<%= today %>" class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-flag"></span> Today
+        </a> -->
+
+        <!--
+        <a href="<%= services_path %>?date=" class="btn btn-default btn-xs">
+          Next Day <span class="glyphicon glyphicon-arrow-right"></span>
+        </a>
+      -->
+      </div>
+      <% end %>
+
+      <!-- <a href="<%= services_path %>" class="btn btn-default btn-xs">
+        <span class="glyphicon glyphicon-list-alt"></span> Show All
+      </a> -->
+
+      <% if person_signed_in? && (current_person.manager? || current_person.admin?) %>
+      <div class="list-group">
+        <a href="<%= new_service_path %>?date=<%= get_valid_date(params[:date]) %>" class="list-group-item">
+          <span class="glyphicon glyphicon-plus"></span> Add New Schedule
+        </a>
+      </div>
+      <% end %>
+
+
+      <ul class="timeline">
+          <% @activities.each do |activity| %>
+            <%= render_activity activity %>
+          <% end %>
+          <%# FOR ANOTHER SAMPLE PLEASE SEE : http://bootsnipp.com/snippets/featured/timeline-responsive %>
+      </ul>
+    </div>
+
+
+    <!-- <div class="inline-date-picker"></div> -->
 
 	</div>
 </div>

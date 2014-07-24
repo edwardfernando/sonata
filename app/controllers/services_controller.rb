@@ -36,6 +36,10 @@ class ServicesController < ApplicationController
 		@service = Service.find(params[:id])
 
 		respond_to do |format|
+			format.js{
+
+			}
+
 			format.html{
 			}
 
@@ -57,16 +61,28 @@ class ServicesController < ApplicationController
 		role_array = params[:service][:role] ||= []
 		people_array = params[:service][:person] ||= []
 
+		attachments_name_array = params[:service][:attachment_name] ||= []
+		attachments_url_array = params[:service][:attachment_url] ||= []
+
 		role_array.delete_if(&:empty?)
 		people_array.delete_if(&:empty?)
+		attachments_name_array.delete_if(&:empty?)
+		attachments_url_array.delete_if(&:empty?)
 
 		if !@service.valid?
 			render "new"
 		elsif !role_array.any? || !people_array.any?
 			@service.errors.add(:schedules)
 			render "new"
+		elsif attachments_name_array.size != attachments_url_array.size
+			@service.errors.add(:attachments)
+			render "new"
 		else
 			# Service.find(params[:id]).schedules.destroy_all
+
+			attachments_name_array.each_with_index do |attachment,index|
+				Attachment.create(service:@service, name:attachment, url:attachments_url_array[index])
+			end
 
 			role_array.each_with_index do |role,index|
 				person = Person.find(people_array[index])
@@ -95,10 +111,14 @@ class ServicesController < ApplicationController
 		role_array = params[:service][:role] ||= []
 		people_array = params[:service][:person] ||= []
 		confirmation_array = params[:service][:isConfirmed] ||= []
+		attachments_name_array = params[:service][:attachment_name] ||= []
+		attachments_url_array = params[:service][:attachment_url] ||= []
 
 		role_array.delete_if(&:empty?)
 		people_array.delete_if(&:empty?)
 		confirmation_array.delete_if(&:empty?)
+		attachments_name_array.delete_if(&:empty?)
+		attachments_url_array.delete_if(&:empty?)
 
 		if !@service.update(service_param)
 			render "edit"
@@ -106,6 +126,12 @@ class ServicesController < ApplicationController
 			@service.errors.add(:schedules)
 			render "edit"
 		else
+
+			Attachment.where(service: @service).destroy_all
+			attachments_name_array.each_with_index do |attachment,index|
+				Attachment.create(service:@service, name:attachment, url:attachments_url_array[index])
+			end
+
 
 			# Remove all unconfirmed schedules from particular service because we're going to overide it
 			Schedule.where(service: @service, confirmed_at: nil).destroy_all
