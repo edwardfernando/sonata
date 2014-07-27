@@ -6,6 +6,10 @@ class SchedulePolicy
     @record = record
   end
 
+  def create?
+    @person.manager? || @person.admin?
+  end
+
   def confirm?
     person.id == record.person.id
   end
