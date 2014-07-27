@@ -134,25 +134,25 @@ class ServicesController < ApplicationController
 
 
 			# Remove all unconfirmed schedules from particular service because we're going to overide it
-			Schedule.where(service: @service, confirmed_at: nil).destroy_all
-
-			role_array.each_with_index do |role,index|
-
-				if confirmation_array[index] == "false"
-					person = Person.find(people_array[index])
-					role = Role.find(role_array[index])
-
-					begin
-						schedule = Schedule.create(service:@service, role:role, person:person)
-						ScheduleMailer.new_schedule_notification(schedule).deliver
-					rescue ActiveRecord::RecordNotUnique => error
-						@service.errors.add(:schedules, " - You already assigned #{person.name} as #{role.name}. Operation canceled.")
-						render "edit"
-						return false
-					end
-				end
-
-			end
+			# Schedule.where(service: @service, confirmed_at: nil).destroy_all
+			#
+			# role_array.each_with_index do |role,index|
+			#
+			# 	if confirmation_array[index] == "false"
+			# 		person = Person.find(people_array[index])
+			# 		role = Role.find(role_array[index])
+			#
+			# 		begin
+			# 			schedule = Schedule.create(service:@service, role:role, person:person)
+			# 			ScheduleMailer.new_schedule_notification(schedule).deliver
+			# 		rescue ActiveRecord::RecordNotUnique => error
+			# 			@service.errors.add(:schedules, " - You already assigned #{person.name} as #{role.name}. Operation canceled.")
+			# 			render "edit"
+			# 			return false
+			# 		end
+			# 	end
+			#
+			# end
 
 			@service.update(service_param)
 

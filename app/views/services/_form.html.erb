@@ -82,7 +82,7 @@
       path = (path == undefined) ? "" : path;
 
       personRowCount += 1;
-      return "<tr id=person-row-"+ personRowCount +" class=\'content\'>"+
+      var tr = "<tr id=person-row-"+ personRowCount +" class=\'content\'>"+
                 "<td>" +
 
                   <% if action_name.eql?("edit") %>
@@ -100,8 +100,17 @@
                   "<input type=hidden id=person-id-"+ personRowCount +" name=service[person][] value=\""+ personID +"\" />" +
                 "</td>" +
                 "<td><a href='javascript:' onclick='pop_people(" + personRowCount + ")' class=\"btn btn-default btn-xs "+ disabled_class +"\"><span class=\"glyphicon glyphicon-export\"></span> Choose</a></td>" +
-                "<td><a href=javascript: onclick=deletePersonRow("+ personRowCount +") class=\"btn btn-default btn-xs "+ disabled_class +" \"><span class=\"glyphicon glyphicon-remove-circle\"></span> Delete Row</a></td>" +
-              "</tr>";
+                "<td>";
+
+      <%# Show Save Button for new schedule - Ajaxify %>
+      if(scheduleID == ""){
+        tr += "<a id=save-button-"+ personRowCount +" href=javascript: onclick=savePersonRow("+ personRowCount +") class=\"btn btn-default btn-xs "+ disabled_class +" \"><span class=\"glyphicon glyphicon-floppy-saved\"></span> Save</a>";
+      }
+
+      tr += "<a id=delete-button-"+ personRowCount +" href=javascript: onclick=deletePersonRow("+ personRowCount +") class=\"btn btn-default btn-xs "+ disabled_class +" \"><span class=\"glyphicon glyphicon-remove-circle\"></span> Delete Row</a>";
+      tr += "</td></tr>";
+
+      return tr;
     }
 
     function pop_role(row){
@@ -122,6 +131,34 @@
     function newPerson(scheduleID, role, roleID, person, personID, isConfirmed, path){
       $('#person-incharge-table').append(createPersonRow(scheduleID, role, roleID, person, personID, isConfirmed, path));
     }
+
+    function savePersonRow(row){
+
+      var role_id = $("#role-id-" + row).val();
+      var person_id = $("#person-id-" + row).val();
+
+      if(role_id == "" || person_id == ""){
+        BootstrapDialog.alert("Please choose Role and Person");
+        return;
+      }
+
+      $.ajax({
+        url: "<%= service_schedules_path(@service) %>",
+        type: "POST",
+        dataType: "json",
+        data: {"_method":"post", "role_id" : role_id, "person_id" : person_id},
+        success:function(result){
+          $("#schedule-id-" + row).val(result.schedule.id);
+          $("#schedule-url-path-" + row).val(result.url);
+          $("#save-button-" + row).remove();
+        },
+        error: function(xhr){
+          var json = JSON.parse(xhr.responseText);
+          BootstrapDialog.alert(json.errors);
+        }
+      });
+    }
+
 
     function deletePersonRow(row){
 
