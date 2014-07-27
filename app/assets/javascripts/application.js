@@ -37,6 +37,12 @@ function choose(n, t, id, text){
   window.opener.document.getElementById(n + '-id-' + t).value = id;
   window.opener.document.getElementById(n + '-text-' + t).innerHTML = text;
 
+  // Reset person id and text each time user change role
+  if(n == 'role'){
+    window.opener.document.getElementById('person-id-' + t).value = "";
+    window.opener.document.getElementById('person-text-' + t).innerHTML = "";
+  }
+
   window.close();
 }
 
