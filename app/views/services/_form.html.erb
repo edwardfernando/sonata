@@ -11,7 +11,7 @@
       }
 
       <% @service.schedules.each do |s| %>
-      newPerson("<%= s.id %>", "<%= s.role.name %>", "<%= s.role.id %>", "<%= s.person.name %>", "<%= s.person.id %>", <%= !s.confirmed_at.nil? %>, "<%= service_schedule_path(@service, s) %>");
+      newPerson("<%= s.id %>", "<%= s.role.name %>", "<%= s.role.id %>", "<%= s.person.name %>", "<%= s.person.id %>", <%= s.is_confirmed? && !s.confirmed_at.nil? %>, "<%= service_schedule_path(@service, s) %>");
       <% end %>
 
       <% @service.attachments.each do |a| %>
@@ -103,9 +103,11 @@
                 "<td>";
 
       <%# Show Save Button for new schedule - Ajaxify %>
-      if(scheduleID == ""){
-        tr += "<a id=save-button-"+ personRowCount +" href=javascript: onclick=savePersonRow("+ personRowCount +") class=\"btn btn-default btn-xs "+ disabled_class +" \"><span class=\"glyphicon glyphicon-floppy-saved\"></span> Save</a>";
-      }
+      <% if action_name.eql?("edit") %>
+        if(scheduleID == ""){
+          tr += "<a id=save-button-"+ personRowCount +" href=javascript: onclick=savePersonRow("+ personRowCount +") class=\"btn btn-default btn-xs "+ disabled_class +" \"><span class=\"glyphicon glyphicon-floppy-saved\"></span> Save</a>";
+        }
+      <% end %>
 
       tr += "<a id=delete-button-"+ personRowCount +" href=javascript: onclick=deletePersonRow("+ personRowCount +") class=\"btn btn-default btn-xs "+ disabled_class +" \"><span class=\"glyphicon glyphicon-remove-circle\"></span> Delete Row</a>";
       tr += "</td></tr>";
@@ -143,7 +145,7 @@
       }
 
       $.ajax({
-        url: "<%= service_schedules_path(@service) %>",
+        url: "<%= action_name.eql?("edit") ? service_schedules_path(@service) : '' %>",
         type: "POST",
         dataType: "json",
         data: {"_method":"post", "role_id" : role_id, "person_id" : person_id},
