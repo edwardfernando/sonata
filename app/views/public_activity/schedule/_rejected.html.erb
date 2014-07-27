@@ -1,3 +1,9 @@
+<%
+  json = JSON.parse(activity.parameters[:model_details])
+  role_name = activity.parameters[:role_name]
+  service_name = activity.parameters[:service_name]
+%>
+
 <li>
   <div class="timeline-badge danger"><i class="glyphicon glyphicon-list-alt"></i></div>
   <div class="timeline-panel">
@@ -12,10 +18,13 @@
           </a>
           <div class="media-body">
               <strong><%= activity.owner.name %></strong> rejected
-              <a href="<%= service_path(activity.trackable.service) %>">
-              <%= activity.trackable.service.name %> at <% activity.trackable.service.date %>
+
+              <a href="<%= service_path(json["service_id"]) %>">
+              <%= service_name %>
               </a>
-              as <%= activity.trackable.role.name %>
+              as
+              <%= role_name %>
+
           </div>
       </div>
 
