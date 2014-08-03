@@ -42,7 +42,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '~> 4.2.1'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -62,6 +62,8 @@ end
 gem 'unicorn'
 
 gem 'fullcalendar-rails'
+
+gem 'figaro'
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
