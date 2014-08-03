@@ -84,7 +84,7 @@ Sonata::Application.configure do
     :address => "smtp.mandrillapp.com",
     :port => 587,
     :domain => "sonata.com",
-    :user_name => MANDRILAPP_CONFIG['username'],
-    :password => MANDRILAPP_CONFIG['password']
+    :user_name => ENV["MANDRIL_APP_USERNAME"],
+    :password => ENV["MANDRIL_APP_PASSWORD"]
   }
 end
