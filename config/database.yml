@@ -24,6 +24,6 @@ production:
    database: sonata
    pool: 10
    username: root
-   password: 
+   password: <%= ENV["MYSQL_PASSWORD"] %>
    socket: /var/run/mysqld/mysqld.sock
    reconnect: true
