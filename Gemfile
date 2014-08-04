@@ -64,8 +64,10 @@ gem 'unicorn'
 gem 'fullcalendar-rails'
 
 gem 'figaro'
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
+
+gem 'capistrano', '~> 3.1.0'
+gem 'capistrano-bundler', '~> 1.1.2'
+gem 'capistrano-rails', '~> 1.1.1'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
