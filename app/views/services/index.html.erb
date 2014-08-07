@@ -154,6 +154,8 @@
           <% end %>
           <%# FOR ANOTHER SAMPLE PLEASE SEE : http://bootsnipp.com/snippets/featured/timeline-responsive %>
       </ul>
+
+      <%= render :partial => "partials/paginator", :locals => {:paginated_object => @activities} %>
     </div>
 
 

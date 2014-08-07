@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
 
   def index
-    @activities = PublicActivity::Activity.order("created_at desc").limit(10)
+    @activities = PublicActivity::Activity.page(params[:page]).per(10).order("created_at desc")
   end
 
   def login
