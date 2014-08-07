@@ -10,7 +10,7 @@ class ServicesController < ApplicationController
 
 		respond_to do |format|
 			format.html {
-				@activities = PublicActivity::Activity.where(:trackable_type => "Schedule").order("created_at desc")
+				@activities = PublicActivity::Activity.page(params[:page]).per(10).where(:trackable_type => "Schedule").order("created_at desc")
 				# @services = Service.order("date asc").limit(5)
 
 				# if date == nil

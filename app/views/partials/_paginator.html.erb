@@ -1,0 +1,9 @@
+<div align="center">
+  <ul class="pagination">
+    <li><a href="?page=1">&laquo;</a></li>
+    <li><a href="?page=<%= paginated_object.prev_page %>">&lsaquo;</a></li>
+    <li><span>Page <%= paginated_object.current_page %> of <%= paginated_object.total_pages %></span></li>
+    <li><a href="?page=<%= paginated_object.next_page %>">&rsaquo;</a></li>
+    <li><a href="?page=<%= paginated_object.total_pages %>">&raquo;</a></li>
+  </ul>
+</div>
