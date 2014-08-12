@@ -1,5 +1,3 @@
-require 'whenever/capistrano'
-
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
@@ -54,12 +52,17 @@ namespace :deploy do
   after :finishing, 'deploy:cleanup'
 end
 
-namespace :whenever do
-  desc "Update the crontab file"
-  task :update_crontab, :roles => :app, :except => { :no_release => true } do
-    run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
-  end
-end
+# Struggling with this one
+# namespace :whenever do
+#   desc "Update the crontab file"
+#
+#   task :update_crontab do
+#     on roles(:app) do
+#       execute "cd #{current_path} && bundle exec whenever --update-crontab sonata"
+#     end
+#   end
+#
+# end
 
 namespace :figaro do
   desc "SCP transfer figaro configuration to the shared folder"
