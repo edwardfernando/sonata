@@ -22,4 +22,8 @@ namespace :reminder do
     puts "### #{Time.now} : Finished not_confirmed reminder"
   end
 
+  task puts_test: :environment do
+    puts " test.... #{Time.now}"
+  end
+
 end
