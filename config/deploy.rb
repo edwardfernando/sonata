@@ -1,3 +1,5 @@
+require 'whenever/capistrano'
+
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
@@ -50,9 +52,13 @@ namespace :deploy do
 
   after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'
+end
 
-  # after "deploy:started", "figaro:setup"
-  # after 'deploy:updating', 'figaro:symlink'
+namespace :whenever do
+  desc "Update the crontab file"
+  task :update_crontab, :roles => :app, :except => { :no_release => true } do
+    run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
+  end
 end
 
 namespace :figaro do
