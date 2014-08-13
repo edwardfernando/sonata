@@ -27,6 +27,8 @@ Sonata::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :authentication => :plain,
@@ -36,4 +38,7 @@ Sonata::Application.configure do
     :user_name => ENV["MANDRIL_APP_USERNAME"],
     :password => ENV["MANDRIL_APP_PASSWORD"]
   }
+
+
+
 end

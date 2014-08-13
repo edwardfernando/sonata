@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  include PublicActivity::StoreController 
+  include PublicActivity::StoreController
   include Pundit
 
   # Prevent CSRF attacks by raising an exception.
@@ -8,6 +8,13 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+
+  # http://excid3.com/blog/change-actionmailer-email-url-host-dynamically/
+  before_filter :set_mailer_host
+  def set_mailer_host
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
+  end
 
   # Need to add this method - since pundit expects it
   def pundit_user

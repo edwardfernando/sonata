@@ -7,7 +7,7 @@ Email ini adalah pengingat bahwa Anda memiliki jadwal pelayanan sebagai berikut:
 <table class="table table-hover table-bordered">
     <tr>
         <td width="35%">Ibadah</td>
-        <td>: <%= @schedule.service.name %></td>
+        <td>: <a href="<%= service_url(@schedule.service) %>"><%= @schedule.service.name %></a></td>
     </tr>
     <tr>
         <td>Tanggal</td>
@@ -18,6 +18,10 @@ Email ini adalah pengingat bahwa Anda memiliki jadwal pelayanan sebagai berikut:
         <td>: <%= @schedule.role.name %></td>
     </tr>
 </table>
+
+<br/>
+
+<a href="<%= service_url(@schedule.service) %>">Lihat detil jadwal</a>
 
 <br/>
 
