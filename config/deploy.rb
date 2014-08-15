@@ -39,8 +39,6 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
-
 namespace :deploy do
 
   desc 'Restart application'
@@ -53,13 +51,14 @@ namespace :deploy do
   desc "Update the crontab file"
   task :update_crontab do
     on roles(:app) do
-      execute "cd #{current_path} && bundle exec whenever --set environment=production --update-crontab sonata"
+      execute "cd #{release_path} && bundle exec whenever --set environment=production --update-crontab sonata"
     end
   end
 
   after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'
-  after :deploy, 'deploy:update_crontab'
+
+  # after :deploy, 'deploy:update_crontab'
 end
 
 # Struggling with this one
