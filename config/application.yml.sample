@@ -1,0 +1,17 @@
+
+development:
+  MANDRIL_APP_USERNAME: xxxxxxxxx
+  MANDRIL_APP_PASSWORD: xxxxxxxxx
+  FACEBOOK_APP_ID: xxxxxxxxx
+  FACEBOOK_SECRET: xxxxxxxxx
+  TWITTER_CONSUMER_KEY: xxxxxxxxx
+  TWITTER_CONSUMER_SECRET: xxxxxxxxx
+
+production:
+  MANDRIL_APP_USERNAME: xxxxxxxxx
+  MANDRIL_APP_PASSWORD: xxxxxxxxx
+  FACEBOOK_APP_ID: xxxxxxxxx
+  FACEBOOK_SECRET: xxxxxxxxx
+  TWITTER_CONSUMER_KEY: xxxxxxxxx
+  TWITTER_CONSUMER_SECRET: xxxxxxxxx
+  MYSQL_PASSWORD: xxxxxxxxx
