@@ -6,7 +6,7 @@ every 1.day, :at => "10:00 am" do
   rake "reminder:not_confirmed"
 end
 
-every 1.day, :at => "17:22 pm" do
+every 5.minutes do
   rake "reminder:schedule"
   rake "reminder:not_confirmed"
 end
