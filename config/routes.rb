@@ -30,10 +30,11 @@ Sonata::Application.routes.draw do
       get 'approve', :action => 'approve'
     end
   end
-  devise_for :people, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+
+  devise_for :people, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :registrations => "registrations" }
 
   devise_scope :person do
-    get 'logout', :to => 'devise/sessions#destroy', :as => :destroy_person_session
+    get 'logout', :to => 'devise/sessions#destroy', :as => :omniauth_destroy_person_session
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

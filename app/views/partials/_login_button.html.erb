@@ -1,6 +1,6 @@
 <li class="dropdown">
   <% if person_signed_in? %>
-    <%= link_to "Logout", destroy_person_session_path %>
+    <%= link_to "Logout", omniauth_destroy_person_session_path %>
   <% else %>
     <a  href="#" class="dropdown-toggle" data-toggle= "dropdown">
       Sign In <b class="caret"></b>
