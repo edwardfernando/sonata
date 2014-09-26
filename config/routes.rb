@@ -31,9 +31,21 @@ Sonata::Application.routes.draw do
     end
   end
 
-  devise_for :people, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :registrations => "registrations" }
+  # devise_for :people, path: "registration", :controllers => { :omniauth_callbacks => "omniauth_callbacks"}
 
-  devise_scope :person do
+  devise_for :people, path: "", :controllers => { :omniauth_callbacks => "omniauth_callbacks"},
+    path_names: { 
+      sign_in: 'login', 
+      sign_out: 'logout', 
+      password: 'secret', 
+      confirmation: 'verification', 
+      unlock: 'unblock', 
+      registration: 'register', 
+      sign_up: 'new' 
+    }
+
+
+  devise_scope :person do    
     get 'logout', :to => 'devise/sessions#destroy', :as => :omniauth_destroy_person_session
   end
 
