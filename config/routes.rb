@@ -45,9 +45,10 @@ Sonata::Application.routes.draw do
     }
 
 
-  devise_scope :person do    
-    get 'logout', :to => 'devise/sessions#destroy', :as => :omniauth_destroy_person_session
-  end
+  # No need to user this anymore since i figured how to customized URL for devise
+  # devise_scope :person do    
+  #   get 'logout', :to => 'devise/sessions#destroy', :as => :omniauth_destroy_person_session
+  # end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
