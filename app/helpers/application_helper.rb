@@ -10,4 +10,19 @@ module ApplicationHelper
     return counter
   end
 
+
+ # Display a custom sign_in form anywhere in your app
+  # https://github.com/plataformatec/devise/wiki/How-To:-Display-a-custom-sign_in-form-anywhere-in-your-app
+  # def resource_name
+  #   :people
+  # end
+ 
+  # def resource
+  #   @resource ||= Person.new
+  # end
+ 
+  # def devise_mapping
+  #   @devise_mapping ||= Devise.mappings[:people]
+  # end
+
 end

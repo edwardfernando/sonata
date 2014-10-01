@@ -5,6 +5,8 @@ module PeopleHelper
       person.avatar_url + "?type=large"
     elsif person.provider == "twitter"
       person.avatar_url.gsub "_normal", ""
+    else
+      person.avatar_url = "/assets/default_avatar.png"
     end
   end
 

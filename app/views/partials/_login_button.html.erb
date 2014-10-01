@@ -1,15 +1,20 @@
 <li class="dropdown">
   <% if person_signed_in? %>
-    <%= link_to "Logout", omniauth_destroy_person_session_path %>
+    <%= link_to "Logout", destroy_person_session_path, method: :delete %>
   <% else %>
     <a  href="#" class="dropdown-toggle" data-toggle= "dropdown">
-      Sign In <b class="caret"></b>
+      Log In <b class="caret"></b>
     </a>
 
     <ul class="dropdown-menu">
-      <li><a href="<%= person_omniauth_authorize_path('facebook') %>"><b class="fa fa-facebook-square"> </b> Sign in with Facebook</a></li>
-      <li><a href="<%= person_omniauth_authorize_path('twitter') %>"><b class="fa fa-twitter-square"> </b> Sign in with Twitter</a></li>
+      <li><a href="<%= new_person_session_path %>"><b class="fa fa-sign-in"> </b> Log In</a></li>  
+      <li role="presentation" class="divider"></li>
+      <li><a href="<%= person_omniauth_authorize_path('facebook') %>"><b class="fa fa-facebook-square"> </b> Log in with Facebook</a></li>
+      <li><a href="<%= person_omniauth_authorize_path('twitter') %>"><b class="fa fa-twitter-square"> </b> Log in with Twitter</a></li>
+      <li role="presentation" class="divider"></li>
+      <li><a href="<%= new_person_registration_path %>"><b class="fa fa-users"> </b> Sign Up</a></li>
     </ul>
 
   <% end %>
 </li>
+

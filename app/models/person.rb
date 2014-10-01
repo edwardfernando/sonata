@@ -9,12 +9,14 @@ class Person < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :trackable, :validatable, :omniauthable
-  devise :omniauthable, :trackable, :database_authenticatable, :registerable #, :validatable
+  devise :omniauthable, :trackable, :database_authenticatable, :registerable, :validatable, :confirmable, :recoverable
 
   validates :name, presence: true
   validates :email, uniqueness: true, presence: true
-  validates :phone_number_1, numericality: { only_integer: true }, presence: true
-  validates :phone_number_2, numericality: { only_integer: true }, allow_blank: true
+
+  # TEMPORARY COMMENTED DUE TO REGISTRATION ISSUE - WILL FIGURE IT OUT
+  # validates :phone_number_1, numericality: { only_integer: true }, presence: true
+  # validates :phone_number_2, numericality: { only_integer: true }, allow_blank: true
 
   enum role: [:user, :manager, :admin]
   after_initialize :set_default_role, :if => :new_record?

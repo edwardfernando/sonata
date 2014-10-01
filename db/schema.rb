@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140703142958) do
+ActiveRecord::Schema.define(version: 20140930160046) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -66,8 +66,12 @@ ActiveRecord::Schema.define(version: 20140703142958) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "birthday"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
 
+  add_index "people", ["confirmation_token"], name: "index_people_on_confirmation_token", unique: true
   add_index "people", ["email"], name: "index_people_on_email", unique: true
   add_index "people", ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true
 

@@ -31,11 +31,24 @@ Sonata::Application.routes.draw do
     end
   end
 
-  devise_for :people, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :registrations => "registrations" }
+  # devise_for :people, path: "registration", :controllers => { :omniauth_callbacks => "omniauth_callbacks"}
 
-  devise_scope :person do
-    get 'logout', :to => 'devise/sessions#destroy', :as => :omniauth_destroy_person_session
-  end
+  devise_for :people, path: "", :controllers => { :omniauth_callbacks => "omniauth_callbacks"},
+    path_names: { 
+      sign_in: 'login', 
+      sign_out: 'logout', 
+      password: 'secret', 
+      confirmation: 'verification', 
+      unlock: 'unblock', 
+      registration: 'register', 
+      sign_up: 'new' 
+    }
+
+
+  # No need to user this anymore since i figured how to customized URL for devise
+  # devise_scope :person do    
+  #   get 'logout', :to => 'devise/sessions#destroy', :as => :omniauth_destroy_person_session
+  # end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
