@@ -40,7 +40,9 @@
           </li>
 
           <li <% if params[:controller] == "profiles" %> class="active" <% end %>>
-              <a href="<%= profile_path %>"> <img src="<%= parse_avatar(current_person) %>" class="img-circle profilePicture-small">  Me </a>
+              <a href="<%= profile_path %>">
+                <img src="<%= image_path(parse_avatar(current_person)) %>" class="img-circle profilePicture-small">  Me
+              </a>
               <!-- <a  href="javascript: " class="dropdown-toggle" data-toggle= "dropdown">
                 <img src="<%= current_person.avatar_url %>" class="img-circle profilePicture-small">  Me <b class="caret"></b>
               </a>
