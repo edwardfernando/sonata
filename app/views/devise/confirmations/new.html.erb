@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-md-6">
-    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }, :html => {:role => "form", :class => "form-horizontal"}) do |f| %>
+    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, :role => "form", :class => "form-horizontal"}) do |f| %>
       <%= devise_error_messages! %>
 
       <div class="form-group">
