@@ -11,7 +11,9 @@
 
   <div class="navbar navbar-default navbar-static-top">
     <div class="container">
-      <%= link_to "Sonatask", root_path, :class => 'navbar-brand' %>
+      <a class="navbar-brand" href="<%= root_path %>">
+          <img src="<%= image_path("logo_small.png") %>"/>
+      </a>
 
       <button class="navbar-toggle btn btn-default" data-toggle="collapse" data-target=".navHeaderCollapse">
          <span class="glyphicon glyphicon-th"></span>
