@@ -1,9 +1,9 @@
 class NotConfirmedScheduleMailer < ActionMailer::Base
-  default from: "sonata@sonata.com"
+  default from: ENV["DEFAULT_MAILER_ADDRESS"]
 
   def notify(schedule)
     @schedule = schedule
-    mail to: schedule.person.email, subject: "Sonata - Action Required for : #{schedule.service.name} - #{schedule.role.name}"
+    mail to: schedule.person.email, subject: "Action required : #{schedule.service.name} - #{schedule.role.name}"
   end
 
 end
