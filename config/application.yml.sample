@@ -6,6 +6,7 @@ development:
   FACEBOOK_SECRET: xxxxxxxxx
   TWITTER_CONSUMER_KEY: xxxxxxxxx
   TWITTER_CONSUMER_SECRET: xxxxxxxxx
+  DEFAULT_MAILER_ADDRESS: xxx@xxx.com
 
 production:
   MANDRIL_APP_USERNAME: xxxxxxxxx
@@ -15,3 +16,4 @@ production:
   TWITTER_CONSUMER_KEY: xxxxxxxxx
   TWITTER_CONSUMER_SECRET: xxxxxxxxx
   MYSQL_PASSWORD: xxxxxxxxx
+  DEFAULT_MAILER_ADDRESS: xxx@xxx.com
