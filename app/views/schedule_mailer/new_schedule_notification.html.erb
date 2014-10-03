@@ -25,4 +25,12 @@ Anda menerima permintaan jadwal pelayanan untuk ibadah sebagai berikut:
 
 <br/>
 
-<p>Untuk menyetujui / menolak jadwal ini silahkan login dengan akun <%= @schedule.person.provider %> Anda.</p>
+<p>Untuk menyetujui / menolak jadwal ini silahkan login dengan akun
+
+  <% if @schedule.person.provider.blank? %>
+    email (<%= @schedule.person.email %>)
+  <% else %>
+    <%= @schedule.person.provider %>
+  <% end %>
+
+   Anda.</p>
