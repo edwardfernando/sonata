@@ -78,14 +78,14 @@ Sonata::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.action_mailer.default_url_options = { :host => 'http://metaduty.com' }
+  config.action_mailer.default_url_options = { :host => 'http://sonatask.com' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :authentication => :plain,
     :address => "smtp.mandrillapp.com",
     :port => 587,
-    :domain => "sonata.com",
+    :domain => "sonatask.com",
     :user_name => ENV["MANDRIL_APP_USERNAME"],
     :password => ENV["MANDRIL_APP_PASSWORD"]
   }
