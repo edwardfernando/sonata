@@ -16,10 +16,10 @@
 
                   <a class="thumbnail pull-left" href="#">
                       <img class="media-object profilePicture-medium" src="<%= image_path(parse_avatar(p)) %>">
+                      <div align="center"><small><%= p.role %></small></div>
                   </a>
                   <div class="media-body">
                       <h4 class="media-heading">
-                        <% if p.admin? %><span class="glyphicon glyphicon-tower"></span> <% end %>
                         <% if p.provider == 'facebook' %>
                           <b class="fa fa-facebook-square"> </b> </a>
                         <% elsif p.provider == 'twitter' %>
@@ -33,6 +33,10 @@
                         <% end %>
                       </p>
                       <p>
+                          <% if current_person.admin? %>
+                          <a href="<%= update_level_person_path(p, p.role) %>" person-id="<%= p.id %>" class="person_level_text btn btn-xs btn-default"><span class="glyphicon glyphicon-tower"></span> Level</a>
+                          <% end %>
+
                           <a href="<%= person_path(p) %>" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-eye-open"></span> View</a>
                           <a href="<%= edit_person_path(p) %>" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-edit"></span> Edit</a>
 
@@ -59,3 +63,5 @@
 
   </div>
 </div>
+
+<%= render 'level_list' %>

@@ -123,7 +123,26 @@ var ready = function(){
       eventRender: function(event, element) {
         element.css('cursor', 'pointer');
       }
-    })
+    });
+
+    // Moved to coffee script file
+    // Access  Level Modal - People List Page
+    // $(".person_level_text").click(function(){
+    //   $('#available-access-level-dialog').modal({show:true});
+    //
+    //   var person_id = $(this).attr('person-id');
+    //   $('#available-access-level-dialog-confirm').attr("href", $(this).attr("href")).attr("data-method", "post");
+    //
+    //   $.get('/people/' + person_id  + '.json', function(result){
+    //     $("#person_level_combobox").val(result.role).change(function(){
+    //       var url = '/people/' + person_id + '/level/' + $(this).val();
+    //       $('#available-access-level-dialog-confirm').attr("href", url).attr("data-method", "post");
+    //     });
+    //   });
+    //
+    //   return false;
+    // });
+
   });
 
   // All codes below are related to date picker
@@ -170,6 +189,7 @@ var ready = function(){
       todayHighlight: true
     });
   });
+
 };
 
 
