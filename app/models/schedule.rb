@@ -8,7 +8,8 @@ class Schedule < ActiveRecord::Base
     }
 
   belongs_to :service
-  belongs_to :person
+  belongs_to :person, :class_name => 'Person'
+  belongs_to :created_by, :class_name => 'Person', :foreign_key => 'created_by'
   belongs_to :role
 
   validates :service, presence: true
