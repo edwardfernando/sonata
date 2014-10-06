@@ -1,0 +1,31 @@
+<h3>Halo, <%= @schedule.created_by.name %></h3>
+
+Permintaan jadwal pelayanan yang Anda lakukan berikut:
+
+<br/><br/>
+
+<table class="table table-hover table-bordered">
+    <tr>
+        <td width="35%">Ibadah</td>
+        <td>: <a href="<%= service_url(@schedule.service) %>"><%= @schedule.service.name %></a></td>
+    </tr>
+    <tr>
+        <td>Tanggal</td>
+        <td>: <%= @schedule.service.date %></td>
+    </tr>
+    <tr>
+        <td>Role</td>
+        <td>: <%= @schedule.role.name %></td>
+    </tr>
+    <tr>
+        <td>Petugas</td>
+        <td>: <%= @schedule.person.name%></td>
+    </tr>
+</table>
+
+<b>Ditolak</b> oleh yang bersangkutan, dengan alasan: <br/>
+"<%= @schedule.reasons %>"
+
+<br/><br/>
+Silahkan melakukan penjadwalan ulang terhadap
+role yang sama dengan mengklik <a href="<%= service_url(@schedule.service) %>">tautan berikut ini</a>.

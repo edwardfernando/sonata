@@ -22,7 +22,7 @@ class SchedulesController < ApplicationController
     elsif !person_role_in_service.nil?
       service.errors.add(:schedules, "#{person.name} has been assigned as #{person_role_in_service.role.name}. Please choose other person.")
     else
-      schedule = Schedule.create(person: person, role: role, service: service)
+      schedule = Schedule.create(person: person, role: role, service: service, created_by:current_person)
     end
 
     # use in create-user ajax (service form page)
@@ -58,6 +58,8 @@ class SchedulesController < ApplicationController
     schedule.update(:is_confirmed => false, :confirmed_at => Time.now, :reasons => params[:schedule][:reasons])
 
     schedule.create_activity action: :rejected, owner: current_person
+
+    ScheduleRejectedMailer.notify(schedule).deliver
 
     redirect_to profile_path
   end

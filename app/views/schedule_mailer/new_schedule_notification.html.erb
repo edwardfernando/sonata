@@ -17,6 +17,10 @@ Anda menerima permintaan jadwal pelayanan untuk ibadah sebagai berikut:
         <td>Role</td>
         <td>: <%= @schedule.role.name %></td>
     </tr>
+    <tr>
+        <td>Dijadwalkan Oleh</td>
+        <td>: <%= @schedule.created_by.name%></td>
+    </tr>
 </table>
 
 <br/>

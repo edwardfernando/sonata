@@ -2,6 +2,7 @@
   json = JSON.parse(activity.parameters[:model_details])
   role_name = activity.parameters[:role_name]
   service_name = activity.parameters[:service_name]
+  reasons = activity.parameters[:reasons]
 %>
 
 <li>
@@ -25,6 +26,7 @@
               as
               <%= role_name %>
 
+              <blockquote class="blockquote-reverse"><small><em><%= json["reasons"] %></em></small></blockquote>
           </div>
       </div>
 

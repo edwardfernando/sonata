@@ -12,4 +12,5 @@ class Service < ActiveRecord::Base
     validates :name, presence: true
     validates :date, presence: true
 
+    belongs_to :created_by, :class_name => 'Person', :foreign_key => 'created_by'
 end
