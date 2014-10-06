@@ -42,4 +42,8 @@ class PersonPolicy
     @person.manager? || @person.admin?
   end
 
+  def update_level?
+    @person.admin?
+  end
+
 end
