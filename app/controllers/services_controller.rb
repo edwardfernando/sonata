@@ -88,11 +88,12 @@ class ServicesController < ApplicationController
 				person = Person.find(people_array[index])
 				role = Role.find(role)
 
-				schedule = Schedule.create(service:@service, role:role, person:person)
+				schedule = Schedule.create(service:@service, role:role, person:person, created_by:current_person)
 				ScheduleMailer.new_schedule_notification(schedule).deliver
 
 			end
 
+			@service.created_by = current_person
 			@service.save(service_param)
 			redirect_to services_path + "?date=" + @service.date.strftime("%F")
 		end
