@@ -79,6 +79,17 @@ class PeopleController < ApplicationController
   def show
     @person = Person.find(params[:id])
     authorize @person
+
+    respond_to do |format|
+      format.html{
+
+      }
+
+      format.json{
+        render json: @person
+      }
+    end
+
   end
 
   def destroy
@@ -91,6 +102,15 @@ class PeopleController < ApplicationController
 
   def find_by_role
     @skillsets = Role.find(params[:role]).skillsets
+  end
+
+  def update_level
+    @person = Person.find(params[:id])
+    authorize @person
+
+    @person.update(role: params[:role_id])
+
+    redirect_to people_path
   end
 
   private
