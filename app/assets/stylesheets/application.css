@@ -56,6 +56,10 @@ label.required:after {
     text-align: left;
  }
 
+.navbar-brand.logo-padding {
+   padding-top: 5px;
+ }
+
 /**
 * For Error Message
 */
