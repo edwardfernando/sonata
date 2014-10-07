@@ -1,31 +1,37 @@
 <h3>Service Details</h3>
 
-<% if person_signed_in? && (current_person.manager? || current_person.admin?) %>
-<div style="padding-top: 10px; padding-bottom: 20px;">
-  <a href="<%= edit_service_path(@service) %>" class="btn btn-default btn-xs">
-    <span class="glyphicon glyphicon-edit"></span> Edit
-  </a>
-</div>
-<% end %>
-
-<p>
-  <strong>Name:</strong>
-  <%= @service.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @service.description %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @service.date %>
-</p>
-
-
 <div class="row">
   <div class="col-md-8">
+
+    <% if person_signed_in? && (current_person.manager? || current_person.admin?) %>
+    <div style="padding-top: 10px; padding-bottom: 20px;">
+      <a href="<%= edit_service_path(@service) %>" class="btn btn-default btn-xs">
+        <span class="glyphicon glyphicon-edit"></span> Edit
+      </a>
+    </div>
+    <% end %>
+
+    <p>
+      <strong>Name:</strong>
+      <%= @service.name %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @service.description %>
+    </p>
+
+    <p>
+      <strong>Date:</strong>
+      <%= @service.date %>
+    </p>
+    <strong>Attachments & Resources:</strong>
+    <ul>
+      <% @service.attachments.each do |a| %>
+      <li><a href="<%= a.url %>"><%= a.name %></a></li>
+      <% end %>
+    </ul>
+
     <table class="table table-hover table-bordered" id="person-incharge-table">
       <thead>
         <tr>
@@ -113,11 +119,16 @@
     </table>
   </div>
   <div class="col-md-4">
-    <strong>Attachments & Resources:</strong>
-    <ul>
-      <% @service.attachments.each do |a| %>
-      <li><a href="<%= a.url %>"><%= a.name %></a></li>
-      <% end %>
-    </ul>
+
+    <% unless @activities.blank? %>
+      <ul class="timeline">
+          <% @activities.each do |activity| %>
+            <%= render_activity activity %>
+          <% end %>
+          <%# FOR ANOTHER SAMPLE PLEASE SEE : http://bootsnipp.com/snippets/featured/timeline-responsive %>
+      </ul>
+
+      <%= render :partial => "partials/paginator", :locals => {:paginated_object => @activities} %>
+    <% end %>
   </div>
 </div>
