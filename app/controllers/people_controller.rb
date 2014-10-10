@@ -115,7 +115,7 @@ class PeopleController < ApplicationController
 
   private
   def person_param
-    params.require(:person).permit(:name, :email, :phone_number_1, :phone_number_2, :birthday, :skillsets)
+    params.require(:person).permit(:name, :email, :phone_number_1, :phone_number_2, :birthday, :skillsets, :avatar_url, :avatar_url_cache)
   end
 
 end
