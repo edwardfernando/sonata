@@ -55,7 +55,7 @@ class SchedulesController < ApplicationController
     schedule = Schedule.find(params[:id])
     authorize schedule
 
-    schedule.update(:is_confirmed => false, :confirmed_at => Time.now, :reasons => params[:schedule][:reasons])
+    schedule.update(:is_confirmed => false, :confirmed_at => Time.now, :reasons => params[:schedule][:reasons], :is_rejected => true)
 
     schedule.create_activity action: :rejected, owner: current_person, recipient: schedule.service
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141006152231) do
+ActiveRecord::Schema.define(version: 20141008115608) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20141006152231) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "created_by"
+    t.integer  "is_rejected",  default: 0
   end
 
   add_index "schedules", ["person_id"], name: "index_schedules_on_person_id"
