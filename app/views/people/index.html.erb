@@ -15,7 +15,7 @@
               <div class="media">
 
                   <a class="thumbnail pull-left" href="#">
-                      <img class="media-object profilePicture-medium" src="<%= image_path(parse_avatar(p)) %>">
+                      <%= render "partials/avatar", person: p, width: 40, height: 40, css: "media-object profilePicture-medium" %>
                       <div align="center"><small><%= p.role %></small></div>
                   </a>
                   <div class="media-body">

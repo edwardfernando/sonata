@@ -5,13 +5,12 @@
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
-          <img src="<%= image_path(parse_avatar(current_person)) %>" alt="" class="center-block img-circle img-responsive profilePicture-normal">
-          <p></p>
+          <%= render "partials/avatar", person: current_person, width: 200, height: 200, css: "center-block img-circle img-responsive profilePicture-normal" %>
           <div>
           <% current_person.skillsets.each do |s| %>
           <span class="label label-primary"><%= s.role.name %></span>
           <% end %>
-        </div>
+          </div>
         </div>
       </div>
 

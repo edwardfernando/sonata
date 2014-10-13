@@ -49,6 +49,14 @@
         </div>
       </div>
 
+    <div class="form-group">
+      <div class="col-xs-4">
+        <%= p.label :avatar_url, "Avatar:" %>
+        <%= p.file_field :avatar_url %>
+        <%= p.hidden_field(:avatar_url_cache) %>
+      </div>
+    </div>
+
       <div class="form-group">
         <div class="col-xs-6">
           <%= p.label "Skillsets"%>
