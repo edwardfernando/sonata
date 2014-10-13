@@ -1,0 +1,21 @@
+---
+development:
+  cloud_name: sonatask-com
+  api_key: '539548349248859'
+  api_secret: i4PoA7zLcH8AzCkwhAlwKzVJfEE
+  enhance_image_tag: true
+  static_image_support: false
+
+production:
+  cloud_name: sonatask-com
+  api_key: '539548349248859'
+  api_secret: i4PoA7zLcH8AzCkwhAlwKzVJfEE
+  enhance_image_tag: true
+  static_image_support: true
+  
+test:
+  cloud_name: sonatask-com
+  api_key: '539548349248859'
+  api_secret: i4PoA7zLcH8AzCkwhAlwKzVJfEE
+  enhance_image_tag: true
+  static_image_support: false
