@@ -1,68 +1,81 @@
 <h3>Update Your Profile</h3>
 
+<%= form_for @person, :url => profile_update_path, :html => {:role => "form", :class => "form-horizontal"} do |p| %>
 <div class="container">
   <div class="row">
-    <%= form_for @person, :url => profile_update_path, :html => {:role => "form", :class => "form-horizontal"} do |p| %>
-      <% if @person.errors.any? %>
-        <div id="error_explanation">
-          <%= pluralize(@person.errors.count, "error") %> prohibited this post from being saved:
-          <ul>
-            <% @person.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+    <div class="col-md-8">
+        <% if @person.errors.any? %>
+          <div id="error_explanation">
+            <%= pluralize(@person.errors.count, "error") %> prohibited this post from being saved:
+            <ul>
+              <% @person.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-      <div class="form-group">
-        <div class="col-xs-4">
-          <%= p.label :name, :for => "peopleName" %>
-          <%= p.text_field :name, :class => "form-control", :id => "peopleName", :placeholder => "Enter Name" %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-xs-4">
-          <%= p.label :birthday, :for => "peopleBirthday" %>
-          <%= p.text_field :birthday, :class => "form-control datepicker-field", :id => "peopleBirthday", :placeholder => "Enter Birthday" %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-xs-4">
-          <%= p.label :phone_number_1, :for => "peoplePhoneNumber1" %>
-          <%= p.text_field :phone_number_1, :class => "form-control", :id => "peoplePhoneNumber1", :placeholder => "Enter Your Mobile Phone Number" %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-xs-4">
-          <%= p.label :phone_number_2, :for => "peoplePhoneNumber1" %>
-          <%= p.text_field :phone_number_2, :class => "form-control", :id => "peoplePhoneNumber1", :placeholder => "Enter Your Mobile Phone Number" %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-xs-4">
-          <%= p.label :email, :for => "peopleEmail" %>
-          <%= p.text_field :email, :class => "form-control", :id => "peopleEmail", :placeholder => "Enter Email"%>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-xs-6">
-          <%= p.label "Skillsets"%>
-          <div class="checkbox">
-            <% for role in Role.all %>
-              <label>
-                <%= check_box_tag "person[skillsets][]", role.id, @person.skillsets.map(&:role_id).include?(role.id) %> <%= role.name %>
-              </label>
-            <% end %>
+        <div class="form-group">
+          <div class="col-xs-4">
+            <%= p.label :name, :for => "peopleName" %>
+            <%= p.text_field :name, :class => "form-control", :id => "peopleName", :placeholder => "Enter Name" %>
           </div>
         </div>
-      </div>
 
-      <%= p.submit :class => "btn btn-default" %>
-    <% end %>
+        <div class="form-group">
+          <div class="col-xs-4">
+            <%= p.label :birthday, :for => "peopleBirthday" %>
+            <%= p.text_field :birthday, :class => "form-control datepicker-field", :id => "peopleBirthday", :placeholder => "Enter Birthday" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-4">
+            <%= p.label :phone_number_1, :for => "peoplePhoneNumber1" %>
+            <%= p.text_field :phone_number_1, :class => "form-control", :id => "peoplePhoneNumber1", :placeholder => "Enter Your Mobile Phone Number" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-4">
+            <%= p.label :phone_number_2, :for => "peoplePhoneNumber1" %>
+            <%= p.text_field :phone_number_2, :class => "form-control", :id => "peoplePhoneNumber1", :placeholder => "Enter Your Mobile Phone Number" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-4">
+            <%= p.label :email, :for => "peopleEmail" %>
+            <%= p.text_field :email, :class => "form-control", :id => "peopleEmail", :placeholder => "Enter Email"%>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-6">
+            <%= p.label "Skillsets"%>
+            <div class="checkbox">
+              <% for role in Role.all %>
+                <label>
+                  <%= check_box_tag "person[skillsets][]", role.id, @person.skillsets.map(&:role_id).include?(role.id) %> <%= role.name %>
+                </label>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <%= p.submit :class => "btn btn-default" %>
+
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <div class="col-xs-4">
+          <%= render "partials/avatar", person: @person, width: 200, height: 200, css: "center-block img-circle img-responsive profilePicture-normal" %>
+          <%= p.label :avatar_url, "Upload New:" %>
+          <%= p.file_field :avatar_url %>
+          <%= p.hidden_field(:avatar_url_cache) %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+<% end %>

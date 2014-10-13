@@ -46,7 +46,10 @@
         <% activity.trackable.schedules.each do |s| %>
           <tr>
               <td><%= s.role.name %></td>
-              <td><img src="<%= image_path(parse_avatar(s.person)) %>" class="img-circle profilePicture-small"> <%= s.person.name %></td>
+              <td>
+                <%= render "partials/avatar", person: s.person, width: 20, height: 20, css: "img-circle profilePicture-small" %>
+                <%= s.person.name %>
+              </td>
           </tr>
         <% end %>
         </tbody>

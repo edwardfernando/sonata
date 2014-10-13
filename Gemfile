@@ -74,5 +74,8 @@ gem 'capistrano-rvm', github: "capistrano/rvm"
 
 gem 'whenever', '~> 0.9.0'
 
+gem 'carrierwave'
+gem 'cloudinary'
+
 # Use debugger
 # gem 'debugger', group: [:development, :test]

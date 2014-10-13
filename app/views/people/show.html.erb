@@ -5,7 +5,7 @@
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
-          <img src="<%= image_path(parse_avatar(@person)) %>" alt="" class="center-block img-circle img-responsive profilePicture-normal">
+          <%= render "partials/avatar", person: @person, width: 200, height: 200, css: "center-block img-circle img-responsive profilePicture-normal" %>
           <p></p>
           <div>
           <% @person.skillsets.each do |s| %>

@@ -1,3 +1,5 @@
+require 'file_size_validator'
+
 class Person < ActiveRecord::Base
   has_many :skillsets, :dependent => :destroy
   has_many :roles, :through => :skiilsets
@@ -20,6 +22,13 @@ class Person < ActiveRecord::Base
 
   enum role: [:user, :manager, :admin]
   after_initialize :set_default_role, :if => :new_record?
+
+  mount_uploader :avatar_url, AvatarUploader
+  validates :avatar_url,
+    :presence => false,
+    :file_size => {
+      :maximum => 0.5.megabytes.to_i
+    }
 
   def set_default_role
     self.role ||= :user

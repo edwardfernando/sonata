@@ -15,7 +15,7 @@
     <div class="timeline-body">
       <div class="media">
           <a class=" pull-left" href="#">
-              <img src="<%= image_path(parse_avatar(activity.owner)) %>" class="img-circle profilePicture-medium"/>
+              <%= render "partials/avatar", person: activity.owner, width: 40, height: 40, css: "img-circle profilePicture-medium" %>
           </a>
           <div class="media-body">
               <strong><%= activity.owner.name %></strong> rejected

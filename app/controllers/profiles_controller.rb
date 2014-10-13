@@ -35,8 +35,14 @@ class ProfilesController < ApplicationController
   def schedule
   end
 
+  def change_avatar
+    @person = Person.find(current_person)
+    @person.update(params.permit(:avatar_url, :avatar_url_cache))
+    redirect_to profile_path
+  end
+
   private
   def person_param
-    params.require(:person).permit(:name, :email, :phone_number_1, :phone_number_2, :birthday, :skillsets)
+    params.require(:person).permit(:name, :email, :phone_number_1, :phone_number_2, :birthday, :skillsets, :avatar_url, :avatar_url_cache)
   end
 end

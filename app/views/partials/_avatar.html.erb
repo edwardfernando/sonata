@@ -1,0 +1,9 @@
+<% if person.avatar_url.blank? %>
+  <img src="<%= image_path("default_avatar.png") %>" width="<%=width%>" height="<%=height%>" class="<%=css%>"/>
+<% else %>
+  <% if person.provider.blank? %>
+  <%= cl_image_tag(person.avatar_url, :width => width, :height => height, :crop => :fill, :class => css) %>
+  <% else %>
+  <img src="<%= image_path(parse_avatar(person)) %>" width="<%=width%>" height="<%=height%>" class="<%=css%>"/>
+  <% end %>
+<% end %>
