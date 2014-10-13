@@ -7,6 +7,11 @@ development:
   TWITTER_CONSUMER_KEY: xxxxxxxxx
   TWITTER_CONSUMER_SECRET: xxxxxxxxx
   DEFAULT_MAILER_ADDRESS: xxx@xxx.com
+  cloud_name: xxxx
+  api_key: xxxx
+  api_secret: xxxx
+  enhance_image_tag: xxxx
+  static_image_support: xxxx
 
 production:
   MANDRIL_APP_USERNAME: xxxxxxxxx
@@ -17,3 +22,8 @@ production:
   TWITTER_CONSUMER_SECRET: xxxxxxxxx
   MYSQL_PASSWORD: xxxxxxxxx
   DEFAULT_MAILER_ADDRESS: xxx@xxx.com
+  cloud_name: xxxx
+  api_key: xxxx
+  api_secret: xxxx
+  enhance_image_tag: xxxx
+  static_image_support: xxxx

@@ -1,21 +1,21 @@
 ---
 development:
-  cloud_name: sonatask-com
-  api_key: '539548349248859'
-  api_secret: i4PoA7zLcH8AzCkwhAlwKzVJfEE
-  enhance_image_tag: true
-  static_image_support: false
+  cloud_name: <%= ENV["cloud_name"] %>
+  api_key: <%= ENV["api_key"] %>
+  api_secret: <%= ENV["api_secret"] %>
+  enhance_image_tag: <%= ENV["enhance_image_tag"] %>
+  static_image_support: <%= ENV["static_image_support"] %>
 
 production:
-  cloud_name: sonatask-com
-  api_key: '539548349248859'
-  api_secret: i4PoA7zLcH8AzCkwhAlwKzVJfEE
-  enhance_image_tag: true
-  static_image_support: true
-  
+  cloud_name: <%= ENV["cloud_name"] %>
+  api_key: <%= ENV["api_key"] %>
+  api_secret: <%= ENV["api_secret"] %>
+  enhance_image_tag: <%= ENV["enhance_image_tag"] %>
+  static_image_support: <%= ENV["static_image_support"] %>
+
 test:
-  cloud_name: sonatask-com
-  api_key: '539548349248859'
-  api_secret: i4PoA7zLcH8AzCkwhAlwKzVJfEE
-  enhance_image_tag: true
-  static_image_support: false
+  cloud_name: <%= ENV["cloud_name"] %>
+  api_key: <%= ENV["api_key"] %>
+  api_secret: <%= ENV["api_secret"] %>
+  enhance_image_tag: <%= ENV["enhance_image_tag"] %>
+  static_image_support: <%= ENV["static_image_support"] %>
