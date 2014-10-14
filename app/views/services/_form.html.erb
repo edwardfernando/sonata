@@ -11,7 +11,7 @@
       }
 
       <% @service.schedules.each do |s| %>
-      newPerson("<%= s.id %>", "<%= s.role.name %>", "<%= s.role.id %>", "<%= s.person.name %>", "<%= s.person.id %>", <%= s.is_confirmed? && !s.confirmed_at.nil? %>, "<%= service_schedule_path(@service, s) %>");
+      newPerson("<%= s.id %>", "<%= s.role.name %>", "<%= s.role.id %>", "<%= s.person.name %>", "<%= s.person.id %>", <%= s.is_confirmed? && !s.confirmed_at.nil? %>, <%= s.is_rejected? %>, "<%= service_schedule_path(@service, s) %>");
       <% end %>
 
       <% @service.attachments.each do |a| %>
@@ -70,7 +70,7 @@
       }
     }
 
-    function createPersonRow(scheduleID, role, roleID, person, personID, isConfirmed, path){
+    function createPersonRow(scheduleID, role, roleID, person, personID, isConfirmed, isRejected, path){
 
       scheduleID = (scheduleID == undefined) ? "" : scheduleID;
       role = (role == undefined) ? "" : role;
@@ -82,7 +82,7 @@
       path = (path == undefined) ? "" : path;
 
       personRowCount += 1;
-      var tr = "<tr id=person-row-"+ personRowCount +" class=\'content\'>"+
+      var tr = "<tr id=person-row-"+ personRowCount +" class=\'content "+ (isRejected ? "danger" : "") +"\'>"+
                 "<td>" +
 
                   <% if action_name.eql?("edit") %>
@@ -130,8 +130,8 @@
       pop("<%= popup_people_path %>?target="+ row +"&name=person&role=" + roleValue);
     }
 
-    function newPerson(scheduleID, role, roleID, person, personID, isConfirmed, path){
-      $('#person-incharge-table').append(createPersonRow(scheduleID, role, roleID, person, personID, isConfirmed, path));
+    function newPerson(scheduleID, role, roleID, person, personID, isConfirmed, isRejected, path){
+      $('#person-incharge-table').append(createPersonRow(scheduleID, role, roleID, person, personID, isConfirmed, isRejected, path));
     }
 
     function savePersonRow(row){

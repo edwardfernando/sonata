@@ -43,7 +43,7 @@
 
       <tbody>
       <% @service.schedules.each do |s| %>
-        <tr>
+        <tr class="<%= "danger" if s.is_rejected? %>">
             <td><%= s.role.name %></td>
             <td>
               <%= s.person.name %>
