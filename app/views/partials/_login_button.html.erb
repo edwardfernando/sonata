@@ -7,14 +7,15 @@
     </a>
 
     <ul class="dropdown-menu">
-      <li><a href="<%= new_person_session_path %>"><b class="fa fa-sign-in"> </b> Log In</a></li>  
+      <li><a href="<%= new_person_session_path %>"><b class="fa fa-sign-in"> </b> Log In</a></li>
       <li role="presentation" class="divider"></li>
+      <!--
       <li><a href="<%= person_omniauth_authorize_path('facebook') %>"><b class="fa fa-facebook-square"> </b> Log in with Facebook</a></li>
       <li><a href="<%= person_omniauth_authorize_path('twitter') %>"><b class="fa fa-twitter-square"> </b> Log in with Twitter</a></li>
       <li role="presentation" class="divider"></li>
+      -->
       <li><a href="<%= new_person_registration_path %>"><b class="fa fa-users"> </b> Sign Up</a></li>
     </ul>
 
   <% end %>
 </li>
-
