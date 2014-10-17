@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
-  $(".person_level_text").click ->
+  $(document).on "click", ".person_level_text", ->
     $("#available-access-level-dialog").modal show: true
     person_id = $(this).attr("person-id")
     $("#available-access-level-dialog-confirm").attr("href", $(this).attr("href")).attr "data-method", "post"
