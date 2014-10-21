@@ -11,7 +11,7 @@
       }
 
       <% @service.schedules.each do |s| %>
-      newPerson("<%= s.id %>", "<%= s.role.name %>", "<%= s.role.id %>", "<%= s.person.name %>", "<%= s.person.id %>", <%= s.is_confirmed? && !s.confirmed_at.nil? %>, <%= s.is_rejected? %>, "<%= service_schedule_path(@service, s) %>");
+      newPerson("<%= s.id %>", "<%= s.role.name %>", "<%= s.role.id %>", "<%= s.person.name %>", "<%= s.person.id %>", "<%= s.status %>", "<%= service_schedule_path(@service, s) %>");
       <% end %>
 
       <% @service.attachments.each do |a| %>
@@ -70,16 +70,18 @@
       }
     }
 
-    function createPersonRow(scheduleID, role, roleID, person, personID, isConfirmed, isRejected, path){
+    function createPersonRow(scheduleID, role, roleID, person, personID, status, path){
 
+      status = (status == undefined) ? "" : status;
       scheduleID = (scheduleID == undefined) ? "" : scheduleID;
       role = (role == undefined) ? "" : role;
       roleID = (roleID == undefined) ? "" : roleID;
       person = (person == undefined) ? "" : person;
       personID = (personID == undefined) ? "" : personID;
-      disabled_class = (isConfirmed == undefined) ? "" : isConfirmed ? "disabled" : "";
-      isConfirmed = (isConfirmed == undefined) ? "false" : isConfirmed ? "true" : "false";
+      disabled_class = (status == "confirmed") ? "disabled" : "";
+      isConfirmed = (status == "confirmed");
       path = (path == undefined) ? "" : path;
+      isRejected = (status == "rejected");
 
       personRowCount += 1;
       var tr = "<tr id=person-row-"+ personRowCount +" class=\'content "+ (isRejected ? "danger" : "") +"\'>"+
@@ -110,7 +112,8 @@
       <% end %>
 
       tr += "<a id=delete-button-"+ personRowCount +" href=javascript: onclick=deletePersonRow("+ personRowCount +") class=\"btn btn-default btn-xs "+ disabled_class +" \"><span class=\"glyphicon glyphicon-remove-circle\"></span> Delete Row</a>";
-      tr += "</td></tr>";
+      tr += "</td>";
+      tr += "<td>" + status + "</td></tr>";
 
       return tr;
     }
@@ -130,8 +133,8 @@
       pop("<%= popup_people_path %>?target="+ row +"&name=person&role=" + roleValue);
     }
 
-    function newPerson(scheduleID, role, roleID, person, personID, isConfirmed, isRejected, path){
-      $('#person-incharge-table').append(createPersonRow(scheduleID, role, roleID, person, personID, isConfirmed, isRejected, path));
+    function newPerson(scheduleID, role, roleID, person, personID, status, path){
+      $('#person-incharge-table').append(createPersonRow(scheduleID, role, roleID, person, personID, status, path));
     }
 
     function savePersonRow(row){
@@ -310,6 +313,7 @@
                       <th colspan=2>Role</th>
                       <th colspan=2>Person</th>
                       <th>#</th>
+                      <th>Status</th>
                   </tr>
                 </thead>
 
