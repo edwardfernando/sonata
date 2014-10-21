@@ -122,7 +122,7 @@
 
       tr += "<a id=delete-button-"+ personRowCount +" href=javascript: onclick=deletePersonRow("+ personRowCount +") class=\"btn btn-default btn-xs "+ disabled_class +" \"><span class=\"glyphicon glyphicon-remove-circle\"></span> Delete Row</a>";
       tr += "</td>";
-      tr += "<td><i id=schedule-status-"+ personRowCount +" class=\""+ status_css_class +"\"></i> "+ status +"</td></tr>";
+      tr += "<td><i id=schedule-status-indicator-"+ personRowCount +" class=\""+ status_css_class +"\"></i> <span id=schedule-status-"+ personRowCount  +">"+ status +"</span></td></tr>";
 
       return tr;
     }
@@ -161,9 +161,11 @@
         type: "POST",
         dataType: "json",
         data: {"_method":"post", "role_id" : role_id, "person_id" : person_id},
-        success:function(result){
+        success: function(result){
           $("#schedule-id-" + row).val(result.schedule.id);
           $("#schedule-url-path-" + row).val(result.url);
+          $("#schedule-status-indicator-" + row).attr("class", "fa fa-circle-o-notch fa-spin");
+          $("#schedule-status-" + row).html("waiting");
           $("#save-button-" + row).remove();
         },
         error: function(xhr){
@@ -216,6 +218,13 @@
 <div class="container">
   <%= form_for @service, :html => {:role => "form", :class => "form-horizontal"} do |s| %>
     <div class="row">
+        <% if action_name.eql?("edit") && (current_person.manager? || current_person.admin?) %>
+        <div style="padding-top: 10px; padding-bottom: 20px;">
+          <a href="<%= service_path(@service) %>" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+        </div>
+        <% end %>
+
+
         <% if @service.errors.any? %>
           <div id="error_explanation">
             <%= pluralize(@service.errors.count, "error") %> prohibited this post from being saved:
