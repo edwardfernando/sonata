@@ -31,7 +31,7 @@
             <% if get_unconfirmed_schedules > 0 %>
             <ul class="dropdown-menu">
             <% current_person.schedules.each do |schedule|
-                if schedule.confirmed_at.nil? %>
+                if schedule.waiting? %>
 
               <li><a href="<%= service_path(schedule.service) %>"> <%= schedule.service.name %></a></li>
 

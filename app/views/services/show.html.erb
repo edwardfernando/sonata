@@ -43,26 +43,26 @@
 
       <tbody>
       <% @service.schedules.each do |s| %>
-        <tr class="<%= "danger" if s.is_rejected? %>">
+        <tr class="<%= "danger" if s.rejected? %>">
             <td><%= s.role.name %></td>
             <td>
               <%= s.person.name %>
             </td>
             <td>
 
-          <% if s.is_confirmed? %>
-            Confirmed at <%= s.confirmed_at %>
-          <% elsif s.person == current_person && s.confirmed_at.blank? %>
+          <% if s.confirmed? %>
+            <i class="fa fa-check-square-o"></i> Confirmed
+          <% elsif s.person == current_person && s.waiting? %>
             <a href="javascript:" class="btn btn-default btn-xs" data-toggle="modal" data-target="#confirm-schedule-modal-<%= s.id %>">
               Confirm / Reject?
             </a>
-          <% elsif !s.confirmed_at.blank? && !s.is_confirmed? %>
-              Rejected
+          <% elsif s.rejected? %>
+              <i class="fa fa-minus-square"></i> Rejected
           <% else %>
-              Waiting
+              <i class="fa fa-circle-o-notch fa-spin"></i> Waiting
           <% end %>
 
-            <% if s.person == current_person && s.confirmed_at.blank? %>
+            <% if s.person == current_person && s.waiting? %>
 
               <div class="modal fade" id="confirm-schedule-modal-<%= s.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">

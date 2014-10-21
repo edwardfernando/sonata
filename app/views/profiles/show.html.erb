@@ -91,14 +91,14 @@
       </td>
 
       <td>
-        <% if schedule.is_confirmed? %>
-          Confirmed at <%= schedule.confirmed_at %>
-        <% elsif schedule.confirmed_at.blank? %>
+        <% if schedule.confirmed? %>
+          Confirmed at <%= schedule.status_date %>
+        <% elsif schedule.waiting? %>
           <a href="javascript:" class="btn btn-default btn-xs" data-toggle="modal" data-target="#confirm-schedule-modal-<%= schedule.id %>">
             Confirm / Reject?
           </a>
         <% else %>
-            Rejected at <%= schedule.confirmed_at %>
+            Rejected at <%= schedule.status_date %>
         <% end %>
 
         <div class="modal fade" id="confirm-schedule-modal-<%= schedule.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

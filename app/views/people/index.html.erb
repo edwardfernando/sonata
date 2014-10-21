@@ -48,7 +48,13 @@
                               </a>
                               <!-- <span class="glyphicon glyphicon-ban-circle"></span> Reject -->
                             <% else %>
-                              <a href="<%= approve_person_path(p) %>" class="btn btn-xs btn-default">
+                              <a href="<%= p.confirmed_at.blank? ? "javascript:" : approve_person_path(p) %>" class="btn btn-xs btn-default"
+
+                                <% if p.confirmed_at.blank? %>
+                                rel="tooltip" title="Granting access prohibited (Unconfirmed Account)"
+                                <% end %>
+                                >
+
                                 <span class="glyphicon glyphicon-ok-circle"></span> Grant
                               </a>
                             <% end %>
