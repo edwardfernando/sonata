@@ -51,15 +51,15 @@
             <td>
 
           <% if s.confirmed? %>
-            Confirmed at <%= s.status_date %>
+            <i class="fa fa-check-square-o"></i> Confirmed
           <% elsif s.person == current_person && s.waiting? %>
             <a href="javascript:" class="btn btn-default btn-xs" data-toggle="modal" data-target="#confirm-schedule-modal-<%= s.id %>">
               Confirm / Reject?
             </a>
           <% elsif s.rejected? %>
-              Rejected
+              <i class="fa fa-minus-square"></i> Rejected
           <% else %>
-              Waiting
+              <i class="fa fa-circle-o-notch fa-spin"></i> Waiting
           <% end %>
 
             <% if s.person == current_person && s.waiting? %>

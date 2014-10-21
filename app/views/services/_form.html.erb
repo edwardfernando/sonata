@@ -83,6 +83,15 @@
       path = (path == undefined) ? "" : path;
       isRejected = (status == "rejected");
 
+      status_css_class = "";
+      if(status == "confirmed"){
+        status_css_class = "fa fa-check-square-o";
+      }else if(status == "rejected"){
+        status_css_class = "fa fa-minus-square";
+      }else if(status == "waiting"){
+        status_css_class = "fa fa-circle-o-notch fa-spin"
+      }
+
       personRowCount += 1;
       var tr = "<tr id=person-row-"+ personRowCount +" class=\'content "+ (isRejected ? "danger" : "") +"\'>"+
                 "<td>" +
@@ -113,7 +122,7 @@
 
       tr += "<a id=delete-button-"+ personRowCount +" href=javascript: onclick=deletePersonRow("+ personRowCount +") class=\"btn btn-default btn-xs "+ disabled_class +" \"><span class=\"glyphicon glyphicon-remove-circle\"></span> Delete Row</a>";
       tr += "</td>";
-      tr += "<td>" + status + "</td></tr>";
+      tr += "<td><i id=schedule-status-"+ personRowCount +" class=\""+ status_css_class +"\"></i> "+ status +"</td></tr>";
 
       return tr;
     }
