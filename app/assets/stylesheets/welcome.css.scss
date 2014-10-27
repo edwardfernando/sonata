@@ -1,3 +1,81 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+/* http://css-tricks.com/perfect-full-page-background-image/ */
+.landing-body {
+  // background: url(image-path("1.jpg")) no-repeat center center fixed;
+  // -webkit-background-size: cover;
+  // -moz-background-size: cover;
+  // -o-background-size: cover;
+  // background-size: cover;
+  // padding-top: 20px;
+  // font-size: 16px;
+  // font-family: "Open Sans",serif;
+
+
+
+  // background: url(http://www.digitalartsonline.co.uk/cmsdata/features/3218891/MapPatternFinal.jpg);
+	// background-color: #444;
+  //   background: url(http://mymaplist.com/img/parallax/pinlayer2.png),url(http://mymaplist.com/img/parallax/pinlayer1.png),url(http://www.digitalartsonline.co.uk/cmsdata/features/3218891/MapPatternFinal.jpg);
+
+   background-color: #444;
+  //  background: url(http://bglabs.evade.netdna-cdn.com/wp-content/uploads/2013/03/colored-pencil-pattern.png);
+  // background: url(http://media-cache-ak0.pinimg.com/30x30/5d/6e/95/5d6e9573a81d0d8b5c83c0398055020c.jpg);
+  // background: url(http://assets.mochithings.com/products/large_pattern_folding_planner/photos/31212/small_large_pattern_folding_planner.png);
+
+  background: url(image-path("stripes.jpeg"));
+}
+
+
+.box-panel {
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 3px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  top: 150px;
+  left: 0;
+  position: fixed;
+  margin-left: 20px;
+  margin-right: 20px;
+  right: 0;
+  z-index: 2;
+  padding: 20px 10px 0px 0px;
+}
+
+.form-signin input[type="email"] {
+        margin-bottom: 5px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .form-signin .form-control {
+        position: relative;
+        font-size: 16px;
+        font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+        height: auto;
+        padding: 10px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    .vertical-offset-100 {
+        padding-top: 100px;
+    }
+    .img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+    }
+    .panel {
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.75);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    }
