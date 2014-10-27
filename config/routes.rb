@@ -1,6 +1,7 @@
 Sonata::Application.routes.draw do
   root "welcome#index"
 
+  match 'activities', to: "welcome#activities", via: [:get]
   match 'denied', to: 'denied#index', via: [:get]
 
   resources :services do
