@@ -3,7 +3,7 @@ namespace :reminder do
   task schedule: :environment do
     puts "### #{Time.now} : Executing upcoming schedule reminder\n"
 
-    Schedule.joins(:service).where("status = ? and services.date < ?", 1, Date.today + 3).each do |s|
+    Schedule.joins(:service).where("status = ? and services.date between ? and ?", 1, Date.today, Date.today + 3).each do |s|
       puts "  --- Send notification to #{s.person.email} / Schedule ID : #{s.id}\n"
       UpcomingScheduleMailer.notify(s).deliver
     end
