@@ -27,7 +27,7 @@ class ServicesController < ApplicationController
 					end_date = Time.at(params[:end].to_i).to_date
 
 					@services = Service.where(:date => start_date..end_date)
-					authorize @service
+					authorize @services
 			}
 		end
 
