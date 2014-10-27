@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="page-header">
+        <h3>Public Activity</h3>
+    </div>
+    <ul class="timeline">
+        <% @activities.each do |activity| %>
+          <%= render_activity activity %>
+        <% end %>
+        <%# FOR ANOTHER SAMPLE PLEASE SEE : http://bootsnipp.com/snippets/featured/timeline-responsive %>
+    </ul>
+    <%= render :partial => "partials/paginator", :locals => {:paginated_object => @activities} %>
+</div>
