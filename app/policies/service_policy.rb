@@ -11,6 +11,10 @@ class ServicePolicy
     @person.user? || @person.manager? || @person.admin?
   end
 
+  def show?
+    @person.manager? || @person.admin?
+  end
+
   def new?
     @person.manager? || @person.admin?
   end

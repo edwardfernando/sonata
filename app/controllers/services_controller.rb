@@ -37,6 +37,8 @@ class ServicesController < ApplicationController
 		@service = Service.find(params[:id])
 		@activities = PublicActivity::Activity.page(params[:page]).per(10).where(trackable_type: "Schedule", recipient_type: "Service", recipient_id: params[:id]).order("created_at desc")
 
+		authorize @service
+
 		respond_to do |format|
 			format.js{
 
