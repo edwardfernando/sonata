@@ -2,8 +2,8 @@ require 'date'
 
 class ServicesController < ApplicationController
 
-	before_filter :authenticate_person!, except: [:index, :show]
-	after_action :verify_authorized, except: [:index, :show]
+	before_filter :authenticate_person!
+	after_action :verify_authorized
 
 	def index
 		date = params[:date]
