@@ -6,6 +6,11 @@ class ServicePolicy
     @record = record
   end
 
+  def index?
+    puts "service_policy_index"
+    @person.user? || @person.manager? || @person.admin?
+  end
+
   def new?
     @person.manager? || @person.admin?
   end

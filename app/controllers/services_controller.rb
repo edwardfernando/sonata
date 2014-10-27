@@ -19,6 +19,7 @@ class ServicesController < ApplicationController
 				# else
 				# 	@services = Service.where(:date => date)
 				# end
+				authorize current_person
 			}
 
 			format.json {
@@ -26,6 +27,7 @@ class ServicesController < ApplicationController
 					end_date = Time.at(params[:end].to_i).to_date
 
 					@services = Service.where(:date => start_date..end_date)
+					authorize @service
 			}
 		end
 

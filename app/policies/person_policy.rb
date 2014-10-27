@@ -7,7 +7,7 @@ class PersonPolicy
   end
 
   def index?
-    @person.manager? || @person.admin?
+    @person.user? || @person.manager? || @person.admin?
   end
 
   def approve?
