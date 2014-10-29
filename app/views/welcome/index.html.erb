@@ -38,12 +38,10 @@
 
 															<%= f.submit "Log in »", :class => "btn btn-lg btn-success btn-block", :id => "login" %>
 															<br>
-															<p class="text-center">
-																<small>
+															<p class="text-center small">
 																	<a href="<%= new_person_registration_path %>">Register to join</a> | <a href="<%= new_person_password_path %>">Forgot your password?</a>
 																	<br/>
-																<a href="<%= new_person_confirmation_path %>">Didn't receive confirmation instructions?</a>
-																</small>
+																	<a href="<%= new_person_confirmation_path %>">Didn't receive confirmation instructions?</a>
 															</p>
                           </fieldset>
 											<% end %>
@@ -53,5 +51,10 @@
       </div>
   </div>
 
+
+	<p id="footer" class="text-center text-muted small" style="color: #000000">
+			<span style="color: #ddddcc">Created with <i class="fa fa-heart"></i> by : @edwardfernando</span><br/>
+			Questions and suggestions : <i class="fa fa-envelope-o"></i> edward.fer@gmail.com
+	</p>
 </body>
 </html>
