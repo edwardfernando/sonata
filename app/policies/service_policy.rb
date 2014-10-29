@@ -7,12 +7,11 @@ class ServicePolicy
   end
 
   def index?
-    puts "service_policy_index"
     @person.user? || @person.manager? || @person.admin?
   end
 
   def show?
-    @person.manager? || @person.admin?
+    @person.user? || @person.manager? || @person.admin?
   end
 
   def new?
