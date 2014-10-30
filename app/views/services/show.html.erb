@@ -25,6 +25,12 @@
       <strong>Date:</strong>
       <%= @service.date %>
     </p>
+
+    <p>
+      <strong>Managed By:</strong>
+      <%= @service.created_by.name %>
+    </p>
+
     <strong>Attachments & Resources:</strong>
     <ul>
       <% @service.attachments.each do |a| %>

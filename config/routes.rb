@@ -36,7 +36,7 @@ Sonata::Application.routes.draw do
 
   # devise_for :people, path: "registration", :controllers => { :omniauth_callbacks => "omniauth_callbacks"}
 
-  devise_for :people, path: "", :controllers => { :omniauth_callbacks => "omniauth_callbacks"},
+  devise_for :people, path: "", :controllers => { :omniauth_callbacks => "omniauth_callbacks", :registrations => "registrations" },
     path_names: {
       sign_in: 'login',
       sign_out: 'logout',
