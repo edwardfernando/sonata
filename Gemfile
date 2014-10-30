@@ -29,7 +29,7 @@ gem "font-awesome-rails"
 gem 'bootstrap-sass', '~> 3.1.1'
 
 # Use Bootstrap Date Picker
-gem 'bootstrap-datepicker-rails'
+# gem 'bootstrap-datepicker-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

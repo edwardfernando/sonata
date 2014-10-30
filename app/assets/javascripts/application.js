@@ -16,8 +16,6 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap
-//= require bootstrap-datepicker/core
-//= require bootstrap-datepicker/locales/bootstrap-datepicker.id.js
 //= require fullcalendar
 
 
@@ -179,15 +177,36 @@ var ready = function(){
   });
 
   $(function() {
-    $( ".datepicker-field" ).datepicker({
-      language: "id",
-      format: "yyyy-mm-dd",
-      todayBtn: "linked",
-      orientation: "top auto",
-      calendarWeeks: true,
-      autoclose: true,
-      todayHighlight: true
+    $('.datepicker-field').datetimepicker({
+      weekStart: 1,
+      todayBtn:  1,
+      autoclose: 1,
+      todayHighlight: 1,
+      startView: 2,
+      forceParse: 0,
+      showMeridian: 0
     });
+
+    $('.datepicker-field-no-time').datetimepicker({
+      format: "yyyy-mm-dd",
+      weekStart: 1,
+      todayBtn:  1,
+      autoclose: 1,
+      todayHighlight: 1,
+      startView: 2,
+      minView: 2,
+      forceParse: 0
+    });
+
+    // $( ".datepicker-field" ).datepicker({
+    //   language: "id",
+    //   format: "yyyy-mm-dd",
+    //   todayBtn: "linked",
+    //   orientation: "top auto",
+    //   calendarWeeks: true,
+    //   autoclose: true,
+    //   todayHighlight: true
+    // });
   });
 
 };
