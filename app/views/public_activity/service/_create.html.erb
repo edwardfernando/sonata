@@ -21,7 +21,8 @@
           <%= json["name"] %> / <%= json["date"] %>
         <% else %>
           <a href="<%= service_path(activity.trackable) %>">
-            <%= activity.trackable.name %> / <%= activity.trackable.date %>
+            <%= activity.trackable.name %>
+            <span class="small"><%= activity.trackable.date.strftime("%d/%m/%Y - %H:%M") %></span>
           </a>
         <% end %>
 
