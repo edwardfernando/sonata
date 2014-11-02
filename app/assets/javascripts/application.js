@@ -189,7 +189,7 @@ var ready = function(){
     //   todayHighlight: true
     // });
 
-      $('.datepicker-field').first().datetimepicker({
+    $('.datepicker-field').first().datetimepicker({
         weekStart: 1,
         todayBtn:  1,
     		autoclose: 1,
@@ -197,6 +197,18 @@ var ready = function(){
     		startView: 2,
     		forceParse: 0,
         showMeridian: 0
+    });
+
+    $('.datepicker-field-no-time').first().datetimepicker({
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 0,
+        minView: 2,
+        format: "yyyy-mm-dd"
     });
 
   });
