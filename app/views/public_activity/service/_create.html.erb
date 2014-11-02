@@ -22,7 +22,7 @@
         <% else %>
           <a href="<%= service_path(activity.trackable) %>">
             <%= activity.trackable.name %>
-            <span class="small"><%= activity.trackable.date.strftime("%d/%m/%Y - %H:%M") %></span>
+            <span class="small">&bull; <%= format_date(activity.trackable.date) %></span>
           </a>
         <% end %>
 

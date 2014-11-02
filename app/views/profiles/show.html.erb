@@ -55,7 +55,7 @@
             <label class="col-lg-3 control-label"><span class="glyphicon glyphicon-registration-mark"></span> Register Date</label>
             <div class="col-lg-8">
               <label class="control-label">
-                <%= current_person.created_at.strftime("%d/%m/%Y - %H:%M") %>
+                <%= format_date(current_person.created_at) %>
               </label>
             </div>
           </div>
@@ -94,7 +94,7 @@
   <tbody>
     <% current_person.schedules.each do |schedule| %>
     <tr>
-      <td><%= schedule.service.date.strftime("%d/%m/%Y - %H:%M") %></td>
+      <td><%= format_date(schedule.service.date) %></td>
       <td><%= schedule.role.name.capitalize %></td>
       <td>
         <%= link_to schedule.service.name.capitalize, service_path(schedule.service) %>

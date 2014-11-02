@@ -7,7 +7,10 @@
 
       // Set service date to 'today' day for 'add' page
       if($('#serviceDate').val() == ''){
-        $('#serviceDate').val($.datepicker.formatDate('yy-mm-dd', getValidDateParam()));
+
+        // $('#serviceDate').val($.datepicker.formatDate('yy-mm-dd', getValidDateParam()));
+        $('#serviceDate').val(moment(getValidDateParam()).format('YYYY-MM-DD HH:mm'));
+
       }
 
       <% @service.schedules.each do |s| %>

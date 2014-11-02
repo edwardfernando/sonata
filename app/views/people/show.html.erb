@@ -55,7 +55,7 @@
             <label class="col-lg-3 control-label"><span class="glyphicon glyphicon-registration-mark"></span> Register Date</label>
             <div class="col-lg-8">
               <label class="control-label">
-                <%= @person.created_at.strftime("%d/%m/%Y - %H:%M") %>
+                <%= format_date(@person.created_at) %>
               </label>
             </div>
           </div>
