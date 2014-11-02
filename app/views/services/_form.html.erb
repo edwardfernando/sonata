@@ -261,7 +261,8 @@
                 <div class="form-group">
                   <div class="col-xs-4">
                     <%= s.label :date, :for => "serviceDate" %>
-                    <%= s.text_field :date, :class => "form-control datepicker-field", :id => "serviceDate"%>
+                    <%= s.text_field :date, :value => s.object.date, :class => "form-control datepicker-field", :id => "serviceDate"%>
+                    <!-- <input type="text" value="<%= @service.date %>" id="datetimepicker" class="datepicker-field"> -->
                   </div>
                 </div>
                 <%= s.submit :class => "btn btn-default" %>
