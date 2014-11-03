@@ -102,13 +102,13 @@
 
       <td>
         <% if schedule.confirmed? %>
-          Confirmed at <%= schedule.status_date %>
+          Confirmed at <%= format_date(schedule.status_date) %>
         <% elsif schedule.waiting? %>
           <a href="javascript:" class="btn btn-default btn-xs" data-toggle="modal" data-target="#confirm-schedule-modal-<%= schedule.id %>">
             Confirm / Reject?
           </a>
         <% else %>
-            Rejected at <%= schedule.status_date %>
+            Rejected at <%= format_date(schedule.status_date) %>
         <% end %>
 
         <div class="modal fade" id="confirm-schedule-modal-<%= schedule.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -122,7 +122,7 @@
                 <p><strong>Service Name:</strong> <%= schedule.service.name %></p>
                 <p><strong>Role:</strong> <%= schedule.role.name.capitalize %></p>
                 <p><strong>Description:</strong> <%= schedule.service.description %></p>
-                <p><strong>Date:</strong> <%= schedule.service.date %></p>
+                <p><strong>Date:</strong> <%= format_date(schedule.service.date) %></p>
               </div>
 
               <div class="modal-footer">
