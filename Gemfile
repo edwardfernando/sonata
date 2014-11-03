@@ -77,5 +77,7 @@ gem 'whenever', '~> 0.9.0'
 gem 'carrierwave'
 gem 'cloudinary'
 
+gem 'momentjs-rails'
+
 # Use debugger
 # gem 'debugger', group: [:development, :test]

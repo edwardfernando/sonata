@@ -19,6 +19,7 @@
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.id.js
 //= require fullcalendar
+//= require moment
 
 
 function pop(url) {
@@ -114,7 +115,7 @@ var ready = function(){
 
             $("#detail-service-modal-dialog-edit-link").attr("href", "/services/" + json.id + "/edit");
             $("#detail-service-modal-dialog-view-link").attr("href", "/services/" + json.id);
-            $("#detail-service-modal-dialog-title").html(json.name + " / " + json.date);
+            $("#detail-service-modal-dialog-title").html(json.name + " &bull; " + moment(json.date).format('dddd, DD/MM/YYYY - HH:mm'));
             $("#detail-service-modal-dialog-body").html(json.description);
 
       	    $('#detail-service-modal-dialog').modal({show:true});
@@ -179,15 +180,38 @@ var ready = function(){
   });
 
   $(function() {
-    $( ".datepicker-field" ).datepicker({
-      language: "id",
-      format: "yyyy-mm-dd",
-      todayBtn: "linked",
-      orientation: "top auto",
-      calendarWeeks: true,
-      autoclose: true,
-      todayHighlight: true
+    // $( ".datepicker-field" ).datepicker({
+    //   language: "id",
+    //   format: "yyyy-mm-dd",
+    //   todayBtn: "linked",
+    //   orientation: "top auto",
+    //   calendarWeeks: true,
+    //   autoclose: true,
+    //   todayHighlight: true
+    // });
+
+    $('.datepicker-field').first().datetimepicker({
+        weekStart: 1,
+        todayBtn:  1,
+    		autoclose: 1,
+    		todayHighlight: 1,
+    		startView: 2,
+    		forceParse: 0,
+        showMeridian: 0
     });
+
+    $('.datepicker-field-no-time').first().datetimepicker({
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 0,
+        minView: 2,
+        format: "yyyy-mm-dd"
+    });
+
   });
 
 };

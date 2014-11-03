@@ -46,7 +46,16 @@
             <label class="col-lg-3 control-label"><span class="glyphicon glyphicon-registration-mark"></span> Account Type</label>
             <div class="col-lg-8">
               <label class="control-label">
-                <%= @person.provider.blank? ? "Email" : @person.provider.capitalize %> / <%= @person.created_at %>
+                <%= @person.provider.blank? ? "Email" : @person.provider.capitalize %>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label"><span class="glyphicon glyphicon-registration-mark"></span> Register Date</label>
+            <div class="col-lg-8">
+              <label class="control-label">
+                <%= format_date(@person.created_at) %>
               </label>
             </div>
           </div>

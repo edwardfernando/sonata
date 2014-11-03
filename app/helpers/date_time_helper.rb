@@ -6,4 +6,8 @@ module DateTimeHelper
   def get_valid_date time
     time.blank? ? DateTime.now.strftime("%F") : time
   end
+
+  def format_date date
+    date.strftime("%A, %d/%m/%Y - %H:%M")
+  end
 end
