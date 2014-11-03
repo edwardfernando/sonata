@@ -11,7 +11,7 @@ Email ini adalah pengingat bahwa Anda memiliki jadwal pelayanan sebagai berikut:
     </tr>
     <tr>
         <td>Tanggal</td>
-        <td>: <%= @schedule.service.date %></td>
+        <td>: <%= format_date(@schedule.service.date) %></td>
     </tr>
     <tr>
         <td>Role</td>
