@@ -5,7 +5,10 @@ Sonata::Application.routes.draw do
   match 'denied', to: 'denied#index', via: [:get]
 
   resources :services do
-    resources :schedules
+    resources :schedules do
+      get 'confirm', :action => 'confirm_from_email'
+      get 'reject', :action => 'reject_from_email'
+    end
     resources :attachments
   end
 
