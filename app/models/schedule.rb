@@ -22,6 +22,7 @@ class Schedule < ActiveRecord::Base
   def set_default_status
     self.status ||= :waiting
     self.status_date ||= Time.now
+    self.random_id ||= SecureRandom.urlsafe_base64(50)
   end
 
 end
