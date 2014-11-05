@@ -1,41 +1,61 @@
-<h3>Halo, <%= @schedule.person.name %>!</h3>
+<html>
 
-Anda menerima permintaan jadwal pelayanan untuk ibadah sebagai berikut:
+  <head>
+  </head>
 
-<br/><br/>
+  <body>
+    <h3>Halo, <%= @schedule.person.name %>!</h3>
 
-<table class="table table-hover table-bordered">
-    <tr>
-        <td width="35%">Ibadah</td>
-        <td>: <a href="<%= service_url(@schedule.service) %>"><%= @schedule.service.name %></a></td>
-    </tr>
-    <tr>
-        <td>Tanggal</td>
-        <td>: <%= format_date(@schedule.service.date) %></td>
-    </tr>
-    <tr>
-        <td>Role</td>
-        <td>: <%= @schedule.role.name %></td>
-    </tr>
-    <tr>
-        <td>Dijadwalkan Oleh</td>
-        <td>: <%= @schedule.created_by.name%></td>
-    </tr>
-</table>
+    Anda menerima permintaan jadwal pelayanan untuk ibadah sebagai berikut:
 
-<br/>
+    <br/><br/>
 
-<a href="<%= service_url(@schedule.service) %>">Lihat detil jadwal</a>
+    <table class="table table-hover table-bordered">
+        <tr>
+            <td width="35%">Ibadah</td>
+            <td>: <a href="<%= service_url(@schedule.service) %>"><%= @schedule.service.name %></a></td>
+        </tr>
+        <tr>
+            <td>Tanggal</td>
+            <td>: <%= @schedule.service.date.strftime("%A, %d/%m/%Y - %H:%M") %></td>
+        </tr>
+        <tr>
+            <td>Role</td>
+            <td>: <%= @schedule.role.name %></td>
+        </tr>
+        <tr>
+            <td>Dijadwalkan Oleh</td>
+            <td>: <%= @schedule.created_by.name%></td>
+        </tr>
+    </table>
 
-<br/>
+    <br/>
 
-<p>Untuk menyetujui / menolak jadwal ini silahkan login dengan akun
-  <% if @schedule.person.provider.blank? %>
-    email (<%= @schedule.person.email %>)
-  <% else %>
-    <%= @schedule.person.provider %>
-  <% end %>
+    <table border="0">
+        <tr>
+            <td><a style="display: block; width: 115px; height: 25px; background: #4E9CAF; padding-top: 6px; text-align: center; border-radius: 5px; color: white; font-weight: bold;" href="<%= confirm_from_email_url(@schedule.random_id) %>">Confirm</a></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td><a style="display: block; width: 115px; height: 25px; background: #4E9CAF; padding-top: 6px; text-align: center; border-radius: 5px; color: white; font-weight: bold;" href="<%= reject_from_email_url(@schedule.random_id) %>">Reject</a></td>
+        </tr>
+    </table>
 
-  Anda.</p>
-<i>Jika Anda sudah pernah menerima email dengan jadwal dan role yang sama sebelumnya, maka email ini merupakan pengingat bahwa Anda belum
-  melakukan persetujuan/penolakan terhadap permintaan jadwal ini.<i>
+    <br/>
+
+    <p>Untuk menyetujui / menolak jadwal ini silahkan klik button diatas, atau login dengan akun
+      <% if @schedule.person.provider.blank? %>
+        email (<%= @schedule.person.email %>)
+      <% else %>
+        <%= @schedule.person.provider %>
+      <% end %>
+
+      Anda.</p>
+
+    <i>Jika Anda sudah pernah menerima email dengan jadwal dan role yang sama sebelumnya, maka email ini merupakan pengingat bahwa Anda belum
+      melakukan persetujuan/penolakan terhadap permintaan jadwal ini.</i>
+
+
+
+    <p><a href="<%= service_url(@schedule.service) %>">Lihat detil jadwal</a></p>
+  </body>
+</html>

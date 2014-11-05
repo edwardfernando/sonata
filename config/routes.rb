@@ -9,6 +9,12 @@ Sonata::Application.routes.draw do
     resources :attachments
   end
 
+  match 'confirm/:random_id', to: 'schedules#confirm_from_email_view', via: [:get], as: "confirm_from_email"
+  match 'confirm/:random_id', to: 'schedules#confirm_from_email', via: [:patch]
+
+  match 'reject/:random_id', to: 'schedules#reject_from_email_view', via: [:get], as: "reject_from_email"
+  match 'reject/:random_id', to: 'schedules#reject_from_email', via: [:patch]
+
   resources :roles do
     collection do
       get 'popup', :controller => 'popup', :action => 'popup_roles'
