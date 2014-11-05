@@ -81,7 +81,7 @@
                       <p><strong>Service Name:</strong> <%= s.service.name %></p>
                       <p><strong>Role:</strong> <%= s.role.name.capitalize %></p>
                       <p><strong>Description:</strong> <%= s.service.description %></p>
-                      <p><strong>Date:</strong> <%= s.service.date %></p>
+                      <p><strong>Date:</strong> <%= format_date(s.service.date) %></p>
                     </div>
 
                     <div class="modal-footer">
