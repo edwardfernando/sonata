@@ -5,12 +5,15 @@ Sonata::Application.routes.draw do
   match 'denied', to: 'denied#index', via: [:get]
 
   resources :services do
-    resources :schedules do
-      get 'confirm', :action => 'confirm_from_email'
-      get 'reject', :action => 'reject_from_email'
-    end
+    resources :schedules
     resources :attachments
   end
+
+  match 'confirm/:random_id', to: 'schedules#confirm_from_email_view', via: [:get], as: "confirm_from_email"
+  match 'confirm/:random_id', to: 'schedules#confirm_from_email', via: [:patch]
+
+  match 'reject/:random_id', to: 'schedules#reject_from_email_view', via: [:get], as: "reject_from_email"
+  match 'reject/:random_id', to: 'schedules#reject_from_email', via: [:patch]
 
   resources :roles do
     collection do
