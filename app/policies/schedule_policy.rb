@@ -21,4 +21,16 @@ class SchedulePolicy
   def destroy?
     @person.manager? || @person.admin?
   end
+
+  def direct_action?
+    true
+  end
+
+  def confirm_from_email?
+    true
+  end
+
+  def reject_from_email?
+    true
+  end
 end
