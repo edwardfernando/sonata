@@ -1,0 +1,89 @@
+<%= form_for @schedule, :url => url, :html => {:role => "form", :class => "form-horizontal"} do |p| %>
+<div class="col-md-9 personal-info">
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Service Name</label>
+      <div class="col-sm-10">
+        <p class="form-control-static"><%= @schedule.service.name %></p>
+      </div>
+    </div>
+
+    <% unless @schedule.waiting? %>
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Person</label>
+      <div class="col-sm-10">
+        <p class="form-control-static"><%= @schedule.person.name %></p>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Role</label>
+      <div class="col-sm-10">
+        <p class="form-control-static"><%= @schedule.role.name %></p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Description</label>
+      <div class="col-sm-10">
+        <p class="form-control-static"><%= @schedule.service.description %></p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Date</label>
+      <div class="col-sm-10">
+        <p class="form-control-static"><%= format_date(@schedule.service.date) %></p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Status</label>
+      <div class="col-sm-10">
+        <p class="form-control-static"><%= @schedule.status.capitalize %></p>
+      </div>
+    </div>
+
+    <% if is_reject %>
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Reason</label>
+      <div class="col-sm-10">
+        <p class="form-control-static"><%= @schedule.reasons %></p>
+      </div>
+    </div>
+    <% end %>
+
+    <% if @schedule.waiting? %>
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Your Email</label>
+      <div class="col-sm-10">
+        <p class="form-control-static">
+          <input autofocus="autofocus" class="form-control" id="email" name="person[email]" placeholder="Enter Your Email" required="required" type="email" value="">
+        </p>
+      </div>
+    </div>
+    <% end %>
+
+    <% if is_reject && @schedule.waiting? %>
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Why are you rejecting this schedule?</label>
+      <div class="col-sm-10">
+        <p class="form-control-static">
+          <textarea class="form-control" rows="3" id="reason" name="person[reason]" placeholder="Enter Your Reason" required="required"></textarea>
+        </p>
+      </div>
+    </div>
+    <% end %>
+
+    <% if @schedule.waiting? %>
+    <div class="form-group">
+      <label class="col-lg-2 control-label"></label>
+      <div class="col-sm-10">
+        <p class="form-control-static">
+          <%= p.submit value: submit_text, :class => "btn btn-default" %>
+        </p>
+      </div>
+    </div>
+    <% end %>
+</div>
+<% end %>
