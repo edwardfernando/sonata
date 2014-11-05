@@ -1,7 +1,7 @@
 class SchedulesController < ApplicationController
 
-  before_filter :authenticate_person!
-  after_action :verify_authorized
+  before_filter :authenticate_person!, except: [:confirm_from_email_view, :reject_from_email_view, :confirm_from_email, :reject_from_email]
+  after_action :verify_authorized, except: [:confirm_from_email_view, :reject_from_email_view, :confirm_from_email, :reject_from_email]
 
   def create
 
@@ -43,24 +43,17 @@ class SchedulesController < ApplicationController
   def confirm
     schedule = Schedule.find(params[:id])
     authorize schedule
-
     schedule.update(:status => :confirmed, :status_date => Time.now)
-
     schedule.create_activity action: :confirmed, owner: current_person, recipient: schedule.service
-
     redirect_to profile_path
   end
 
   def reject
     schedule = Schedule.find(params[:id])
     authorize schedule
-
     schedule.update(:status => :rejected, :status_date => Time.now, :reasons => params[:schedule][:reasons])
-
     schedule.create_activity action: :rejected, owner: current_person, recipient: schedule.service
-
     ScheduleRejectedMailer.notify(schedule).deliver
-
     redirect_to profile_path
   end
 
@@ -78,7 +71,66 @@ class SchedulesController < ApplicationController
       format.js{
       }
     end
+  end
 
+  def confirm_from_email
+    entered_email = params[:person][:email]
+    @schedule = Schedule.where(random_id: params[:random_id]).first
+
+    if entered_email.to_s != @schedule.person.email.to_s
+      flash[:danger] = "Your email is invalid."
+    else
+      @schedule.update(:status => :confirmed, :status_date => Time.now)
+      @schedule.create_activity action: :confirmed, owner: @schedule.person, recipient: @schedule.service
+      flash[:info] = "You've confirmed the following schedule"
+    end
+
+    redirect_to confirm_from_email_path
+  end
+
+  def reject_from_email
+    entered_email = params[:person][:email]
+    @schedule = Schedule.where(random_id: params[:random_id]).first
+
+    if entered_email.to_s != @schedule.person.email.to_s
+      flash[:danger] = "Your email is invalid."
+    else
+      @schedule.update(:status => :rejected, :status_date => Time.now, :reasons => params[:person][:reason])
+      @schedule.create_activity action: :rejected, owner: @schedule.person, recipient: @schedule.service
+      ScheduleRejectedMailer.notify(@schedule).deliver
+      flash[:info] = "You've rejected the following schedule"
+    end
+
+    redirect_to confirm_from_email_path
+  end
+
+  def confirm_from_email_view
+    @schedule = Schedule.where(random_id: params[:random_id]).first
+
+    # unless @schedule.waiting?
+    #   reject_confirmation_request
+    # end
+
+  end
+
+  def reject_from_email_view
+    @schedule = Schedule.where(random_id: params[:random_id]).first
+
+    # puts @schedule.to_yaml
+    #
+    # unless @schedule.waiting?
+    #   reject_confirmation_request
+    # end
+
+  end
+
+  private
+  def reject_confirmation_request
+    respond_to do |format|
+      format.html { render :file => "#{Rails.root}/public/schedule_invalid", :layout => false, :status => :not_found }
+      format.xml  { head :not_found }
+      format.any  { head :not_found }
+    end
   end
 
 end
