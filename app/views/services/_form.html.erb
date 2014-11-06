@@ -188,7 +188,7 @@
 
       if($("#isconfirmed-" + row).val() == 'false'){
 
-        BootstrapDialog.confirm('Are you sure to delete this schedule?', function(result){
+        BootstrapDialog.confirm('Are you sure to delete this role/person?', function(result){
             if(result) {
               <% if action_name.eql?("edit") %>
               $.ajax({
@@ -208,7 +208,7 @@
 
     <% if action_name.eql?("new") %>
     function deleteAllPeople(){
-      if(window.confirm("Are you sure? This is not undo-able!")){
+      if(window.confirm("Are you sure to delete all roles?")){
           for(var x = 0; x <= personRowCount; x++){
             deletePersonRow(x);
           }
@@ -250,7 +250,7 @@
                 <div class="form-group">
                   <div class="col-xs-12">
                     <%= s.label :name, :for => "serviceName" %>
-                    <%= s.text_field :name, :class => "form-control", :id => "serviceName", :placeholder => "Enter Service Name" %>
+                    <%= s.text_field :name, :class => "form-control", :id => "serviceName", :placeholder => "Service Name" %>
                   </div>
                 </div>
 
@@ -287,12 +287,12 @@
             <div class="panel-body">
               <div align="right" style="padding-top: 10px; padding-bottom: 20px;">
                 <a href="javascript: " onclick="createAttachmentRow()" class="btn btn-default btn-xs">
-                  <span class="glyphicon glyphicon-plus"></span> Add More Row
+                  <span class="glyphicon glyphicon-plus"></span> Add Attachment
                 </a>
 
                 <% if action_name.eql?("new") %>
                 <a href="javascript: " onclick="deleteAllAttachments()" class="btn btn-default btn-xs">
-                  <span class="glyphicon glyphicon-minus"></span> Delete All Rows
+                  <span class="glyphicon glyphicon-minus"></span> Delete All
                 </a>
                 <% end %>
               </div>
@@ -312,7 +312,7 @@
         <div style="padding-top: 10px; padding-bottom: 20px;">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Choose People Involved</h3>
+              <h3 class="panel-title">People Involved List</h3>
             </div>
 
             <div class="panel-body">

@@ -66,7 +66,7 @@
           <% if person_signed_in? && (current_person.manager? || current_person.admin?) %>
 
           <li <% if params[:controller] == "people" && params[:action] == "index" %> class="active" <% end %>>
-            <%= link_to "People", people_path %>
+            <%= link_to "Members", people_path %>
           </li>
 
           <% end %>
