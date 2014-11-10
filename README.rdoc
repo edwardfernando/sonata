@@ -6,10 +6,3 @@ How to Run?
 * bundle install
 * rake db:migrate
 * rails s
-
-Deploy Steps:
-
-* bundle exec cap [stage] deploy
-* bundle exec cap [stage] figaro:setup
-* bundle exec cap [stage] figaro:symlink
-* bundle exec cap [stage] deploy:restart
