@@ -9,6 +9,9 @@ Sonata::Application.routes.draw do
     resources :attachments
   end
 
+  match '/services/:service_id/schedules/propose_change_schedule/:id', to: 'schedules#propose_change_schedule', via: [:get]
+  match '/services/:service_id/schedules/propose_change_schedule/:id', to: 'schedules#process_change_schedule', via: [:post]
+
   match 'confirm/:random_id', to: 'schedules#confirm_from_email_view', via: [:get], as: "confirm_from_email"
   match 'confirm/:random_id', to: 'schedules#confirm_from_email', via: [:patch]
 

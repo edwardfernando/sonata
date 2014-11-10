@@ -3,6 +3,30 @@ class SchedulesController < ApplicationController
   before_filter :authenticate_person!, except: [:confirm_from_email_view, :reject_from_email_view, :confirm_from_email, :reject_from_email]
   after_action :verify_authorized, except: [:confirm_from_email_view, :reject_from_email_view, :confirm_from_email, :reject_from_email]
 
+  def show
+  end
+
+  def propose_change_schedule
+    schedule = Schedule.where(random_id: params[:id]).first
+    authorize schedule
+
+    person_with_same_skillsets = Person.joins(:skillsets).where("skillsets.role_id = ? and people.id != ?", schedule.role, current_person)
+
+    respond_to do |format|
+      format.json{
+        render json: {
+          :requested_role => schedule.role.name,
+          :person_with_same_skillsets => person_with_same_skillsets,
+          :url => service_schedule_path(schedule.service, schedule)
+        }
+      }
+    end
+  end
+
+  def process_change_schedule
+
+  end
+
   def create
 
     service = Service.find(params[:service_id])

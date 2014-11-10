@@ -31,12 +31,41 @@
       <%= @service.created_by.name %>
     </p>
 
-    <strong>Attachments & Resources:</strong>
+    <strong>Attachments & Resources: </strong>
+
     <ul>
       <% @service.attachments.each do |a| %>
       <li><a href="<%= a.url %>"><%= a.name %></a></li>
       <% end %>
     </ul>
+
+
+    <p align="right">
+
+      <a href="javascript:" id="propose-change-schedule-link" class="btn btn-default btn-xs">
+        <i class="glyphicon glyphicon-list-alt"></i> Propose Change My Schedule
+      </a>
+    </p>
+
+    <%# Proposing change schedule - modal dialog %>
+    <div class="modal fade" id="propose-change-schedule-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Ask for help from other <span id="schedule-role-type"></span> fellas</h4>
+          </div>
+          <div class="modal-body">
+            <ul class="person_with_same_skillsets">
+            </ul>
+          </div>
+
+          <div class="modal-footer">
+            <a href="" class="btn btn-primary js-propose-change-schedule-button">Propose</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <table class="table table-hover table-bordered" id="person-incharge-table">
       <thead>
@@ -59,6 +88,8 @@
           <% if s.confirmed? %>
             <i class="fa fa-check-square-o"></i> Confirmed
           <% elsif s.person == current_person && s.waiting? %>
+            <input type="hidden" id="current-person-schedule-id" value="<%= s.random_id %>"/>
+            <input type="hidden" id="current-schedule-id" value="<%= s.service.id %>"/>
             <a href="javascript:" class="btn btn-default btn-xs" data-toggle="modal" data-target="#confirm-schedule-modal-<%= s.id %>">
               Confirm / Reject?
             </a>
@@ -125,7 +156,6 @@
     </table>
   </div>
   <div class="col-md-4">
-
     <% unless @activities.blank? %>
       <ul class="timeline">
           <% @activities.each do |activity| %>

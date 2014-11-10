@@ -6,6 +6,14 @@ class SchedulePolicy
     @record = record
   end
 
+  def show?
+    @person.user? || @person.manager? || @person.admin?
+  end
+
+  def propose_change_schedule?
+    record.person.id == person.id
+  end
+
   def create?
     @person.manager? || @person.admin?
   end
