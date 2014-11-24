@@ -7,6 +7,9 @@ class Schedule < ActiveRecord::Base
       :service_name => proc {|controller, model_instance| model_instance.service.name}
     }
 
+  has_many :sub_schedules, class_name: "Schedule", foreign_key: "parent_id"
+  belongs_to :schedule, class_name: "Schedule"
+
   belongs_to :service
   belongs_to :person, :class_name => 'Person'
   belongs_to :created_by, :class_name => 'Person', :foreign_key => 'created_by'

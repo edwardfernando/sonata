@@ -12,14 +12,17 @@ $(function() {
       $("#schedule-role-type").html(result.requested_role);
 
       result.person_with_same_skillsets.forEach(function(each){
-        body.append('<li><label><input type="checkbox" name="person_with_same_skillsets[]" value='+ each.id +'> '+ each.name +'</label></li>');
+        body.append('<li><label><input type="checkbox" class="person_with_same_skillsets" name="person_with_same_skillsets[]" value='+ each.id +'> '+ each.name +'</label></li>');
       });
     });
 
   });
 
   $(document).on("click", ".js-propose-change-schedule-button", function() {
-    alert("hoi");
+  
+
+
+
   });
 
 
