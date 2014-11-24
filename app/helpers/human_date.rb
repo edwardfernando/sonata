@@ -11,11 +11,11 @@ module HumanDate
       when -2
         "day before yesterday"
       when -1
-        "yesterday"
+        "Yesterday"
       when 0
-        "today"
+        "Today"
       when 1
-        "tomorrow"
+        "Tomorrow"
       when 2..6
         "this #{day_name(days_difference)}"
       when 7..13
