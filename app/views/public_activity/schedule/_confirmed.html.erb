@@ -23,8 +23,9 @@ role_name = activity.parameters[:role_name]
               <s><%= service_name %></s> <em>(which has been deleted)</em> as <%= role_name %>
               <% else %>
               <a href="<%= service_path(activity.trackable.service) %>">
-              <%= activity.trackable.service.name %> as <%= activity.trackable.role.name %>
+              <%= activity.trackable.service.name %>
               </a>
+              as <%= activity.trackable.role.name %>
               <% end %>
 
           </div>
