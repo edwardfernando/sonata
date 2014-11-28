@@ -123,7 +123,7 @@
         }
       <% end %>
 
-      tr += "<a id=delete-button-"+ personRowCount +" href=javascript: onclick=deletePersonRow("+ personRowCount +") class=\"btn btn-default btn-xs "+ disabled_class +" \"><span class=\"glyphicon glyphicon-remove-circle\"></span> Delete Row</a>";
+      tr += "<a id=delete-button-"+ personRowCount +" href=javascript: onclick=deletePersonRow("+ personRowCount +") class=\"btn btn-default btn-xs  \"><span class=\"glyphicon glyphicon-remove-circle\"></span> Delete Row</a>";
       tr += "</td>";
       tr += "<td><i id=schedule-status-indicator-"+ personRowCount +" class=\""+ status_css_class +"\"></i> <span id=schedule-status-"+ personRowCount  +">"+ status +"</span></td></tr>";
 
@@ -186,7 +186,7 @@
         return;
       }
 
-      if($("#isconfirmed-" + row).val() == 'false'){
+      // if($("#isconfirmed-" + row).val() == 'false'){
 
         BootstrapDialog.confirm('Are you sure to delete this role/person?', function(result){
             if(result) {
@@ -203,7 +203,7 @@
             }
         });
 
-      }
+      // }
     }
 
     <% if action_name.eql?("new") %>
