@@ -45,7 +45,7 @@ class SchedulesController < ApplicationController
     authorize schedule
     schedule.update(:status => :confirmed, :status_date => Time.now)
     schedule.create_activity action: :confirmed, owner: current_person, recipient: schedule.service
-    redirect_to profile_path
+    redirect_to service_path(schedule.service)
   end
 
   def reject
@@ -54,7 +54,7 @@ class SchedulesController < ApplicationController
     schedule.update(:status => :rejected, :status_date => Time.now, :reasons => params[:schedule][:reasons])
     schedule.create_activity action: :rejected, owner: current_person, recipient: schedule.service
     ScheduleRejectedMailer.notify(schedule).deliver
-    redirect_to profile_path
+    redirect_to service_path(schedule.service)
   end
 
   def destroy
