@@ -1,3 +1,9 @@
+<%
+json = JSON.parse(activity.parameters[:model_details])
+service_name = activity.parameters[:service_name]
+role_name = activity.parameters[:role_name]
+%>
+
 <li>
   <div class="timeline-badge info"><i class="glyphicon glyphicon-list-alt"></i></div>
   <div class="timeline-panel">
@@ -12,10 +18,16 @@
           </a>
           <div class="media-body">
               <strong><%= activity.owner.name %></strong> has confirmed
+
+              <% if activity.trackable.nil? %>
+              <s><%= service_name %></s> <em>(which has been deleted)</em> as <%= role_name %>
+              <% else %>
               <a href="<%= service_path(activity.trackable.service) %>">
               <%= activity.trackable.service.name %>
               </a>
               as <%= activity.trackable.role.name %>
+              <% end %>
+
           </div>
       </div>
 

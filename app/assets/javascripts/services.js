@@ -1,4 +1,5 @@
 $(function() {
+
   $(document).on("click", "#propose-change-schedule-link", function() {
     $("#propose-change-schedule-modal").modal({
       show: true
@@ -16,15 +17,26 @@ $(function() {
       });
     });
 
+  }).on("click", ".js-propose-change-schedule-button", function() {
+
+    
+
+  }).on("click", ".js-show-service-delete", function() {
+    var url = $(this).attr("service-url");
+
+    BootstrapDialog.confirm('Are you sure to delete this Service?', function(result){
+      if(result){
+        $.ajax({
+          url: url ,
+          type: "DELETE",
+          data: {"_method":"delete"}
+        });
+
+        window.location.href = "/services";
+      }
+    });
+
+    return false;
   });
-
-  $(document).on("click", ".js-propose-change-schedule-button", function() {
-  
-
-
-
-  });
-
-
 
 });

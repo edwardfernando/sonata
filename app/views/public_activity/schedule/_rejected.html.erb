@@ -20,9 +20,14 @@
           <div class="media-body">
               <strong><%= activity.owner.name %></strong> rejected
 
-              <a href="<%= service_path(json["service_id"]) %>">
-              <%= service_name %>
-              </a>
+              <% if activity.trackable.nil? %>
+                <s><%= service_name %></s> <em>(which has been deleted)</em>
+              <% else %>
+                <a href="<%= service_path(json["service_id"]) %>">
+                  <%= service_name %>
+                </a>
+              <% end %>
+
               as
               <%= role_name %>
 
