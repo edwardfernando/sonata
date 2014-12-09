@@ -24,7 +24,7 @@ class SchedulesController < ApplicationController
   end
 
   def process_change_schedule
-
+    p params
   end
 
   def create

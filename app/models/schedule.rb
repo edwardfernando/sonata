@@ -19,7 +19,7 @@ class Schedule < ActiveRecord::Base
   validates :person, presence: true
   validates :role, presence: true
 
-  enum status: [:waiting, :confirmed, :rejected]
+  enum status: [:waiting, :confirmed, :rejected, :rolled]
   after_initialize :set_default_status, :if => :new_record?
 
   def set_default_status

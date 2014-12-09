@@ -13,13 +13,28 @@ $(function() {
       $("#schedule-role-type").html(result.requested_role);
 
       result.person_with_same_skillsets.forEach(function(each){
-        body.append('<li><label><input type="checkbox" class="person_with_same_skillsets" name="person_with_same_skillsets[]" value='+ each.id +'> '+ each.name +'</label></li>');
+        body.append('<li><label><input type="checkbox" class="person_with_same_skillsets_cb" name="person_with_same_skillsets_cb[]" value='+ each.id +'> '+ each.name +'</label></li>');
       });
     });
 
   }).on("click", ".js-propose-change-schedule-button", function() {
 
-    
+    var service_id = $("#current-schedule-id").val();
+    var schedule_id = $("#current-person-schedule-id").val();
+    var array = [];
+
+    $.each($(".person_with_same_skillsets_cb"), function(index, value) {
+      if(value.checked){
+        array.push(value.value);
+      }
+    });
+
+    $.post("/services/" + service_id + "/schedules/propose_change_schedule/" + schedule_id + ".json", { 'person_with_same_skillsets_cb[]': array })
+      .done(function( data ) {
+        alert( "Data Loaded: " + data );
+      }
+    );
+    console.log(array);
 
   }).on("click", ".js-show-service-delete", function() {
     var url = $(this).attr("service-url");
