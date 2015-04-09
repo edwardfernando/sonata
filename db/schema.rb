@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103150200) do
+ActiveRecord::Schema.define(version: 20150407115746) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20141103150200) do
 
   create_table "people", force: true do |t|
     t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -69,10 +69,21 @@ ActiveRecord::Schema.define(version: 20141103150200) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit"
+    t.integer  "invited_by_id"
+    t.string   "invited_by_type"
+    t.integer  "invitations_count",      default: 0
   end
 
   add_index "people", ["confirmation_token"], name: "index_people_on_confirmation_token", unique: true
   add_index "people", ["email"], name: "index_people_on_email", unique: true
+  add_index "people", ["invitation_token"], name: "index_people_on_invitation_token", unique: true
+  add_index "people", ["invitations_count"], name: "index_people_on_invitations_count"
+  add_index "people", ["invited_by_id"], name: "index_people_on_invited_by_id"
   add_index "people", ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true
 
   create_table "roles", force: true do |t|

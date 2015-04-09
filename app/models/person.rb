@@ -9,9 +9,9 @@ class Person < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  # devise :database_authenticatable, :registerable,
+  # devise :invitable, :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :trackable, :validatable, :omniauthable
-  devise :omniauthable, :trackable, :database_authenticatable, :registerable, :validatable, :confirmable, :recoverable
+  devise :invitable, :omniauthable, :trackable, :database_authenticatable, :registerable, :validatable, :confirmable, :recoverable
 
   validates :name, presence: true
   validates :email, uniqueness: true, presence: true
