@@ -47,12 +47,13 @@ Sonata::Application.routes.draw do
       sign_in: 'login',
       sign_out: 'logout',
       password: 'secret',
-      confirmation: 'verification',
-      unlock: 'unblock',
-      registration: 'register',
-      sign_up: 'new'
-    }
 
+      # Commented because we want to invite-only-member
+      # confirmation: 'verification',
+      # unlock: 'unblock',
+      # registration: 'register',
+      # sign_up: 'new'
+    }
 
   # No need to user this anymore since i figured how to customized URL for devise
   # devise_scope :person do

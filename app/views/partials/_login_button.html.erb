@@ -14,7 +14,14 @@
       <li><a href="<%= person_omniauth_authorize_path('twitter') %>"><b class="fa fa-twitter-square"> </b> Log in with Twitter</a></li>
       <li role="presentation" class="divider"></li>
       -->
-      <li><a href="<%= new_person_registration_path %>"><b class="fa fa-users"> </b> Sign Up</a></li>
+
+      <% if false %>
+
+        <!-- I COMMENTED THIS OUT BECAUSE WE WANT TO USE INVITABLE -->
+
+        <li><a href="<%= new_person_registration_path %>"><b class="fa fa-users"> </b> Sign Up</a></li>
+
+      <% end %>
     </ul>
 
   <% end %>

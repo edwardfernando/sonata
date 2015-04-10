@@ -11,7 +11,7 @@ class Person < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   # devise :invitable, :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :trackable, :validatable, :omniauthable
-  devise :invitable, :omniauthable, :trackable, :database_authenticatable, :registerable, :validatable, :confirmable, :recoverable
+  devise :invitable, :omniauthable, :trackable, :database_authenticatable, :validatable, :recoverable
 
   validates :name, presence: true
   validates :email, uniqueness: true, presence: true
