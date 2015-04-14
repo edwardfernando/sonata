@@ -17,6 +17,7 @@ end
 gem 'sass-rails', '~> 4.0.0'
 
 gem 'devise'
+gem 'devise_invitable'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'

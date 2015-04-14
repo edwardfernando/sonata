@@ -39,9 +39,16 @@
 															<%= f.submit "Log in »", :class => "btn btn-lg btn-success btn-block", :id => "login" %>
 															<br>
 															<p class="text-center small">
-																	<a href="<%= new_person_registration_path %>">Register to join</a> | <a href="<%= new_person_password_path %>">Forgot your password?</a>
+																	<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+																		<a href="<%= new_person_registration_path %>">Register to join</a> |
+																	<% end %>
+
+																	<a href="<%= new_person_password_path %>">Forgot your password?</a>
+
+																	<%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
 																	<br/>
 																	<a href="<%= new_person_confirmation_path %>">Didn't receive confirmation instructions?</a>
+																	<% end %>
 															</p>
                           </fieldset>
 											<% end %>

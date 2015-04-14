@@ -61,6 +61,10 @@
             <%= link_to "General Service", services_path %>
           </li>
 
+          <li <% if params[:controller] == "devise/invitations" %> class="active" <% end %>>
+            <%= link_to "Invite Member", new_person_invitation_path %>
+          </li>
+
           <% end %>
 
           <% if person_signed_in? && (current_person.manager? || current_person.admin?) %>
