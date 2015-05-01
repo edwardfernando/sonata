@@ -22,4 +22,16 @@ namespace :reminder do
     puts "### #{Time.now} : Finished not_confirmed reminder\n"
   end
 
+  task remind_invitation: :environment do
+
+    puts "### #{Time.now} : Executing invitation reminder\n"
+
+    Person.where.not(invitation_token: nil).each do |person|
+      AccountRegistrationMailer.remind(person).deliver
+    end
+
+    puts "### #{Time.now} : Finished invitation reminder\n"
+
+  end
+
 end
