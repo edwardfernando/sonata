@@ -1,0 +1,24 @@
+<html>
+  <head>
+  </head>
+
+  <body>
+    <h3>Halo, <%= @person.email %>!</h3>
+
+    <br/>
+
+    Beberapa waktu yang lalu <%= @person.invited_by.name %> mengundang Anda untuk bergabung ke <a href="<%= root_url %>">Sonatask.com</a> -
+    sebuah layanan yang digunakan untuk mengatur jadwal pelayanan Anda di GII semanggi, Jakarta.
+
+    <br/><br/>
+
+    Untuk menerima undangan ini, silahkan klik tautan berikut:
+
+    <p><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@person, :invitation_token => @person.raw_invitation_token) %></p>
+
+    <br/><br/>
+
+    Selamat melayani!
+
+  </body>
+</html>
