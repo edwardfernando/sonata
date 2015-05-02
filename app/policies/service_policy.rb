@@ -10,6 +10,14 @@ class ServicePolicy
     @person.user? || @person.manager? || @person.admin?
   end
 
+  def show_new_calendar?
+    @person.user? || @person.manager? || @person.admin?
+  end
+
+  def calendar_feed_events?
+    @person.user? || @person.manager? || @person.admin?
+  end
+
   def show?
     @person.user? || @person.manager? || @person.admin?
   end

@@ -3,8 +3,13 @@ Sonata::Application.routes.draw do
 
   match 'activities', to: "welcome#activities", via: [:get]
   match 'denied', to: 'denied#index', via: [:get]
+  # match 'calendar_feed_events', to: 'services#calendar_feed_events', via: [:get]
 
   resources :services do
+    collection do
+      get 'show_new_calendar', :action => 'show_new_calendar'
+      # get 'calendar_feed_events', :action => 'calendar_feed_events'
+    end
     resources :schedules
     resources :attachments
   end

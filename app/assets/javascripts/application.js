@@ -14,13 +14,12 @@
 //= require jquery_ujs
 //= require jquery.ui.datepicker
 //= require turbolinks
-//= require_tree .
 //= require bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.id.js
 //= require fullcalendar
 //= require moment
-
+//= require_tree .
 
 function pop(url) {
   w = 600;
