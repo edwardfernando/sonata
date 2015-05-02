@@ -9,7 +9,7 @@ class AccountRegistrationMailer < ActionMailer::Base
 
     @person = invited_person
 
-    mail to: person.email, subject: "Complete your profile! #{invited_person.invited_by.name} invited to Sonatask.com - GII Semanggi Jakarta"
+    mail to: person.email, subject: "Complete your profile! #{invited_person.invited_by.name} invited you to Sonatask.com - GII Semanggi Jakarta"
   end
 
 end
