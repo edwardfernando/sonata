@@ -37,8 +37,8 @@
 	// Question: How to disable "single day" (daily) mode? #454
 	// https://github.com/Serhioromano/bootstrap-calendar/issues/454
 	function unbindClicks(){
-		// $('*[data-cal-date]').unbind("click");
-		// $('.cal-cell').unbind("dblclick");
+		$('*[data-cal-date]').unbind("click");
+		$('.cal-cell').unbind("dblclick");
 	}
 
 	var ready = function(){
