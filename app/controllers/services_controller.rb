@@ -45,9 +45,6 @@ class ServicesController < ApplicationController
 				start_date = Time.at(params[:from].to_i/1000).to_date
 				end_date = Time.at(params[:to].to_i/1000).to_date
 
-
-				puts "start date #{start_date} \n end date #{end_date}"
-
 				@services = Service.where(:date => start_date..end_date)
 				authorize @services
 
@@ -87,8 +84,6 @@ class ServicesController < ApplicationController
 	def create
 		@service = Service.new(service_param)
 		authorize @service
-
-		puts "service_param : #{service_param}"
 
 		role_array = params[:service][:role] ||= []
 		people_array = params[:service][:person] ||= []
