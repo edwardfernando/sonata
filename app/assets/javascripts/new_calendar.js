@@ -3,7 +3,7 @@
 	"use strict";
 
 	var options = {
-		events_source: 'show_new_calendar.json',
+		events_source: '/services/show_new_calendar.json',
 		view: 'month',
 		tmpl_path: '/tmpls/',
 		tmpl_cache: false,

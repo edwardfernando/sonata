@@ -297,16 +297,16 @@
 #cal-day-box .day-highlight.dh-event-warning {
   border: 1px solid #e3bc08;
 }
-#cal-day-box .day-highlight.dh-event-info {
+#cal-day-box .day-highlight.dh-general {
   border: 1px solid #1e90ff;
 }
 #cal-day-box .day-highlight.dh-event-inverse {
   border: 1px solid #1b1b1b;
 }
-#cal-day-box .day-highlight.dh-event-success {
+#cal-day-box .day-highlight.dh-rehearsal {
   border: 1px solid #006400;
 }
-#cal-day-box .day-highlight.dh-event-special {
+#cal-day-box .day-highlight.dh-special {
   background-color: #ffe6ff;
   border: 1px solid #800080;
 }
@@ -331,22 +331,34 @@
 .cal-event-list .event.pull-left {
   margin-top: 3px;
 }
+
+// Merah
 .event-important {
   background-color: #ad2121;
 }
-.event-info {
+
+// Biru
+.general {
   background-color: #1e90ff;
 }
+
+// Kuning
 .event-warning {
   background-color: #e3bc08;
 }
+
+// Hitam
 .event-inverse {
   background-color: #1b1b1b;
 }
-.event-success {
+
+// Hijau
+.rehearsal {
   background-color: #006400;
 }
-.event-special {
+
+// Ungu
+.special {
   background-color: #800080;
 }
 .day-highlight:hover,
@@ -361,20 +373,20 @@
 .day-highlight.dh-event-warning {
   background-color: #fdf1ba;
 }
-.day-highlight.dh-event-info:hover,
-.day-highlight.dh-event-info {
+.day-highlight.dh-general:hover,
+.day-highlight.dh-general {
   background-color: #d1e8ff;
 }
 .day-highlight.dh-event-inverse:hover,
 .day-highlight.dh-event-inverse {
   background-color: #c1c1c1;
 }
-.day-highlight.dh-event-success:hover,
-.day-highlight.dh-event-success {
+.day-highlight.dh-rehearsal:hover,
+.day-highlight.dh-rehearsal {
   background-color: #caffca;
 }
-.day-highlight.dh-event-special:hover,
-.day-highlight.dh-event-special {
+.day-highlight.dh-special:hover,
+.day-highlight.dh-special {
   background-color: #ffe6ff;
 }
 .cal-row-head [class*="cal-cell"]:first-child,

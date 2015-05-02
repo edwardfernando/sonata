@@ -88,6 +88,8 @@ class ServicesController < ApplicationController
 		@service = Service.new(service_param)
 		authorize @service
 
+		puts "service_param : #{service_param}"
+
 		role_array = params[:service][:role] ||= []
 		people_array = params[:service][:person] ||= []
 
@@ -119,7 +121,7 @@ class ServicesController < ApplicationController
 				role = Role.find(role)
 
 				schedule = Schedule.create(service:@service, role:role, person:person, created_by:current_person)
-				ScheduleMailer.new_schedule_notification(schedule).deliver
+				# ScheduleMailer.new_schedule_notification(schedule).deliver
 
 			end
 
@@ -202,7 +204,7 @@ class ServicesController < ApplicationController
 
 	private
 	def service_param
-		params.require(:service).permit(:name, :description, :date)
+		params.require(:service).permit(:name, :category, :description, :date)
 	end
 
 end

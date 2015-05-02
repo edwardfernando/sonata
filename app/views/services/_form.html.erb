@@ -254,6 +254,23 @@
                   </div>
                 </div>
 
+
+                <div class="form-group">
+                  <div class="col-xs-12">
+                    <%= s.label :category, :for => "serviceCategory" %>
+                    <a  href="javascript: " rel="tooltip" title="
+                      All schedule will be assigned as 'General Schedule' by default.
+                      If you're trying to make a schedule for rehearsal purposes (eg: Band rehearsal, Choir rehearsal, etc), please choose 'Rehearsal'.
+                      And please choose 'Special Occasion' if you're trying to make a schedule for special event, such as 'Meeting', 'Wedding Ceremony', etc
+                    " data-placement="right">
+                      [?]
+                    </a>
+
+                    <%= select_tag "service[category]", options_for_select([["General Service", "general"], ["Rehearsal", "rehearsal"], ["Special Occasion","special"]], @service.category), :id => "serviceCategory", :class => "form-control" %>
+
+                  </div>
+                </div>
+
                 <div class="form-group">
                   <div class="col-xs-12">
                     <%= s.label :description, :for => "serviceDescription" %>
