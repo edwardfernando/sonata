@@ -1,6 +1,15 @@
   <div class="container">
        <div class="page-header">
            <div class="pull-right form-inline">
+
+               <% if person_signed_in? && (current_person.manager? || current_person.admin?) %>
+               <div class="btn-group">
+                 <a href="<%= new_service_path %>?date=<%= get_valid_date(params[:date]) %>" class="btn btn-success">
+                   <span class="glyphicon glyphicon-plus"></span> Add New Schedule
+                 </a>
+               </div>
+               <% end %>
+
                <div class="btn-group">
                    <button class="btn btn-primary" data-calendar-nav="prev"><< Prev</button>
                    <button class="btn btn-default" data-calendar-nav="today">Today</button>
@@ -11,7 +20,8 @@
        </div>
 
        <div class="row">
-           <input type="checkbox" value="#events-modal" id="events-in-modal"> Open events in modal window
+           <!-- <input type="checkbox" value="#events-modal" id="events-in-modal"> Open events in modal window -->
+
            <div id="calendar_new"></div>
        </div>
 
