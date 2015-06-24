@@ -113,7 +113,7 @@ class ServicesController < ApplicationController
 				role = Role.find(role)
 
 				schedule = Schedule.create(service:@service, role:role, person:person, created_by:current_person)
-				ScheduleMailer.new_schedule_notification(schedule).deliver
+				# ScheduleMailer.new_schedule_notification(schedule).deliver
 
 			end
 

@@ -2,11 +2,32 @@
     <div class="page-header">
         <h3>Public Activity</h3>
     </div>
-    <ul class="timeline">
-        <% @activities.each do |activity| %>
-          <%= render_activity activity %>
-        <% end %>
-        <%# FOR ANOTHER SAMPLE PLEASE SEE : http://bootsnipp.com/snippets/featured/timeline-responsive %>
-    </ul>
-    <%= render :partial => "partials/paginator", :locals => {:paginated_object => @activities} %>
+
+    <div class="row">
+      <div class="col-md-9">
+        <ul class="timeline">
+            <% @activities.each do |activity| %>
+              <%= render_activity activity %>
+            <% end %>
+            <%# FOR ANOTHER SAMPLE PLEASE SEE : http://bootsnipp.com/snippets/featured/timeline-responsive %>
+        </ul>
+        <%= render :partial => "partials/paginator", :locals => {:paginated_object => @activities} %>
+      </div>
+      <div class="col-md-3">
+        <div class="mythumb" data-spy="affix">
+          <div class="caption">
+            <h5>Your upcoming schedule</h5>
+
+            <% @upcoming_schedules.each do | schedule | %>
+            <a href="<%= service_path(schedule.service) %>">
+              <%= schedule.service.name %>
+            </a>
+            <% end %>
+
+            <p>View All</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </div>

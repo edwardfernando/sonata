@@ -13,6 +13,9 @@ class WelcomeController < ApplicationController
 
   def activities
     @activities = PublicActivity::Activity.page(params[:page]).per(10).order("created_at desc")
+
+    @upcoming_schedules = Schedule.joins(:service).joins(:person).where("status = ? and services.date between ? and ? and people.id = ?", 1, Date.today, Date.today + 7, current_person);
+
     authorize @activities
   end
 
