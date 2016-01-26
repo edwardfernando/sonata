@@ -3,10 +3,25 @@ class ProfilesController < ApplicationController
   before_filter :authenticate_person!
 
   def index
-    render 'show'
+
+    respond_to do |format|
+
+			format.html {
+        render 'show'
+			}
+
+			format.json {
+				start_date = Time.at(params[:from].to_i/1000).to_date
+				end_date = Time.at(params[:to].to_i/1000).to_date
+
+				@services = Service.joins(:schedules).where("date between ? and ? and schedules.person_id = ?", start_date, end_date, current_person)
+				authorize @services
+			}
+		end
   end
 
   def show
+
   end
 
   def edit
