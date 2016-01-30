@@ -2,37 +2,9 @@
 
 	"use strict";
 
-	var options = {
-		events_source: '/services/show_new_calendar.json',
-		view: 'month',
-		tmpl_path: '/tmpls/',
-		tmpl_cache: false,
-		day: moment(new Date()).format('YYYY-MM-DD'),
-		onAfterEventsLoad: function(events) {
-			if(!events) {
-				return;
-			}
-			var list = $('#eventlist');
-			list.html('');
-
-			$.each(events, function(key, val) {
-				$(document.createElement('li'))
-					.html('<a href="' + val.url + '">' + val.title + '</a>')
-					.appendTo(list);
-			});
-		},
-		onAfterViewLoad: function(view) {
-			$('.page-header h3').text(this.getTitle());
-			$('.btn-group button').removeClass('active');
-			$('button[data-calendar-view="' + view + '"]').addClass('active');
-		},
-		classes: {
-			months: {
-				general: 'label'
-			}
-		}
-	};
-
+	function parse_event_source(){
+		return window.location.pathname + ".json";
+	}
 
 	// Question: How to disable "single day" (daily) mode? #454
 	// https://github.com/Serhioromano/bootstrap-calendar/issues/454
@@ -42,6 +14,37 @@
 	}
 
 	var ready = function(){
+
+		var options = {
+			events_source: parse_event_source(),
+			view: 'month',
+			tmpl_path: '/tmpls/',
+			tmpl_cache: false,
+			day: moment(new Date()).format('YYYY-MM-DD'),
+			onAfterEventsLoad: function(events) {
+				if(!events) {
+					return;
+				}
+				var list = $('#eventlist');
+				list.html('');
+
+				$.each(events, function(key, val) {
+					$(document.createElement('li'))
+						.html('<a href="' + val.url + '">' + val.title + '</a>')
+						.appendTo(list);
+				});
+			},
+			onAfterViewLoad: function(view) {
+				$('.page-header h3').text(this.getTitle());
+				$('.btn-group button').removeClass('active');
+				$('button[data-calendar-view="' + view + '"]').addClass('active');
+			},
+			classes: {
+				months: {
+					general: 'label'
+				}
+			}
+		};
 
 		var calendar = $('#calendar_new').calendar(options);
 
