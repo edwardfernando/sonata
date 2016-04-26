@@ -32,9 +32,9 @@ Sonata::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :authentication => :plain,
-    :address => "smtp.mandrillapp.com",
+    :address => "smtp.mailgun.org",
     :port => 587,
-    :domain => "sonatask.com",
+    :domain => "sandboxe5f6366e30f6420085f3df08f8163b93.mailgun.org",
     :user_name => ENV["MANDRIL_APP_USERNAME"],
     :password => ENV["MANDRIL_APP_PASSWORD"]
   }
