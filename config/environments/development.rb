@@ -32,11 +32,11 @@ Sonata::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :authentication => :plain,
-    :address => "smtp.mailgun.org",
-    :port => 587,
-    :domain => "sandboxe5f6366e30f6420085f3df08f8163b93.mailgun.org",
-    :user_name => ENV["MANDRIL_APP_USERNAME"],
-    :password => ENV["MANDRIL_APP_PASSWORD"]
+    :address => ENV["MAIL_SERVICE_APP_SMTP_HOSTNAME"],
+    :port => ENV["MAIL_SERVICE_APP_PORT"],
+    :domain => ENV["MAIL_SERVICE_APP_DOMAIN"],
+    :user_name => ENV["MAIL_SERVICE_APP_USERNAME"],
+    :password => ENV["MAIL_SERVICE_APP_PASSWORD"]
   }
 
 

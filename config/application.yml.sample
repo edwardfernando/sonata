@@ -1,11 +1,15 @@
 
 development:
-  MANDRIL_APP_USERNAME: xxxxxxxxx
-  MANDRIL_APP_PASSWORD: xxxxxxxxx
+  MAIL_SERVICE_APP_USERNAME: xxxxxxxxx
+  MAIL_SERVICE_APP_PASSWORD: xxxxxxxxx
+  MAIL_SERVICE_APP_SMTP_HOSTNAME: xxxxxxxxx
+  MAIL_SERVICE_APP_DOMAIN: xxxxxxxxx
+  MAIL_SERVICE_APP_PORT: xxxxxxxxx
   FACEBOOK_APP_ID: xxxxxxxxx
   FACEBOOK_SECRET: xxxxxxxxx
   TWITTER_CONSUMER_KEY: xxxxxxxxx
   TWITTER_CONSUMER_SECRET: xxxxxxxxx
+  MYSQL_PASSWORD: xxxx
   DEFAULT_MAILER_ADDRESS: xxx@xxx.com
   cloud_name: xxxx
   api_key: xxxx
@@ -14,8 +18,11 @@ development:
   static_image_support: xxxx
 
 production:
-  MANDRIL_APP_USERNAME: xxxxxxxxx
-  MANDRIL_APP_PASSWORD: xxxxxxxxx
+  MAIL_SERVICE_APP_USERNAME: xxxxxxxxx
+  MAIL_SERVICE_APP_PASSWORD: xxxxxxxxx
+  MAIL_SERVICE_APP_SMTP_HOSTNAME: xxxxxxxxx
+  MAIL_SERVICE_APP_DOMAIN: xxxxxxxxx
+  MAIL_SERVICE_APP_PORT: xxxxxxxxx
   FACEBOOK_APP_ID: xxxxxxxxx
   FACEBOOK_SECRET: xxxxxxxxx
   TWITTER_CONSUMER_KEY: xxxxxxxxx
